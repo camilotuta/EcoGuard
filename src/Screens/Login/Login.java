@@ -4,7 +4,6 @@
  */
 package Screens.Login;
 
-import Screens.Principal.Principal;
 import java.awt.Toolkit;
 import java.util.Calendar;
 import javax.swing.JLabel;
@@ -21,13 +20,6 @@ public class Login extends javax.swing.JFrame {
 	public Login() {
 		initComponents();
 
-
-		Principal prin = new Principal();
-		prin.setVisible(true);
-
-		
-
-		this.setTitle("Ingresar");
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 
