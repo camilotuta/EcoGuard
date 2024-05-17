@@ -27,16 +27,10 @@ public class Singup extends javax.swing.JFrame {
 		this.setIconImage(Toolkit.getDefaultToolkit()
 			.getImage(getClass().getResource("/img/icon.png")));
 
-		ponerTextoEtiqueta(txtMostrarCopy, "©" + obtenerAño() + " EcoGuard . Todos los derechos reservados.");
-
 	}
 
 	public static String obtenerAño() {
 		return String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-	}
-
-	public static void ponerTextoEtiqueta(JLabel label, String texto) {
-		label.setText(texto);
 	}
 
 	/**
@@ -49,16 +43,26 @@ public class Singup extends javax.swing.JFrame {
         private void initComponents() {
 
                 ventanaLogIn = new javax.swing.JPanel();
-                lbContraseña = new javax.swing.JLabel();
+                lbConfContraseña = new javax.swing.JLabel();
                 lbCorreo = new javax.swing.JLabel();
-                pfContraseña = new javax.swing.JPasswordField();
-                logoGrande = new javax.swing.JLabel();
+                pfConfirmarContraseña = new javax.swing.JPasswordField();
                 btnRegistrarse = new javax.swing.JButton();
-                btnIngresar = new javax.swing.JButton();
+                btnVerificarCodigo = new javax.swing.JButton();
+                tfRecibirCodigo = new javax.swing.JTextField();
+                tfNombre = new javax.swing.JTextField();
+                lbNombre = new javax.swing.JLabel();
+                btnRegresar = new javax.swing.JButton();
                 tfCorreo = new javax.swing.JTextField();
-                txtMostrarCopy = new javax.swing.JLabel();
-                btnErroresComunes = new javax.swing.JButton();
-                jLabel8 = new javax.swing.JLabel();
+                btnEnviarCodigo = new javax.swing.JButton();
+                pfContraseña = new javax.swing.JPasswordField();
+                lbContraseña = new javax.swing.JLabel();
+                lbNombre1 = new javax.swing.JLabel();
+                lbNombre2 = new javax.swing.JLabel();
+                comboCiudad = new javax.swing.JComboBox<>();
+                comboEdad = new javax.swing.JComboBox<>();
+                lbNombre3 = new javax.swing.JLabel();
+                comboDepartamento = new javax.swing.JComboBox<>();
+                lbPerfil = new javax.swing.JLabel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,29 +70,26 @@ public class Singup extends javax.swing.JFrame {
                 ventanaLogIn.setPreferredSize(new java.awt.Dimension(1080, 720));
                 ventanaLogIn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-                lbContraseña.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-                lbContraseña.setForeground(new java.awt.Color(255, 255, 254));
-                lbContraseña.setText("CONTRASEÑA: ");
-                ventanaLogIn.add(lbContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, -1, -1));
+                lbConfContraseña.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                lbConfContraseña.setForeground(new java.awt.Color(255, 255, 254));
+                lbConfContraseña.setText("CONFIRMAR CONTRASEÑA: ");
+                ventanaLogIn.add(lbConfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, -1, -1));
 
                 lbCorreo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
                 lbCorreo.setForeground(new java.awt.Color(255, 255, 254));
-                lbCorreo.setText("CORREO: ");
-                ventanaLogIn.add(lbCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, -1, -1));
+                lbCorreo.setText("CORREO ELECTRÓNICO: ");
+                ventanaLogIn.add(lbCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
 
-                pfContraseña.setBackground(new java.awt.Color(36, 38, 41));
-                pfContraseña.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-                pfContraseña.setForeground(new java.awt.Color(148, 161, 178));
-                pfContraseña.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-                pfContraseña.addActionListener(new java.awt.event.ActionListener() {
+                pfConfirmarContraseña.setBackground(new java.awt.Color(36, 38, 41));
+                pfConfirmarContraseña.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                pfConfirmarContraseña.setForeground(new java.awt.Color(148, 161, 178));
+                pfConfirmarContraseña.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+                pfConfirmarContraseña.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                pfContraseñaActionPerformed(evt);
+                                pfConfirmarContraseñaActionPerformed(evt);
                         }
                 });
-                ventanaLogIn.add(pfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 440, 310, 30));
-
-                logoGrande.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoPequeño.png"))); // NOI18N
-                ventanaLogIn.add(logoGrande, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 160, 190));
+                ventanaLogIn.add(pfConfirmarContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 570, 310, 30));
 
                 btnRegistrarse.setBackground(new java.awt.Color(127, 90, 240));
                 btnRegistrarse.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -101,22 +102,67 @@ public class Singup extends javax.swing.JFrame {
                                 btnRegistrarseActionPerformed(evt);
                         }
                 });
-                ventanaLogIn.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 520, -1, -1));
+                ventanaLogIn.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 630, -1, -1));
 
-                btnIngresar.setBackground(new java.awt.Color(127, 90, 240));
-                btnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-                btnIngresar.setForeground(new java.awt.Color(255, 255, 254));
-                btnIngresar.setText("Ingresar");
-                btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+                btnVerificarCodigo.setBackground(new java.awt.Color(127, 90, 240));
+                btnVerificarCodigo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+                btnVerificarCodigo.setForeground(new java.awt.Color(255, 255, 254));
+                btnVerificarCodigo.setText("Verificar");
+                btnVerificarCodigo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                btnVerificarCodigo.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btnIngresarActionPerformed(evt);
+                                btnVerificarCodigoActionPerformed(evt);
                         }
                 });
-                ventanaLogIn.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 520, -1, -1));
+                ventanaLogIn.add(btnVerificarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 450, -1, -1));
+
+                tfRecibirCodigo.setBackground(new java.awt.Color(36, 38, 41));
+                tfRecibirCodigo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                tfRecibirCodigo.setForeground(new java.awt.Color(148, 161, 178));
+                tfRecibirCodigo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+                tfRecibirCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+                        public void keyPressed(java.awt.event.KeyEvent evt) {
+                                tfRecibirCodigoKeyPressed(evt);
+                        }
+                        public void keyReleased(java.awt.event.KeyEvent evt) {
+                                tfRecibirCodigoKeyReleased(evt);
+                        }
+                });
+                ventanaLogIn.add(tfRecibirCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 450, 180, 30));
+
+                tfNombre.setBackground(new java.awt.Color(36, 38, 41));
+                tfNombre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                tfNombre.setForeground(new java.awt.Color(148, 161, 178));
+                tfNombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+                tfNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+                        public void keyPressed(java.awt.event.KeyEvent evt) {
+                                tfNombreKeyPressed(evt);
+                        }
+                        public void keyReleased(java.awt.event.KeyEvent evt) {
+                                tfNombreKeyReleased(evt);
+                        }
+                });
+                ventanaLogIn.add(tfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 310, 30));
+
+                lbNombre.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                lbNombre.setForeground(new java.awt.Color(255, 255, 254));
+                lbNombre.setText("CIUDAD:");
+                ventanaLogIn.add(lbNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, -1, -1));
+
+                btnRegresar.setBackground(new java.awt.Color(127, 90, 240));
+                btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+                btnRegresar.setForeground(new java.awt.Color(255, 255, 254));
+                btnRegresar.setText("Regresar");
+                btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btnRegresarActionPerformed(evt);
+                        }
+                });
+                ventanaLogIn.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 630, -1, -1));
 
                 tfCorreo.setBackground(new java.awt.Color(36, 38, 41));
-                tfCorreo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+                tfCorreo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 tfCorreo.setForeground(new java.awt.Color(148, 161, 178));
                 tfCorreo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
                 tfCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -127,28 +173,79 @@ public class Singup extends javax.swing.JFrame {
                                 tfCorreoKeyReleased(evt);
                         }
                 });
-                ventanaLogIn.add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, 310, 30));
+                ventanaLogIn.add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, 310, 30));
 
-                txtMostrarCopy.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-                txtMostrarCopy.setForeground(new java.awt.Color(148, 161, 178));
-                txtMostrarCopy.setText("©");
-                ventanaLogIn.add(txtMostrarCopy, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 690, -1, -1));
-
-                btnErroresComunes.setBackground(new java.awt.Color(127, 90, 240));
-                btnErroresComunes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-                btnErroresComunes.setForeground(new java.awt.Color(255, 255, 254));
-                btnErroresComunes.setText("?");
-                btnErroresComunes.addActionListener(new java.awt.event.ActionListener() {
+                btnEnviarCodigo.setBackground(new java.awt.Color(127, 90, 240));
+                btnEnviarCodigo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+                btnEnviarCodigo.setForeground(new java.awt.Color(255, 255, 254));
+                btnEnviarCodigo.setText("Enviar Código");
+                btnEnviarCodigo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                btnEnviarCodigo.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btnErroresComunesActionPerformed(evt);
+                                btnEnviarCodigoActionPerformed(evt);
                         }
                 });
-                ventanaLogIn.add(btnErroresComunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 30));
+                ventanaLogIn.add(btnEnviarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, -1, -1));
 
-                jLabel8.setFont(new java.awt.Font("Crabs", 1, 100)); // NOI18N
-                jLabel8.setForeground(new java.awt.Color(255, 255, 254));
-                jLabel8.setText("EcoGuard");
-                ventanaLogIn.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, -1));
+                pfContraseña.setBackground(new java.awt.Color(36, 38, 41));
+                pfContraseña.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                pfContraseña.setForeground(new java.awt.Color(148, 161, 178));
+                pfContraseña.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+                pfContraseña.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                pfContraseñaActionPerformed(evt);
+                        }
+                });
+                ventanaLogIn.add(pfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 510, 310, 30));
+
+                lbContraseña.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                lbContraseña.setForeground(new java.awt.Color(255, 255, 254));
+                lbContraseña.setText("CONTRASEÑA: ");
+                ventanaLogIn.add(lbContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 510, -1, -1));
+
+                lbNombre1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                lbNombre1.setForeground(new java.awt.Color(255, 255, 254));
+                lbNombre1.setText("NOMBRE COMPLETO: ");
+                ventanaLogIn.add(lbNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, -1, -1));
+
+                lbNombre2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                lbNombre2.setForeground(new java.awt.Color(255, 255, 254));
+                lbNombre2.setText("EDAD:");
+                ventanaLogIn.add(lbNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
+
+                comboCiudad.setBackground(new java.awt.Color(36, 38, 41));
+                comboCiudad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+                comboCiudad.setForeground(new java.awt.Color(255, 255, 254));
+                comboCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                ventanaLogIn.add(comboCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, 300, 30));
+
+                comboEdad.setBackground(new java.awt.Color(36, 38, 41));
+                comboEdad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+                comboEdad.setForeground(new java.awt.Color(255, 255, 254));
+                comboEdad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                comboEdad.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                comboEdadActionPerformed(evt);
+                        }
+                });
+                ventanaLogIn.add(comboEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, -1, 30));
+
+                lbNombre3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                lbNombre3.setForeground(new java.awt.Color(255, 255, 254));
+                lbNombre3.setText("DEPARTAMENTO:");
+                ventanaLogIn.add(lbNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
+
+                comboDepartamento.setBackground(new java.awt.Color(36, 38, 41));
+                comboDepartamento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+                comboDepartamento.setForeground(new java.awt.Color(255, 255, 254));
+                comboDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                ventanaLogIn.add(comboDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 300, 30));
+
+                lbPerfil.setFont(new java.awt.Font("Crabs", 1, 100)); // NOI18N
+                lbPerfil.setForeground(new java.awt.Color(255, 255, 254));
+                lbPerfil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                lbPerfil.setText("Registro");
+                ventanaLogIn.add(lbPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1080, -1));
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -164,29 +261,57 @@ public class Singup extends javax.swing.JFrame {
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
-        private void pfContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfContraseñaActionPerformed
+        private void pfConfirmarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfConfirmarContraseñaActionPerformed
 		// TODO add your handling code here:
-        }//GEN-LAST:event_pfContraseñaActionPerformed
+        }//GEN-LAST:event_pfConfirmarContraseñaActionPerformed
 
         private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
 		// TODO add your handling code here:
         }//GEN-LAST:event_btnRegistrarseActionPerformed
 
-        private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        private void btnVerificarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarCodigoActionPerformed
 		// TODO add your handling code here:
-        }//GEN-LAST:event_btnIngresarActionPerformed
+        }//GEN-LAST:event_btnVerificarCodigoActionPerformed
+
+        private void tfRecibirCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfRecibirCodigoKeyPressed
+		// TODO add your handling code here:
+        }//GEN-LAST:event_tfRecibirCodigoKeyPressed
+
+        private void tfRecibirCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfRecibirCodigoKeyReleased
+		// TODO add your handling code here:
+        }//GEN-LAST:event_tfRecibirCodigoKeyReleased
+
+        private void tfNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombreKeyPressed
+                // TODO add your handling code here:
+        }//GEN-LAST:event_tfNombreKeyPressed
+
+        private void tfNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombreKeyReleased
+                // TODO add your handling code here:
+        }//GEN-LAST:event_tfNombreKeyReleased
+
+        private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+                // TODO add your handling code here:
+        }//GEN-LAST:event_btnRegresarActionPerformed
 
         private void tfCorreoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCorreoKeyPressed
-		// TODO add your handling code here:
+                // TODO add your handling code here:
         }//GEN-LAST:event_tfCorreoKeyPressed
 
         private void tfCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCorreoKeyReleased
-		// TODO add your handling code here:
+                // TODO add your handling code here:
         }//GEN-LAST:event_tfCorreoKeyReleased
 
-        private void btnErroresComunesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnErroresComunesActionPerformed
+        private void btnEnviarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarCodigoActionPerformed
+                // TODO add your handling code here:
+        }//GEN-LAST:event_btnEnviarCodigoActionPerformed
 
-        }//GEN-LAST:event_btnErroresComunesActionPerformed
+        private void pfContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfContraseñaActionPerformed
+                // TODO add your handling code here:
+        }//GEN-LAST:event_pfContraseñaActionPerformed
+
+        private void comboEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEdadActionPerformed
+                // TODO add your handling code here:
+        }//GEN-LAST:event_comboEdadActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -225,16 +350,26 @@ public class Singup extends javax.swing.JFrame {
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton btnErroresComunes;
-        private javax.swing.JButton btnIngresar;
+        private javax.swing.JButton btnEnviarCodigo;
         private javax.swing.JButton btnRegistrarse;
-        private javax.swing.JLabel jLabel8;
+        private javax.swing.JButton btnRegresar;
+        private javax.swing.JButton btnVerificarCodigo;
+        private javax.swing.JComboBox<String> comboCiudad;
+        private javax.swing.JComboBox<String> comboDepartamento;
+        private javax.swing.JComboBox<String> comboEdad;
+        private javax.swing.JLabel lbConfContraseña;
         private javax.swing.JLabel lbContraseña;
         private javax.swing.JLabel lbCorreo;
-        private javax.swing.JLabel logoGrande;
+        private javax.swing.JLabel lbNombre;
+        private javax.swing.JLabel lbNombre1;
+        private javax.swing.JLabel lbNombre2;
+        private javax.swing.JLabel lbNombre3;
+        private javax.swing.JLabel lbPerfil;
+        private javax.swing.JPasswordField pfConfirmarContraseña;
         private javax.swing.JPasswordField pfContraseña;
         private javax.swing.JTextField tfCorreo;
-        private javax.swing.JLabel txtMostrarCopy;
+        private javax.swing.JTextField tfNombre;
+        private javax.swing.JTextField tfRecibirCodigo;
         private javax.swing.JPanel ventanaLogIn;
         // End of variables declaration//GEN-END:variables
 }

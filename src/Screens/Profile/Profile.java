@@ -27,8 +27,6 @@ public class Profile extends javax.swing.JFrame {
 		this.setIconImage(Toolkit.getDefaultToolkit()
 			.getImage(getClass().getResource("/img/icon.png")));
 
-		ponerTextoEtiqueta(txtMostrarCopy, "©" + obtenerAño() + " EcoGuard . Todos los derechos reservados.");
-
 	}
 
 	public static String obtenerAño() {
@@ -48,145 +46,170 @@ public class Profile extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
-                ventanaLogIn = new javax.swing.JPanel();
+                ventanaProfile = new javax.swing.JPanel();
+                panelMenu = new javax.swing.JPanel();
+                imgCasa = new javax.swing.JLabel();
+                imgVolver = new javax.swing.JLabel();
+                imgUsuario = new javax.swing.JLabel();
+                imgMenuBar = new javax.swing.JLabel();
                 lbContraseña = new javax.swing.JLabel();
+                btnGuardarBiografia = new javax.swing.JButton();
+                btnCancelarBiografia = new javax.swing.JButton();
+                lbPerfil = new javax.swing.JLabel();
+                jScrollPane1 = new javax.swing.JScrollPane();
+                txtMostrarBiografia = new javax.swing.JTextArea();
+                jScrollPane2 = new javax.swing.JScrollPane();
+                tfCambiarBiografia = new javax.swing.JTextPane();
+                lbBiografía = new javax.swing.JLabel();
+                lbNombre = new javax.swing.JLabel();
+                lbEdad = new javax.swing.JLabel();
                 lbCorreo = new javax.swing.JLabel();
-                pfContraseña = new javax.swing.JPasswordField();
-                logoGrande = new javax.swing.JLabel();
-                btnRegistrarse = new javax.swing.JButton();
-                btnIngresar = new javax.swing.JButton();
-                tfCorreo = new javax.swing.JTextField();
-                txtMostrarCopy = new javax.swing.JLabel();
-                btnErroresComunes = new javax.swing.JButton();
-                jLabel8 = new javax.swing.JLabel();
+                lbPonerUbicacion = new javax.swing.JLabel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-                ventanaLogIn.setBackground(new java.awt.Color(22, 22, 26));
-                ventanaLogIn.setPreferredSize(new java.awt.Dimension(1080, 720));
-                ventanaLogIn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                ventanaProfile.setBackground(new java.awt.Color(22, 22, 26));
+                ventanaProfile.setPreferredSize(new java.awt.Dimension(1080, 720));
+                ventanaProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                panelMenu.setBackground(new java.awt.Color(22, 22, 26));
+                panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                imgCasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/casa.png"))); // NOI18N
+                imgCasa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                panelMenu.add(imgCasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+
+                imgVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/volver.png"))); // NOI18N
+                imgVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                panelMenu.add(imgVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+
+                imgUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/perfilHover2.png"))); // NOI18N
+                imgUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                panelMenu.add(imgUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+                imgMenuBar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                imgMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lineaVertical.png"))); // NOI18N
+                imgMenuBar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+                panelMenu.add(imgMenuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, -1));
+
+                ventanaProfile.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 230, 60, 220));
 
                 lbContraseña.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
                 lbContraseña.setForeground(new java.awt.Color(255, 255, 254));
-                lbContraseña.setText("CONTRASEÑA: ");
-                ventanaLogIn.add(lbContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, -1, -1));
+                lbContraseña.setText("CAMBIAR BIOGRAFÍA: ");
+                ventanaProfile.add(lbContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 490, -1, -1));
 
-                lbCorreo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-                lbCorreo.setForeground(new java.awt.Color(255, 255, 254));
-                lbCorreo.setText("CORREO: ");
-                ventanaLogIn.add(lbCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, -1, -1));
-
-                pfContraseña.setBackground(new java.awt.Color(36, 38, 41));
-                pfContraseña.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-                pfContraseña.setForeground(new java.awt.Color(148, 161, 178));
-                pfContraseña.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-                pfContraseña.addActionListener(new java.awt.event.ActionListener() {
+                btnGuardarBiografia.setBackground(new java.awt.Color(127, 90, 240));
+                btnGuardarBiografia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+                btnGuardarBiografia.setForeground(new java.awt.Color(255, 255, 254));
+                btnGuardarBiografia.setText("Guardar");
+                btnGuardarBiografia.setActionCommand("Ingresar");
+                btnGuardarBiografia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                btnGuardarBiografia.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                pfContraseñaActionPerformed(evt);
+                                btnGuardarBiografiaActionPerformed(evt);
                         }
                 });
-                ventanaLogIn.add(pfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 440, 310, 30));
+                ventanaProfile.add(btnGuardarBiografia, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 650, -1, -1));
 
-                logoGrande.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoPequeño.png"))); // NOI18N
-                ventanaLogIn.add(logoGrande, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 160, 190));
-
-                btnRegistrarse.setBackground(new java.awt.Color(127, 90, 240));
-                btnRegistrarse.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-                btnRegistrarse.setForeground(new java.awt.Color(255, 255, 254));
-                btnRegistrarse.setText("Registrarse");
-                btnRegistrarse.setActionCommand("Ingresar");
-                btnRegistrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+                btnCancelarBiografia.setBackground(new java.awt.Color(127, 90, 240));
+                btnCancelarBiografia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+                btnCancelarBiografia.setForeground(new java.awt.Color(255, 255, 254));
+                btnCancelarBiografia.setText("Cancelar");
+                btnCancelarBiografia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                btnCancelarBiografia.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btnRegistrarseActionPerformed(evt);
+                                btnCancelarBiografiaActionPerformed(evt);
                         }
                 });
-                ventanaLogIn.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 520, -1, -1));
+                ventanaProfile.add(btnCancelarBiografia, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 650, -1, -1));
 
-                btnIngresar.setBackground(new java.awt.Color(127, 90, 240));
-                btnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-                btnIngresar.setForeground(new java.awt.Color(255, 255, 254));
-                btnIngresar.setText("Ingresar");
-                btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                btnIngresar.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btnIngresarActionPerformed(evt);
-                        }
-                });
-                ventanaLogIn.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 520, -1, -1));
+                lbPerfil.setFont(new java.awt.Font("Crabs", 1, 100)); // NOI18N
+                lbPerfil.setForeground(new java.awt.Color(255, 255, 254));
+                lbPerfil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                lbPerfil.setText("Perfil");
+                ventanaProfile.add(lbPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1080, -1));
 
-                tfCorreo.setBackground(new java.awt.Color(36, 38, 41));
-                tfCorreo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-                tfCorreo.setForeground(new java.awt.Color(148, 161, 178));
-                tfCorreo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-                tfCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
-                        public void keyPressed(java.awt.event.KeyEvent evt) {
-                                tfCorreoKeyPressed(evt);
-                        }
+                txtMostrarBiografia.setEditable(false);
+                txtMostrarBiografia.setBackground(new java.awt.Color(22, 22, 26));
+                txtMostrarBiografia.setColumns(1);
+                txtMostrarBiografia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                txtMostrarBiografia.setForeground(new java.awt.Color(148, 161, 178));
+                txtMostrarBiografia.setRows(3);
+                txtMostrarBiografia.setBorder(null);
+                txtMostrarBiografia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                txtMostrarBiografia.setFocusable(false);
+                jScrollPane1.setViewportView(txtMostrarBiografia);
+
+                ventanaProfile.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 380, 100));
+
+                tfCambiarBiografia.setBackground(new java.awt.Color(22, 22, 26));
+                tfCambiarBiografia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                tfCambiarBiografia.setForeground(new java.awt.Color(148, 161, 178));
+                tfCambiarBiografia.addKeyListener(new java.awt.event.KeyAdapter() {
                         public void keyReleased(java.awt.event.KeyEvent evt) {
-                                tfCorreoKeyReleased(evt);
+                                tfCambiarBiografiaKeyReleased(evt);
                         }
                 });
-                ventanaLogIn.add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, 310, 30));
+                jScrollPane2.setViewportView(tfCambiarBiografia);
 
-                txtMostrarCopy.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-                txtMostrarCopy.setForeground(new java.awt.Color(148, 161, 178));
-                txtMostrarCopy.setText("©");
-                ventanaLogIn.add(txtMostrarCopy, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 690, -1, -1));
+                ventanaProfile.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, 380, 80));
 
-                btnErroresComunes.setBackground(new java.awt.Color(127, 90, 240));
-                btnErroresComunes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-                btnErroresComunes.setForeground(new java.awt.Color(255, 255, 254));
-                btnErroresComunes.setText("?");
-                btnErroresComunes.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btnErroresComunesActionPerformed(evt);
-                        }
-                });
-                ventanaLogIn.add(btnErroresComunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 30));
+                lbBiografía.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                lbBiografía.setForeground(new java.awt.Color(255, 255, 254));
+                lbBiografía.setText("BIOGRAFÍA: ");
+                ventanaProfile.add(lbBiografía, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
 
-                jLabel8.setFont(new java.awt.Font("Crabs", 1, 100)); // NOI18N
-                jLabel8.setForeground(new java.awt.Color(255, 255, 254));
-                jLabel8.setText("EcoGuard");
-                ventanaLogIn.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, -1));
+                lbNombre.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+                lbNombre.setForeground(new java.awt.Color(148, 161, 178));
+                lbNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                lbNombre.setText("Adrián Camilo Tuta Cortes");
+                ventanaProfile.add(lbNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 1080, -1));
+
+                lbEdad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                lbEdad.setForeground(new java.awt.Color(148, 161, 178));
+                lbEdad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                lbEdad.setText("19 años");
+                ventanaProfile.add(lbEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 1080, -1));
+
+                lbCorreo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                lbCorreo.setForeground(new java.awt.Color(148, 161, 178));
+                lbCorreo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                lbCorreo.setText("camilotuta2004@gmail.com");
+                ventanaProfile.add(lbCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 1080, -1));
+
+                lbPonerUbicacion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                lbPonerUbicacion.setForeground(new java.awt.Color(148, 161, 178));
+                lbPonerUbicacion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                lbPonerUbicacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/marcador.png"))); // NOI18N
+                lbPonerUbicacion.setText("Chía - Cundinamarca");
+                ventanaProfile.add(lbPonerUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 420, -1));
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ventanaLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ventanaProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ventanaLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ventanaProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 );
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
-        private void pfContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfContraseñaActionPerformed
+        private void btnGuardarBiografiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarBiografiaActionPerformed
 		// TODO add your handling code here:
-        }//GEN-LAST:event_pfContraseñaActionPerformed
+        }//GEN-LAST:event_btnGuardarBiografiaActionPerformed
 
-        private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
+        private void btnCancelarBiografiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarBiografiaActionPerformed
 		// TODO add your handling code here:
-        }//GEN-LAST:event_btnRegistrarseActionPerformed
+        }//GEN-LAST:event_btnCancelarBiografiaActionPerformed
 
-        private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-		// TODO add your handling code here:
-        }//GEN-LAST:event_btnIngresarActionPerformed
-
-        private void tfCorreoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCorreoKeyPressed
-		// TODO add your handling code here:
-        }//GEN-LAST:event_tfCorreoKeyPressed
-
-        private void tfCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCorreoKeyReleased
-		// TODO add your handling code here:
-        }//GEN-LAST:event_tfCorreoKeyReleased
-
-        private void btnErroresComunesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnErroresComunesActionPerformed
-
-        }//GEN-LAST:event_btnErroresComunesActionPerformed
+        private void tfCambiarBiografiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCambiarBiografiaKeyReleased
+                // TODO add your handling code here:
+        }//GEN-LAST:event_tfCambiarBiografiaKeyReleased
 
 	/**
 	 * @param args the command line arguments
@@ -225,16 +248,24 @@ public class Profile extends javax.swing.JFrame {
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton btnErroresComunes;
-        private javax.swing.JButton btnIngresar;
-        private javax.swing.JButton btnRegistrarse;
-        private javax.swing.JLabel jLabel8;
+        private javax.swing.JButton btnCancelarBiografia;
+        private javax.swing.JButton btnGuardarBiografia;
+        private javax.swing.JLabel imgCasa;
+        private javax.swing.JLabel imgMenuBar;
+        private javax.swing.JLabel imgUsuario;
+        private javax.swing.JLabel imgVolver;
+        private javax.swing.JScrollPane jScrollPane1;
+        private javax.swing.JScrollPane jScrollPane2;
+        private javax.swing.JLabel lbBiografía;
         private javax.swing.JLabel lbContraseña;
         private javax.swing.JLabel lbCorreo;
-        private javax.swing.JLabel logoGrande;
-        private javax.swing.JPasswordField pfContraseña;
-        private javax.swing.JTextField tfCorreo;
-        private javax.swing.JLabel txtMostrarCopy;
-        private javax.swing.JPanel ventanaLogIn;
+        private javax.swing.JLabel lbEdad;
+        private javax.swing.JLabel lbNombre;
+        private javax.swing.JLabel lbPerfil;
+        private javax.swing.JLabel lbPonerUbicacion;
+        private javax.swing.JPanel panelMenu;
+        private javax.swing.JTextPane tfCambiarBiografia;
+        private javax.swing.JTextArea txtMostrarBiografia;
+        private javax.swing.JPanel ventanaProfile;
         // End of variables declaration//GEN-END:variables
 }

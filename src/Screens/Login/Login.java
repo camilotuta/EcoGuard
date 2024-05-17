@@ -52,7 +52,6 @@ public class Login extends javax.swing.JFrame {
                 lbContraseña = new javax.swing.JLabel();
                 lbCorreo = new javax.swing.JLabel();
                 pfContraseña = new javax.swing.JPasswordField();
-                logoGrande = new javax.swing.JLabel();
                 btnRegistrarse = new javax.swing.JButton();
                 btnIngresar = new javax.swing.JButton();
                 tfCorreo = new javax.swing.JTextField();
@@ -69,15 +68,15 @@ public class Login extends javax.swing.JFrame {
                 lbContraseña.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
                 lbContraseña.setForeground(new java.awt.Color(255, 255, 254));
                 lbContraseña.setText("CONTRASEÑA: ");
-                ventanaLogIn.add(lbContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, -1, -1));
+                ventanaLogIn.add(lbContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, -1, -1));
 
                 lbCorreo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
                 lbCorreo.setForeground(new java.awt.Color(255, 255, 254));
                 lbCorreo.setText("CORREO: ");
-                ventanaLogIn.add(lbCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, -1, -1));
+                ventanaLogIn.add(lbCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, -1, -1));
 
                 pfContraseña.setBackground(new java.awt.Color(36, 38, 41));
-                pfContraseña.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+                pfContraseña.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 pfContraseña.setForeground(new java.awt.Color(148, 161, 178));
                 pfContraseña.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
                 pfContraseña.addActionListener(new java.awt.event.ActionListener() {
@@ -85,10 +84,7 @@ public class Login extends javax.swing.JFrame {
                                 pfContraseñaActionPerformed(evt);
                         }
                 });
-                ventanaLogIn.add(pfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 440, 310, 30));
-
-                logoGrande.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoPequeño.png"))); // NOI18N
-                ventanaLogIn.add(logoGrande, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 160, 190));
+                ventanaLogIn.add(pfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 310, 30));
 
                 btnRegistrarse.setBackground(new java.awt.Color(127, 90, 240));
                 btnRegistrarse.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -101,7 +97,7 @@ public class Login extends javax.swing.JFrame {
                                 btnRegistrarseActionPerformed(evt);
                         }
                 });
-                ventanaLogIn.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 520, -1, -1));
+                ventanaLogIn.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 520, -1, -1));
 
                 btnIngresar.setBackground(new java.awt.Color(127, 90, 240));
                 btnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -113,10 +109,10 @@ public class Login extends javax.swing.JFrame {
                                 btnIngresarActionPerformed(evt);
                         }
                 });
-                ventanaLogIn.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 520, -1, -1));
+                ventanaLogIn.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 520, -1, -1));
 
                 tfCorreo.setBackground(new java.awt.Color(36, 38, 41));
-                tfCorreo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+                tfCorreo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 tfCorreo.setForeground(new java.awt.Color(148, 161, 178));
                 tfCorreo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
                 tfCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -127,7 +123,7 @@ public class Login extends javax.swing.JFrame {
                                 tfCorreoKeyReleased(evt);
                         }
                 });
-                ventanaLogIn.add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, 310, 30));
+                ventanaLogIn.add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 310, 30));
 
                 txtMostrarCopy.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
                 txtMostrarCopy.setForeground(new java.awt.Color(148, 161, 178));
@@ -147,8 +143,10 @@ public class Login extends javax.swing.JFrame {
 
                 jLabel8.setFont(new java.awt.Font("Crabs", 1, 100)); // NOI18N
                 jLabel8.setForeground(new java.awt.Color(255, 255, 254));
+                jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoPequeño.png"))); // NOI18N
                 jLabel8.setText("EcoGuard");
-                ventanaLogIn.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, -1));
+                ventanaLogIn.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 1080, -1));
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -228,7 +226,6 @@ public class Login extends javax.swing.JFrame {
         private javax.swing.JLabel jLabel8;
         private javax.swing.JLabel lbContraseña;
         private javax.swing.JLabel lbCorreo;
-        private javax.swing.JLabel logoGrande;
         private javax.swing.JPasswordField pfContraseña;
         private javax.swing.JTextField tfCorreo;
         private javax.swing.JLabel txtMostrarCopy;
