@@ -1,6 +1,5 @@
 package Code;
 
-import Screens.Login.Login;
 import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -96,21 +95,21 @@ public class Conexion {
 
 		// ^ REGISTRAR
 		Conexion.registrar(
-			"INSERT INTO usuarios (correo,contraseña,nombre,departamento,ciudad,edad,"
-			+ "fecha_registro ) VALUES ('laura@gmail.com','Laura1234!','Laura Gomez',"
-			// cSpell:disable-next-line
-			+ "'Antioquia','Medellín',25,DATE ('now'));");
+				"INSERT INTO usuarios (correo,contraseña,nombre,departamento,ciudad,edad,"
+						+ "fecha_registro ) VALUES ('laura@gmail.com','Laura1234!','Laura Gomez',"
+						// cSpell:disable-next-line
+						+ "'Antioquia','Medellín',25,DATE ('now'));");
 
 		// ^ ELIMINAR
 		Conexion.eliminar("delete from usuarios where correo like '%@example%'");
 
 		// ^ SELECCIONAR
 		System.out.println(Conexion.seleccionar("select * from usuarios",
-			new String[]{"nombre", "edad", "correo"}));
+				new String[] { "nombre", "edad", "correo" }));
 
 		// ^ ACTUALIZAR
 		Conexion.actualizar("update usuarios set nombre = 'Adrian Camilo Tuta Cortes' where "
-			+ "id_usuario = 1");
+				+ "id_usuario = 1");
 
 	}
 

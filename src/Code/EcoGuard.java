@@ -4,18 +4,28 @@
  */
 package Code;
 
-import Screens.Login.Login;
-import Screens.Principal.Principal;
-import java.sql.SQLException;
-
 /**
  *
  * @author tutaa
  */
 public class EcoGuard {
 
-	/**
-	 * @param args the command line arguments
-	 * @throws SQLException
-	 */
+	// TODO: CREAR UN FONDO PARA LA APLICACION
+	// TODO: cambiar icono en el mapa dependiendo del incidente
+	// TODO: Hashmap:
+	// Key:
+	// departamento String Value:
+	// ubicación marcador lista[x,y]
+	// en píxeles
+	// En el
+	// valor se
+	// selecciona un
+	// área rectangular
+	// y en
+	// esa área
+	// rectangular se
+	// pone un
+	// número Random
+	// para poner el marcador
+
 }
