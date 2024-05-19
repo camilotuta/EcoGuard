@@ -5,9 +5,13 @@
  */
 package Screens.Principal;
 
+import Screens.Login.Login;
+import Screens.Profile.PersonalProfile;
+import javax.swing.JLabel;
+import Code.CambiarIU;
+
 import java.awt.Toolkit;
 import java.util.Calendar;
-import javax.swing.JLabel;
 
 /**
  *
@@ -59,21 +63,25 @@ public class Principal extends javax.swing.JFrame {
          */
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
         // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
                 ventanaPrincipal = new javax.swing.JPanel();
                 imgReload = new javax.swing.JLabel();
-                lbPublicaciones = new javax.swing.JLabel();
                 panelMenu = new javax.swing.JPanel();
                 imgCasa = new javax.swing.JLabel();
                 imgVolver = new javax.swing.JLabel();
                 imgUsuario = new javax.swing.JLabel();
                 imgMenuBar = new javax.swing.JLabel();
+                lbPonerUbicacion = new javax.swing.JLabel();
+                lbPublicaciones = new javax.swing.JLabel();
                 panelMapa = new javax.swing.JPanel();
                 imgMarcador = new javax.swing.JLabel();
                 imgMapa = new javax.swing.JLabel();
-                jScrollPane1 = new Screens.Principal.Custom.ScrollPaneWin11();
+                scrollPublicaciones = new Screens.Principal.Custom.ScrollPaneWin11();
                 panelPublicaciones = new javax.swing.JPanel();
                 panelPublicacion = new javax.swing.JPanel();
                 imgLike = new javax.swing.JLabel();
@@ -85,7 +93,6 @@ public class Principal extends javax.swing.JFrame {
                 imgIconoPublicacion = new javax.swing.JLabel();
                 imgPonerEvidenciaIncidente = new javax.swing.JLabel();
                 imgFondoPub = new javax.swing.JLabel();
-                lbPonerUbicacion = new javax.swing.JLabel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,34 +104,77 @@ public class Principal extends javax.swing.JFrame {
                 imgReload.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
                 ventanaPrincipal.add(imgReload, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 110, -1, -1));
 
+                panelMenu.setBackground(new java.awt.Color(22, 22, 26));
+                panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                imgCasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/casaHover2.png"))); // NOI18N
+                imgCasa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                panelMenu.add(imgCasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+
+                imgVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/volver.png"))); // NOI18N
+                imgVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                imgVolver.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                imgVolverMouseClicked(evt);
+                        }
+
+                        public void mouseEntered(java.awt.event.MouseEvent evt) {
+                                imgVolverMouseEntered(evt);
+                        }
+
+                        public void mouseExited(java.awt.event.MouseEvent evt) {
+                                imgVolverMouseExited(evt);
+                        }
+                });
+                panelMenu.add(imgVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+
+                imgUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
+                imgUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                imgUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                imgUsuarioMouseClicked(evt);
+                        }
+
+                        public void mouseEntered(java.awt.event.MouseEvent evt) {
+                                imgUsuarioMouseEntered(evt);
+                        }
+
+                        public void mouseExited(java.awt.event.MouseEvent evt) {
+                                imgUsuarioMouseExited(evt);
+                        }
+                });
+                panelMenu.add(imgUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+                imgMenuBar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                imgMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lineaVertical.png"))); // NOI18N
+                imgMenuBar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+                imgMenuBar.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseEntered(java.awt.event.MouseEvent evt) {
+                                imgMenuBarMouseEntered(evt);
+                        }
+
+                        public void mouseExited(java.awt.event.MouseEvent evt) {
+                                imgMenuBarMouseExited(evt);
+                        }
+                });
+                panelMenu.add(imgMenuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, -1));
+
+                ventanaPrincipal.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 230, 60, 220));
+
+                lbPonerUbicacion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                lbPonerUbicacion.setForeground(new java.awt.Color(148, 161, 178));
+                lbPonerUbicacion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                lbPonerUbicacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/marcador.png"))); // NOI18N
+                lbPonerUbicacion.setText("Chía - Cundinamarca");
+                ventanaPrincipal.add(lbPonerUbicacion,
+                                new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 420, -1));
+
                 lbPublicaciones.setFont(new java.awt.Font("Crabs", 1, 100)); // NOI18N
                 lbPublicaciones.setForeground(new java.awt.Color(255, 255, 254));
                 lbPublicaciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 lbPublicaciones.setText("Publicaciones");
                 ventanaPrincipal.add(lbPublicaciones,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1080, -1));
-
-                panelMenu.setBackground(new java.awt.Color(22, 22, 26));
-                panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-                imgCasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/casaHover2.png"))); // NOI18N
-                imgCasa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                panelMenu.add(imgCasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
-
-                imgVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/volver.png"))); // NOI18N
-                imgVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                panelMenu.add(imgVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
-
-                imgUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
-                imgUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                panelMenu.add(imgUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
-
-                imgMenuBar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                imgMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lineaVertical.png"))); // NOI18N
-                imgMenuBar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-                panelMenu.add(imgMenuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, -1));
-
-                ventanaPrincipal.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 230, 60, 220));
 
                 panelMapa.setBackground(new java.awt.Color(22, 22, 26));
                 panelMapa.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -206,18 +256,10 @@ public class Principal extends javax.swing.JFrame {
                 panelPublicaciones.add(panelPublicacion,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 310, 200));
 
-                jScrollPane1.setViewportView(panelPublicaciones);
+                scrollPublicaciones.setViewportView(panelPublicaciones);
 
-                ventanaPrincipal.add(jScrollPane1,
+                ventanaPrincipal.add(scrollPublicaciones,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, 390, 520));
-
-                lbPonerUbicacion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-                lbPonerUbicacion.setForeground(new java.awt.Color(148, 161, 178));
-                lbPonerUbicacion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                lbPonerUbicacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/marcador.png"))); // NOI18N
-                lbPonerUbicacion.setText("Chía - Cundinamarca");
-                ventanaPrincipal.add(lbPonerUbicacion,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 420, -1));
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -234,6 +276,44 @@ public class Principal extends javax.swing.JFrame {
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
+
+        private void imgMenuBarMouseExited(java.awt.event.MouseEvent evt) {
+        }
+
+        private void imgUsuarioMouseEntered(java.awt.event.MouseEvent evt) {
+                CambiarIU.setImageLabel(imgUsuario, "src/img/perfilHover2.png");
+
+        }
+
+        private void imgUsuarioMouseExited(java.awt.event.MouseEvent evt) {
+                CambiarIU.setImageLabel(imgUsuario, "src/img/usuario.png");
+
+        }
+
+        private void imgVolverMouseEntered(java.awt.event.MouseEvent evt) {
+                CambiarIU.setImageLabel(imgVolver, "src/img/volverHover2.png");
+
+        }
+
+        private void imgVolverMouseExited(java.awt.event.MouseEvent evt) {
+                CambiarIU.setImageLabel(imgVolver, "src/img/volver.png");
+        }
+
+        private void imgMenuBarMouseEntered(java.awt.event.MouseEvent evt) {
+        }
+
+        private void imgVolverMouseClicked(java.awt.event.MouseEvent evt) {
+
+                Login login = new Login();
+                login.setVisible(true);
+                this.setVisible(false);
+        }
+
+        private void imgUsuarioMouseClicked(java.awt.event.MouseEvent evt) {
+                PersonalProfile perfil = new PersonalProfile();
+                perfil.setVisible(true);
+                this.setVisible(false);
+        }
 
         /**
          * @param args the command line arguments
@@ -290,7 +370,6 @@ public class Principal extends javax.swing.JFrame {
         private javax.swing.JLabel imgReload;
         private javax.swing.JLabel imgUsuario;
         private javax.swing.JLabel imgVolver;
-        private javax.swing.JScrollPane jScrollPane1;
         private javax.swing.JLabel lbPonerFechaIncidente;
         private javax.swing.JLabel lbPonerHoraIncidente;
         private javax.swing.JLabel lbPonerNombreUsuario;
@@ -302,6 +381,7 @@ public class Principal extends javax.swing.JFrame {
         private javax.swing.JPanel panelMenu;
         private javax.swing.JPanel panelPublicacion;
         private javax.swing.JPanel panelPublicaciones;
+        private javax.swing.JScrollPane scrollPublicaciones;
         private javax.swing.JPanel ventanaPrincipal;
         // End of variables declaration//GEN-END:variables
 }

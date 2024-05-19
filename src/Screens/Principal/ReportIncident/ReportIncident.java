@@ -40,7 +40,7 @@ public class ReportIncident extends javax.swing.JFrame {
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
-        // Code">//GEN-BEGIN:initComponents
+        // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
                 ventanaReportarIncidente = new javax.swing.JPanel();
@@ -56,9 +56,9 @@ public class ReportIncident extends javax.swing.JFrame {
                 tfInformacion = new javax.swing.JTextPane();
                 lbEvidencia = new javax.swing.JLabel();
                 tfRutaImagen = new javax.swing.JTextField();
+                btnSubirImagen = new javax.swing.JButton();
                 mostrarImgEvidencia = new javax.swing.JLabel();
                 lbPreview = new javax.swing.JLabel();
-                btnSubirImagen = new javax.swing.JButton();
                 btnPublicar = new javax.swing.JButton();
                 btnRegresar = new javax.swing.JButton();
 
@@ -72,61 +72,50 @@ public class ReportIncident extends javax.swing.JFrame {
                 lbReportar.setForeground(new java.awt.Color(255, 255, 254));
                 lbReportar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 lbReportar.setText("Reportar Incidente");
-                ventanaReportarIncidente.add(lbReportar,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 860, -1));
+                ventanaReportarIncidente.add(lbReportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 860, -1));
 
                 lbTipo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
                 lbTipo.setForeground(new java.awt.Color(255, 255, 254));
                 lbTipo.setText("TIPO:");
-                ventanaReportarIncidente.add(lbTipo,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
+                ventanaReportarIncidente.add(lbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
 
                 comboTipoIncidente.setBackground(new java.awt.Color(36, 38, 41));
                 comboTipoIncidente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
                 comboTipoIncidente.setForeground(new java.awt.Color(255, 255, 254));
-                comboTipoIncidente.setModel(new javax.swing.DefaultComboBoxModel<>(
-                                new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                comboTipoIncidente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
                 comboTipoIncidente.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 comboTipoIncidenteActionPerformed(evt);
                         }
                 });
-                ventanaReportarIncidente.add(comboTipoIncidente,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 300, 30));
+                ventanaReportarIncidente.add(comboTipoIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 300, 30));
 
                 lbDepartamento.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
                 lbDepartamento.setForeground(new java.awt.Color(255, 255, 254));
                 lbDepartamento.setText("DEPARTAMENTO:");
-                ventanaReportarIncidente.add(lbDepartamento,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
+                ventanaReportarIncidente.add(lbDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
 
                 comboDepartamento.setBackground(new java.awt.Color(36, 38, 41));
                 comboDepartamento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
                 comboDepartamento.setForeground(new java.awt.Color(255, 255, 254));
-                comboDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(
-                                new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-                ventanaReportarIncidente.add(comboDepartamento,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 300, 30));
+                comboDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                ventanaReportarIncidente.add(comboDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 300, 30));
 
                 lbCiudad.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
                 lbCiudad.setForeground(new java.awt.Color(255, 255, 254));
                 lbCiudad.setText("CIUDAD:");
-                ventanaReportarIncidente.add(lbCiudad,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
+                ventanaReportarIncidente.add(lbCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
 
                 comboCiudad.setBackground(new java.awt.Color(36, 38, 41));
                 comboCiudad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
                 comboCiudad.setForeground(new java.awt.Color(255, 255, 254));
-                comboCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(
-                                new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-                ventanaReportarIncidente.add(comboCiudad,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 300, 30));
+                comboCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                ventanaReportarIncidente.add(comboCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 300, 30));
 
                 lbInformacion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
                 lbInformacion.setForeground(new java.awt.Color(255, 255, 254));
                 lbInformacion.setText("INFORMACIÓN:");
-                ventanaReportarIncidente.add(lbInformacion,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
+                ventanaReportarIncidente.add(lbInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
 
                 tfInformacion.setBackground(new java.awt.Color(22, 22, 26));
                 tfInformacion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -138,14 +127,12 @@ public class ReportIncident extends javax.swing.JFrame {
                 });
                 scrollInformacion.setViewportView(tfInformacion);
 
-                ventanaReportarIncidente.add(scrollInformacion,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, 420, 80));
+                ventanaReportarIncidente.add(scrollInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, 420, 80));
 
                 lbEvidencia.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
                 lbEvidencia.setForeground(new java.awt.Color(255, 255, 254));
                 lbEvidencia.setText("EVIDENCIA:");
-                ventanaReportarIncidente.add(lbEvidencia,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, -1, -1));
+                ventanaReportarIncidente.add(lbEvidencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, -1, -1));
 
                 tfRutaImagen.setBackground(new java.awt.Color(36, 38, 41));
                 tfRutaImagen.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -155,23 +142,11 @@ public class ReportIncident extends javax.swing.JFrame {
                         public void keyPressed(java.awt.event.KeyEvent evt) {
                                 tfRutaImagenKeyPressed(evt);
                         }
-
                         public void keyReleased(java.awt.event.KeyEvent evt) {
                                 tfRutaImagenKeyReleased(evt);
                         }
                 });
-                ventanaReportarIncidente.add(tfRutaImagen,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, 250, 30));
-
-                mostrarImgEvidencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(1, 1, 1)));
-                ventanaReportarIncidente.add(mostrarImgEvidencia,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 120, 100));
-
-                lbPreview.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-                lbPreview.setForeground(new java.awt.Color(255, 255, 254));
-                lbPreview.setText("Preview");
-                ventanaReportarIncidente.add(lbPreview,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 540, -1, -1));
+                ventanaReportarIncidente.add(tfRutaImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, 250, 30));
 
                 btnSubirImagen.setBackground(new java.awt.Color(127, 90, 240));
                 btnSubirImagen.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -183,8 +158,15 @@ public class ReportIncident extends javax.swing.JFrame {
                                 btnSubirImagenActionPerformed(evt);
                         }
                 });
-                ventanaReportarIncidente.add(btnSubirImagen,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 460, -1, -1));
+                ventanaReportarIncidente.add(btnSubirImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 460, -1, -1));
+
+                mostrarImgEvidencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(120, 85, 227)));
+                ventanaReportarIncidente.add(mostrarImgEvidencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 120, 100));
+
+                lbPreview.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                lbPreview.setForeground(new java.awt.Color(255, 255, 254));
+                lbPreview.setText("Preview");
+                ventanaReportarIncidente.add(lbPreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 540, -1, -1));
 
                 btnPublicar.setBackground(new java.awt.Color(127, 90, 240));
                 btnPublicar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -197,8 +179,7 @@ public class ReportIncident extends javax.swing.JFrame {
                                 btnPublicarActionPerformed(evt);
                         }
                 });
-                ventanaReportarIncidente.add(btnPublicar,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 650, -1, -1));
+                ventanaReportarIncidente.add(btnPublicar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 650, -1, -1));
 
                 btnRegresar.setBackground(new java.awt.Color(127, 90, 240));
                 btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -210,22 +191,18 @@ public class ReportIncident extends javax.swing.JFrame {
                                 btnRegresarActionPerformed(evt);
                         }
                 });
-                ventanaReportarIncidente.add(btnRegresar,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 650, -1, -1));
+                ventanaReportarIncidente.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 650, -1, -1));
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(ventanaReportarIncidente,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 859,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ventanaReportarIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                );
                 layout.setVerticalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(ventanaReportarIncidente,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ventanaReportarIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                );
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents

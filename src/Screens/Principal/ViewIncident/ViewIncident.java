@@ -21,7 +21,7 @@ public class ViewIncident extends javax.swing.JFrame {
         public ViewIncident() {
                 initComponents();
 
-                this.setTitle("Ingresar");
+                this.setTitle("Incidente");
                 this.setResizable(false);
                 this.setLocationRelativeTo(null);
 
@@ -45,20 +45,21 @@ public class ViewIncident extends javax.swing.JFrame {
          */
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
         // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
                 ventanaMostrarIncidente = new javax.swing.JPanel();
                 lbPonerNombreUsuario = new javax.swing.JLabel();
+                lbPonerLikes = new javax.swing.JLabel();
+                lbPonerTipoIncidente = new javax.swing.JLabel();
+                scrollInfoIncidente = new Screens.Principal.Custom.ScrollPaneWin11();
+                txtMostrarInfoIncidente = new javax.swing.JTextArea();
                 imgPonerEvidenciaIncidente = new javax.swing.JLabel();
                 lbPonerFechaIncidente = new javax.swing.JLabel();
                 lbPonerHoraIncidente = new javax.swing.JLabel();
                 lbPonerUbicacionIncidente = new javax.swing.JLabel();
-                jScrollPane1 = new Screens.Principal.Custom.ScrollPaneWin11();
-                txtMostrarBiografia = new javax.swing.JTextArea();
-                lbPonerLikes = new javax.swing.JLabel();
                 btnSalir = new javax.swing.JButton();
-                lbPonerTipoIncidente1 = new javax.swing.JLabel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,10 +75,38 @@ public class ViewIncident extends javax.swing.JFrame {
                 ventanaMostrarIncidente.add(lbPonerNombreUsuario,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 570, -1));
 
+                lbPonerLikes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                lbPonerLikes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                lbPonerLikes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/likeVerdeGrande.png"))); // NOI18N
+                lbPonerLikes.setText("10");
+                ventanaMostrarIncidente.add(lbPonerLikes,
+                                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 570, -1));
+
+                lbPonerTipoIncidente.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+                lbPonerTipoIncidente.setForeground(new java.awt.Color(127, 90, 240));
+                lbPonerTipoIncidente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                lbPonerTipoIncidente.setText("INCENDIO FORESTAL");
+                ventanaMostrarIncidente.add(lbPonerTipoIncidente,
+                                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 570, -1));
+
+                txtMostrarInfoIncidente.setEditable(false);
+                txtMostrarInfoIncidente.setBackground(new java.awt.Color(22, 22, 26));
+                txtMostrarInfoIncidente.setColumns(1);
+                txtMostrarInfoIncidente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                txtMostrarInfoIncidente.setForeground(new java.awt.Color(148, 161, 178));
+                txtMostrarInfoIncidente.setRows(3);
+                txtMostrarInfoIncidente.setBorder(null);
+                txtMostrarInfoIncidente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                txtMostrarInfoIncidente.setFocusable(false);
+                scrollInfoIncidente.setViewportView(txtMostrarInfoIncidente);
+
+                ventanaMostrarIncidente.add(scrollInfoIncidente,
+                                new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 200, 140));
+
                 imgPonerEvidenciaIncidente.setBorder(
                                 javax.swing.BorderFactory.createLineBorder(new java.awt.Color(127, 90, 240)));
                 ventanaMostrarIncidente.add(imgPonerEvidenciaIncidente,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 120, 140));
+                                new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 150, 140));
 
                 lbPonerFechaIncidente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 lbPonerFechaIncidente.setForeground(new java.awt.Color(255, 255, 254));
@@ -91,7 +120,7 @@ public class ViewIncident extends javax.swing.JFrame {
                 lbPonerHoraIncidente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 lbPonerHoraIncidente.setText("12:30 pm");
                 ventanaMostrarIncidente.add(lbPonerHoraIncidente,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, 120, -1));
+                                new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 330, 120, -1));
 
                 lbPonerUbicacionIncidente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 lbPonerUbicacionIncidente.setForeground(new java.awt.Color(255, 255, 254));
@@ -101,27 +130,6 @@ public class ViewIncident extends javax.swing.JFrame {
                 lbPonerUbicacionIncidente.setText("Leticia - Amazonas");
                 ventanaMostrarIncidente.add(lbPonerUbicacionIncidente,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 570, -1));
-
-                txtMostrarBiografia.setEditable(false);
-                txtMostrarBiografia.setBackground(new java.awt.Color(22, 22, 26));
-                txtMostrarBiografia.setColumns(1);
-                txtMostrarBiografia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-                txtMostrarBiografia.setForeground(new java.awt.Color(148, 161, 178));
-                txtMostrarBiografia.setRows(3);
-                txtMostrarBiografia.setBorder(null);
-                txtMostrarBiografia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-                txtMostrarBiografia.setFocusable(false);
-                jScrollPane1.setViewportView(txtMostrarBiografia);
-
-                ventanaMostrarIncidente.add(jScrollPane1,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 200, 140));
-
-                lbPonerLikes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-                lbPonerLikes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                lbPonerLikes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/likeVerdeGrande.png"))); // NOI18N
-                lbPonerLikes.setText("10");
-                ventanaMostrarIncidente.add(lbPonerLikes,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 570, -1));
 
                 btnSalir.setBackground(new java.awt.Color(127, 90, 240));
                 btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -136,13 +144,6 @@ public class ViewIncident extends javax.swing.JFrame {
                 });
                 ventanaMostrarIncidente.add(btnSalir,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, -1, -1));
-
-                lbPonerTipoIncidente1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-                lbPonerTipoIncidente1.setForeground(new java.awt.Color(127, 90, 240));
-                lbPonerTipoIncidente1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                lbPonerTipoIncidente1.setText("INCENDIO FORESTAL");
-                ventanaMostrarIncidente.add(lbPonerTipoIncidente1,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 570, -1));
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -164,7 +165,7 @@ public class ViewIncident extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
         private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {
-
+                this.setVisible(false);
         }
 
         /**
@@ -215,14 +216,14 @@ public class ViewIncident extends javax.swing.JFrame {
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btnSalir;
         private javax.swing.JLabel imgPonerEvidenciaIncidente;
-        private javax.swing.JScrollPane jScrollPane1;
         private javax.swing.JLabel lbPonerFechaIncidente;
         private javax.swing.JLabel lbPonerHoraIncidente;
         private javax.swing.JLabel lbPonerLikes;
         private javax.swing.JLabel lbPonerNombreUsuario;
-        private javax.swing.JLabel lbPonerTipoIncidente1;
+        private javax.swing.JLabel lbPonerTipoIncidente;
         private javax.swing.JLabel lbPonerUbicacionIncidente;
-        private javax.swing.JTextArea txtMostrarBiografia;
+        private javax.swing.JScrollPane scrollInfoIncidente;
+        private javax.swing.JTextArea txtMostrarInfoIncidente;
         private javax.swing.JPanel ventanaMostrarIncidente;
         // End of variables declaration//GEN-END:variables
 }
