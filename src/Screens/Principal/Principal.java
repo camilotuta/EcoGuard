@@ -101,6 +101,7 @@ public class Principal extends javax.swing.JFrame {
                         ArrayList<ArrayList<Object>> datosPublicaciones = solicitarPublicaciones();
 
                         // 0
+
                         idsUsuarios.add((int) datosPublicaciones.get(0).get(1));
                         String nombre0 = solicitarNombreUsuario((int) datosPublicaciones.get(0).get(1));
                         String tipo0 = (String) datosPublicaciones.get(0).get(2);
@@ -121,6 +122,7 @@ public class Principal extends javax.swing.JFrame {
                         lbPonerUbicacionIncidente0.setText(ubicacion0);
 
                         // 1
+
                         idsUsuarios.add((int) datosPublicaciones.get(1).get(1));
                         String nombre1 = solicitarNombreUsuario((int) datosPublicaciones.get(1).get(1));
                         String tipo1 = (String) datosPublicaciones.get(1).get(2);
@@ -141,6 +143,7 @@ public class Principal extends javax.swing.JFrame {
                         lbPonerUbicacionIncidente1.setText(ubicacion1);
 
                         // 2
+
                         idsUsuarios.add((int) datosPublicaciones.get(2).get(1));
                         String nombre2 = solicitarNombreUsuario((int) datosPublicaciones.get(2).get(1));
                         String tipo2 = (String) datosPublicaciones.get(2).get(2);
@@ -161,6 +164,7 @@ public class Principal extends javax.swing.JFrame {
                         lbPonerUbicacionIncidente2.setText(ubicacion2);
 
                         // 3
+
                         idsUsuarios.add((int) datosPublicaciones.get(3).get(1));
                         String nombre3 = solicitarNombreUsuario((int) datosPublicaciones.get(3).get(1));
                         String tipo3 = (String) datosPublicaciones.get(3).get(2);
@@ -489,6 +493,8 @@ public class Principal extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
         // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
@@ -773,8 +779,6 @@ public class Principal extends javax.swing.JFrame {
                 panelPublicaciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
                 panelPublicacion15.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion15.setEnabled(false);
-                panelPublicacion15.setFocusable(false);
                 panelPublicacion15.setOpaque(false);
                 panelPublicacion15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -844,7 +848,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 2870, 310, 200));
 
                 panelPublicacion14.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion14.setEnabled(false);
                 panelPublicacion14.setFocusable(false);
                 panelPublicacion14.setOpaque(false);
                 panelPublicacion14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -915,7 +918,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 2680, 310, 200));
 
                 panelPublicacion13.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion13.setEnabled(false);
                 panelPublicacion13.setFocusable(false);
                 panelPublicacion13.setOpaque(false);
                 panelPublicacion13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -986,7 +988,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 2490, 310, 200));
 
                 panelPublicacion12.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion12.setEnabled(false);
                 panelPublicacion12.setFocusable(false);
                 panelPublicacion12.setOpaque(false);
                 panelPublicacion12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1057,7 +1058,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 2300, 310, 200));
 
                 panelPublicacion11.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion11.setEnabled(false);
                 panelPublicacion11.setFocusable(false);
                 panelPublicacion11.setOpaque(false);
                 panelPublicacion11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1128,7 +1128,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 2110, 310, 200));
 
                 panelPublicacion10.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion10.setEnabled(false);
                 panelPublicacion10.setFocusable(false);
                 panelPublicacion10.setOpaque(false);
                 panelPublicacion10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1199,7 +1198,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1920, 310, 200));
 
                 panelPublicacion9.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion9.setEnabled(false);
                 panelPublicacion9.setFocusable(false);
                 panelPublicacion9.setOpaque(false);
                 panelPublicacion9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1270,7 +1268,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1730, 310, 200));
 
                 panelPublicacion8.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion8.setEnabled(false);
                 panelPublicacion8.setFocusable(false);
                 panelPublicacion8.setOpaque(false);
                 panelPublicacion8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1341,7 +1338,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1540, 310, 200));
 
                 panelPublicacion7.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion7.setEnabled(false);
                 panelPublicacion7.setFocusable(false);
                 panelPublicacion7.setOpaque(false);
                 panelPublicacion7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1412,7 +1408,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1350, 310, 200));
 
                 panelPublicacion6.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion6.setEnabled(false);
                 panelPublicacion6.setFocusable(false);
                 panelPublicacion6.setOpaque(false);
                 panelPublicacion6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1483,7 +1478,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1160, 310, 200));
 
                 panelPublicacion5.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion5.setEnabled(false);
                 panelPublicacion5.setFocusable(false);
                 panelPublicacion5.setOpaque(false);
                 panelPublicacion5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1554,7 +1548,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 970, 310, 200));
 
                 panelPublicacion4.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion4.setEnabled(false);
                 panelPublicacion4.setFocusable(false);
                 panelPublicacion4.setOpaque(false);
                 panelPublicacion4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1625,7 +1618,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 780, 310, 200));
 
                 panelPublicacion3.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion3.setEnabled(false);
                 panelPublicacion3.setFocusable(false);
                 panelPublicacion3.setOpaque(false);
                 panelPublicacion3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1696,7 +1688,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 590, 310, 200));
 
                 panelPublicacion2.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion2.setEnabled(false);
                 panelPublicacion2.setFocusable(false);
                 panelPublicacion2.setOpaque(false);
                 panelPublicacion2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1767,7 +1758,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 310, 200));
 
                 panelPublicacion1.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion1.setEnabled(false);
                 panelPublicacion1.setFocusable(false);
                 panelPublicacion1.setOpaque(false);
                 panelPublicacion1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1838,7 +1828,6 @@ public class Principal extends javax.swing.JFrame {
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 310, 200));
 
                 panelPublicacion0.setBackground(new java.awt.Color(36, 38, 41));
-                panelPublicacion0.setEnabled(false);
                 panelPublicacion0.setFocusable(false);
                 panelPublicacion0.setOpaque(false);
                 panelPublicacion0.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
