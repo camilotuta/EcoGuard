@@ -14,4 +14,12 @@ public class CambiarIU {
                         Image.SCALE_DEFAULT));
         labelName.setIcon(icon);
     }
+
+    public static void setImageLabelSize(JLabel labelName, String root, int width, int height) {
+        ImageIcon image = new ImageIcon(root);
+        Icon icon = new ImageIcon(
+                image.getImage().getScaledInstance(width, height,
+                        Image.SCALE_DEFAULT));
+        labelName.setIcon(icon);
+    }
 }

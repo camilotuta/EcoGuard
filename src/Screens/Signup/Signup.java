@@ -16,7 +16,6 @@ import Code.Conexion;
 import Code.EnviarCorreo;
 import Code.Ubicaciones;
 import Screens.Login.Login;
-import Screens.Principal.Principal;
 
 /**
  *
@@ -161,21 +160,21 @@ public class Signup extends javax.swing.JFrame {
                                         + "Atentamente,<br>"
                                         + "El equipo de EcoGuard. &#128170;";
 
-                        new EnviarCorreo(correo, asunto, mensaje);
+			 new EnviarCorreo(correo, asunto, mensaje);
                 } else {
                         JOptionPane.showMessageDialog(null, "YA EXISTE UNA CUENTA CON ESTE CORREO.");
-                }
-        }
-
-        public void ponerDepartamentos() {
-                for (String departamento : departamentos.keySet()) {
-                        comboDepartamento.addItem(departamento);
                 }
         }
 
         public void ponerEdades() {
                 for (int i = 13; i < 101; i++) {
                         comboEdad.addItem(String.valueOf(i));
+                }
+        }
+
+        public void ponerDepartamentos() {
+                for (String departamento : departamentos.keySet()) {
+                        comboDepartamento.addItem(departamento);
                 }
         }
 

@@ -20,8 +20,8 @@ import Screens.Signup.Signup;
  * @author tutaa
  */
 public class Login extends javax.swing.JFrame {
-        public static int idUsuarioGuardar = 31;
-        public static String correoGuardar = "cauntertut2004@gmail.com";
+        public static int idUsuarioGuardar;
+        public static String correoGuardar = "";
 
         /**
          * Creates new form Login
@@ -39,7 +39,7 @@ public class Login extends javax.swing.JFrame {
                 desactivarBotonIngresar();
         }
 
-        public void desactivarBotonIngresar() {
+        private void desactivarBotonIngresar() {
                 char[] contraseñaEncriptada = pfContraseña.getPassword();
                 String contraseña = new String(contraseñaEncriptada);
                 btnIngresar.setEnabled((contraseña.length() > 8) && tfCorreo.getText().contains("@")
@@ -54,7 +54,7 @@ public class Login extends javax.swing.JFrame {
                                 new String[] { "id_usuario", "correo", "contraseña" });
 
                 if (datosUsuarioRegistrado.size() > 0 && datosUsuarioRegistrado.size() < 4) {
-                        idUsuarioGuardar = (Integer) datosUsuarioRegistrado.get(0);
+                        idUsuarioGuardar = (Integer) datosUsuarioRegistrado.get(0).get(0);
                         return true;
                 }
                 return false;

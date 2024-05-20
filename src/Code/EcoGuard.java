@@ -11,21 +11,8 @@ package Code;
 public class EcoGuard {
 
 	// TODO: CREAR UN FONDO PARA LA APLICACION
-	// TODO: cambiar icono en el mapa dependiendo del incidente
-	// TODO: Hashmap:
-	// Key:
-	// departamento String Value:
-	// ubicación marcador lista[x,y]
-	// en píxeles
-	// En el
-	// valor se
-	// selecciona un
-	// área rectangular
-	// y en
-	// esa área
-	// rectangular se
-	// pone un
-	// número Random
-	// para poner el marcador
+	// TODO: Cambiar visuallizacion de los metodos
+	// TODO: eliminar eventos innecesarios
+	// TODO: Poner likes y seguidores bien y comentarios
 
 }

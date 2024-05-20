@@ -17,7 +17,7 @@ import Code.Conexion;
  * @author tutaa
  */
 public class ViewProfile extends javax.swing.JFrame {
-        int idUsuarioMostrar;
+        public static int idUsuarioMostrar;
 
         /**
          * Creates new form ViewProfile
@@ -50,15 +50,16 @@ public class ViewProfile extends javax.swing.JFrame {
                                                         "seguidores",
                                                         "biografia" });
 
-                        lbPonerNombre.setText((String) datos.get(0));
-                        lbPonerCorreo.setText((String) datos.get(1));
-                        lbPonerUbicacion.setText(((String) datos.get(3)) + " - " + ((String) datos.get(2)));
+                        lbPonerNombre.setText((String) datos.get(0).get(0));
+                        lbPonerCorreo.setText((String) datos.get(0).get(1));
+                        lbPonerUbicacion.setText(
+                                        ((String) datos.get(0).get(3)) + " - " + ((String) datos.get(0).get(2)));
 
-                        lbPonerEdad.setText(datos.get(4) + " años");
-                        lbPonerSeguidores.setText(datos.get(5) + " Seguidores");
-                        txtMostrarBiografia.setText((String) datos.get(6));
+                        lbPonerEdad.setText(datos.get(0).get(4) + " años");
+                        lbPonerSeguidores.setText(datos.get(0).get(5) + " Seguidores");
+                        txtMostrarBiografia.setText((String) datos.get(0).get(6));
 
-                        this.setTitle((String) datos.get(0));
+                        this.setTitle((String) datos.get(0).get(0));
                 } catch (SQLException e) {
                         e.printStackTrace();
                 }
@@ -72,7 +73,7 @@ public class ViewProfile extends javax.swing.JFrame {
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
-        // Code">//GEN-BEGIN:initComponents
+        // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
                 ventanaMostrarIncidente = new javax.swing.JPanel();
@@ -96,44 +97,38 @@ public class ViewProfile extends javax.swing.JFrame {
                 lbPonerUbicacion.setForeground(new java.awt.Color(148, 161, 178));
                 lbPonerUbicacion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
                 lbPonerUbicacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/marcador.png"))); // NOI18N
-                lbPonerUbicacion.setText("Chía - Cundinamarca");
-                ventanaMostrarIncidente.add(lbPonerUbicacion,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 330, -1));
+                lbPonerUbicacion.setText("-");
+                ventanaMostrarIncidente.add(lbPonerUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 330, -1));
 
                 lbPonerSeguidores.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 lbPonerSeguidores.setForeground(new java.awt.Color(148, 161, 178));
                 lbPonerSeguidores.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
                 lbPonerSeguidores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/seguidores.png"))); // NOI18N
-                lbPonerSeguidores.setText("1 Seguidor");
-                ventanaMostrarIncidente.add(lbPonerSeguidores,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 170, -1));
+                lbPonerSeguidores.setText("-");
+                ventanaMostrarIncidente.add(lbPonerSeguidores, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 170, -1));
 
                 lbPonerNombre.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
                 lbPonerNombre.setForeground(new java.awt.Color(127, 90, 240));
                 lbPonerNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                lbPonerNombre.setText("Adrian Camilo Tuta Cortes");
-                ventanaMostrarIncidente.add(lbPonerNombre,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 500, -1));
+                lbPonerNombre.setText("-");
+                ventanaMostrarIncidente.add(lbPonerNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 500, -1));
 
                 lbPonerEdad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 lbPonerEdad.setForeground(new java.awt.Color(148, 161, 178));
                 lbPonerEdad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                lbPonerEdad.setText("19 años");
-                ventanaMostrarIncidente.add(lbPonerEdad,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 500, -1));
+                lbPonerEdad.setText("-");
+                ventanaMostrarIncidente.add(lbPonerEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 500, -1));
 
                 lbPonerCorreo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 lbPonerCorreo.setForeground(new java.awt.Color(148, 161, 178));
                 lbPonerCorreo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                lbPonerCorreo.setText("camilotuta2004@gmail.com");
-                ventanaMostrarIncidente.add(lbPonerCorreo,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 500, -1));
+                lbPonerCorreo.setText("-");
+                ventanaMostrarIncidente.add(lbPonerCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 500, -1));
 
                 lbBiografía.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
                 lbBiografía.setForeground(new java.awt.Color(255, 255, 254));
                 lbBiografía.setText("BIOGRAFÍA: ");
-                ventanaMostrarIncidente.add(lbBiografía,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
+                ventanaMostrarIncidente.add(lbBiografía, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
 
                 txtMostrarBiografia.setEditable(false);
                 txtMostrarBiografia.setBackground(new java.awt.Color(22, 22, 26));
@@ -148,8 +143,7 @@ public class ViewProfile extends javax.swing.JFrame {
                 txtMostrarBiografia.setFocusable(false);
                 scrollPonerBiografia.setViewportView(txtMostrarBiografia);
 
-                ventanaMostrarIncidente.add(scrollPonerBiografia,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 380, 150));
+                ventanaMostrarIncidente.add(scrollPonerBiografia, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 380, 150));
 
                 btnSalir.setBackground(new java.awt.Color(127, 90, 240));
                 btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -162,27 +156,25 @@ public class ViewProfile extends javax.swing.JFrame {
                                 btnSalirActionPerformed(evt);
                         }
                 });
-                ventanaMostrarIncidente.add(btnSalir,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 480, -1, -1));
+                ventanaMostrarIncidente.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 480, -1, -1));
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(ventanaMostrarIncidente,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 496,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ventanaMostrarIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                );
                 layout.setVerticalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(ventanaMostrarIncidente,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 537,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ventanaMostrarIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                );
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
         private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {
                 this.setVisible(false);
+
         }
 
         /**

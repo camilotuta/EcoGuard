@@ -92,11 +92,8 @@
               <Color blue="fe" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccionar"/>
               </StringArray>
             </Property>
           </Properties>
@@ -140,14 +137,14 @@
               <Color blue="fe" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccionar"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboDepartamentoActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -185,14 +182,14 @@
               <Color blue="fe" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccionar"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboCiudadActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -349,6 +346,99 @@
             </Constraint>
           </Constraints>
         </Component>
+        <Component class="javax.swing.JLabel" name="lbHora">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="24" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="fe" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Hora:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="630" y="510" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="comboHora">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="29" green="26" red="24" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="fe" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="49">
+                <StringItem index="0" value="Seleccionar"/>
+                <StringItem index="1" value="12:00am"/>
+                <StringItem index="2" value="12:30am"/>
+                <StringItem index="3" value="01:00am"/>
+                <StringItem index="4" value="01:30am"/>
+                <StringItem index="5" value="02:00am"/>
+                <StringItem index="6" value="02:30am"/>
+                <StringItem index="7" value="03:00am"/>
+                <StringItem index="8" value="03:30am"/>
+                <StringItem index="9" value="04:00am"/>
+                <StringItem index="10" value="04:30am"/>
+                <StringItem index="11" value="05:00am"/>
+                <StringItem index="12" value="05:30am"/>
+                <StringItem index="13" value="06:00am"/>
+                <StringItem index="14" value="06:30am"/>
+                <StringItem index="15" value="07:00am"/>
+                <StringItem index="16" value="07:30am"/>
+                <StringItem index="17" value="08:00am"/>
+                <StringItem index="18" value="08:30am"/>
+                <StringItem index="19" value="09:00am"/>
+                <StringItem index="20" value="09:30am"/>
+                <StringItem index="21" value="10:00am"/>
+                <StringItem index="22" value="10:30am"/>
+                <StringItem index="23" value="11:00am"/>
+                <StringItem index="24" value="11:30am"/>
+                <StringItem index="25" value="12:00pm"/>
+                <StringItem index="26" value="12:30pm"/>
+                <StringItem index="27" value="01:00pm"/>
+                <StringItem index="28" value="01:30pm"/>
+                <StringItem index="29" value="02:00pm"/>
+                <StringItem index="30" value="02:30pm"/>
+                <StringItem index="31" value="03:00pm"/>
+                <StringItem index="32" value="03:30pm"/>
+                <StringItem index="33" value="04:00pm"/>
+                <StringItem index="34" value="04:30pm"/>
+                <StringItem index="35" value="05:00pm"/>
+                <StringItem index="36" value="05:30pm"/>
+                <StringItem index="37" value="06:00pm"/>
+                <StringItem index="38" value="06:30pm"/>
+                <StringItem index="39" value="07:00pm"/>
+                <StringItem index="40" value="07:30pm"/>
+                <StringItem index="41" value="08:00pm"/>
+                <StringItem index="42" value="08:30pm"/>
+                <StringItem index="43" value="09:00pm"/>
+                <StringItem index="44" value="09:30pm"/>
+                <StringItem index="45" value="10:00pm"/>
+                <StringItem index="46" value="10:30pm"/>
+                <StringItem index="47" value="11:00pm"/>
+                <StringItem index="48" value="11:30pm"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboHoraActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="590" y="550" width="140" height="30"/>
+            </Constraint>
+          </Constraints>
+        </Component>
         <Component class="javax.swing.JButton" name="btnPublicar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -400,6 +490,46 @@
             </Constraint>
           </Constraints>
         </Component>
+        <Container class="javax.swing.JPanel" name="panelIconoIncidente">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="29" green="26" red="24" type="rgb"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="690" y="210" width="30" height="30"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="imgIconoIncidente" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="imgIconoIncidente" min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="imgIconoIncidente">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="29" green="26" red="24" type="rgb"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

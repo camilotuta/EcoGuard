@@ -1,3 +1,4 @@
+// cSpell:ignore optyxhhzjrbgnikz
 package Code;
 
 import java.util.Properties;
@@ -10,7 +11,7 @@ import javax.swing.JOptionPane;
 public class EnviarCorreo {
 
     private static String emailFrom = "codigodeverificaciontutosumb@gmail.com";
-    private static String passwordFrom = "optyxhhzjrbgnikz";
+    private static String passwordFrom = "bwaj hgly ehrc zjbc";
     private String emailTo;
     private String subject;
     private String content;

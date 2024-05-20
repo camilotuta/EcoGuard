@@ -1,3 +1,4 @@
+// cSpell:ignore publicacion
 package Code;
 
 import java.util.ArrayList;
@@ -9,10 +10,11 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import Screens.Login.Login;
+
 public class Conexion {
 
-	// "jdbc:sqlite:C:/Users/tutaa/Workspace/Java/Projects/EcoSpot/db/es.db";
-	static String url = "jdbc:sqlite:C:\\Users\\tutaa\\Workspace\\Data Base SQL\\SQLite\\EcoSpot\\es.db";
+	static String url = "jdbc:sqlite:C:/Users/tutaa/Workspace/Java/Projects/EcoGuard/db/es.db";
 
 	static Connection connect;
 	static PreparedStatement pSt;
@@ -33,7 +35,7 @@ public class Conexion {
 			pSt = connect.prepareStatement(query);
 			pSt.executeUpdate();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "ERROR AL REGISTRAR INFORMACION:\n" + e.getMessage());
+			System.out.println("ERROR AL REGISTRAR INFORMACION:\n" + e.getMessage());
 		} finally {
 			if (pSt != null) {
 				pSt.close();
@@ -41,18 +43,49 @@ public class Conexion {
 		}
 	}
 
-	public static ArrayList<Object> seleccionar(String query, String[] columnas) throws SQLException {
-		conectar();
-		ArrayList<Object> datos = new ArrayList<>();
+	public static void registrarPublicacion(int idUsuario, String tipo, String hora, String departamento, String ciudad,
+			byte[] fileData, String informacion) throws SQLException {
 
+		String query = "INSERT INTO incidentes_ambientales(id_usuario, tipo, fecha, hora, departamento, ciudad, evidencia, informacion) "
+				+ "VALUES (?, ?, Date('now'), ?, ?, ?, ?, ?)";
+
+		conectar();
+		try {
+			pSt = connect.prepareStatement(query);
+
+			pSt.setInt(1, Login.idUsuarioGuardar);
+			pSt.setString(2, tipo);
+			pSt.setString(3, hora);
+			pSt.setString(4, departamento);
+			pSt.setString(5, ciudad);
+			pSt.setBytes(6, fileData);
+			pSt.setString(7, informacion);
+
+			pSt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "¡PUBLICADO CON ÉXITO!");
+
+		} catch (SQLException e) {
+			System.out.println("ERROR AL REGISTRAR INFORMACION:\n" + e.getMessage());
+		} finally {
+			if (pSt != null) {
+				pSt.close();
+			}
+		}
+	}
+
+	public static ArrayList<ArrayList<Object>> seleccionar(String query, String[] columnas) throws SQLException {
+		conectar();
+		ArrayList<ArrayList<Object>> registros = new ArrayList<ArrayList<Object>>();
 		try {
 			pSt = connect.prepareStatement(query);
 			result = pSt.executeQuery();
 
 			while (result.next()) {
+				ArrayList<Object> registro = new ArrayList<>();
 				for (var i : columnas) {
-					datos.add(result.getObject(i));
+					registro.add(result.getObject(i));
 				}
+				registros.add(registro);
 			}
 		} catch (SQLException e) {
 			System.out.println("ERROR AL SELECCIONAR INFORMACIÓN:\n" + e.getMessage());
@@ -60,7 +93,30 @@ public class Conexion {
 			pSt.close();
 			result.close();
 		}
-		return datos;
+		return registros;
+	}
+
+	public static void recibirEvidencia(int idIncidente) {
+		conectar();
+		String query = "SELECT evidencia FROM incidentes_ambientales WHERE id_incidente = ?";
+
+		try {
+			pSt = connect.prepareStatement(query);
+			pSt.setInt(1, idIncidente);
+			result = pSt.executeQuery();
+			if (result.next()) {
+				byte[] fileData = result.getBytes("evidencia");
+				Files.writeFile(fileData,
+						String.format(
+								"C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+								idIncidente));
+			} else {
+				System.out.println("No se encontró el incidente con ID: " + idIncidente);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public static void actualizar(String query) throws SQLException {

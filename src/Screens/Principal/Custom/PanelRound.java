@@ -1,3 +1,4 @@
+// cSpell:ignore grphcs
 package Screens.Principal.Custom;
 
 import java.awt.Graphics;

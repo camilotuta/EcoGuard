@@ -1,19 +1,23 @@
 /*
- cSpell:ignore Ubicacion
+ cSpell:ignore Ubicacion publicacion
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Screens.Principal.ViewIncident;
 
+import Code.CambiarIU;
+import Code.Conexion;
+import Screens.Principal.Principal;
+
 import java.awt.Toolkit;
-import java.util.Calendar;
-import javax.swing.JLabel;
+import java.sql.SQLException;
 
 /**
  *
  * @author tutaa
  */
 public class ViewIncident extends javax.swing.JFrame {
+        public static int idPublicacion;
 
         /**
          * Creates new form ViewIncident
@@ -21,21 +25,53 @@ public class ViewIncident extends javax.swing.JFrame {
         public ViewIncident() {
                 initComponents();
 
-                this.setTitle("Incidente");
                 this.setResizable(false);
                 this.setLocationRelativeTo(null);
 
                 this.setIconImage(Toolkit.getDefaultToolkit()
                                 .getImage(getClass().getResource("/img/icon.png")));
-
+                ponerDatos();
         }
 
-        public static String obtenerAño() {
-                return String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-        }
+        public void ponerDatos() {
 
-        public static void ponerTextoEtiqueta(JLabel label, String texto) {
-                label.setText(texto);
+                Conexion.recibirEvidencia(idPublicacion);
+
+                try {
+
+                        var publicacion = Conexion.seleccionar(
+                                        String.format("SELECT * FROM incidentes_ambientales where id_incidente = %d",
+                                                        idPublicacion),
+                                        new String[] { "id_usuario", "tipo", "fecha", "hora", "departamento", "ciudad",
+                                                        "evidencia", "informacion" });
+                        int idUsuarioPublicacion = (int) publicacion.get(0).get(0);
+
+                        var datos = Conexion.seleccionar(
+                                        String.format("SELECT * FROM usuarios where id_usuario = %d",
+                                                        idUsuarioPublicacion),
+                                        new String[] { "nombre" });
+
+                        lbPonerNombreUsuario.setText((String) datos.get(0).get(0));
+
+                        String tipo = (String) publicacion.get(0).get(1);
+
+                        lbPonerTipoIncidente.setText(tipo);
+                        this.setTitle(tipo.substring(0, 1).toUpperCase() + tipo.substring(1).toLowerCase());
+
+                        lbPonerFechaIncidente.setText((String) publicacion.get(0).get(2));
+                        lbPonerHoraIncidente.setText((String) publicacion.get(0).get(3));
+                        lbPonerUbicacionIncidente.setText(
+                                        ((String) publicacion.get(0).get(5)) + " - " + ((String) publicacion.get(0)
+                                                        .get(4)));
+                        txtMostrarInfoIncidente.setText((String) publicacion.get(0).get(7));
+
+                        CambiarIU.setImageLabel(imgPonerEvidenciaIncidente, String.format(
+                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        idPublicacion));
+
+                } catch (SQLException e) {
+                        e.printStackTrace();
+                }
         }
 
         /**
@@ -46,7 +82,8 @@ public class ViewIncident extends javax.swing.JFrame {
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
-        // Code">//GEN-BEGIN:initComponents
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
                 ventanaMostrarIncidente = new javax.swing.JPanel();
@@ -70,66 +107,59 @@ public class ViewIncident extends javax.swing.JFrame {
                 lbPonerNombreUsuario.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
                 lbPonerNombreUsuario.setForeground(new java.awt.Color(255, 255, 254));
                 lbPonerNombreUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                lbPonerNombreUsuario.setText("Miguel Angel Bejarano Muñoz");
+                lbPonerNombreUsuario.setText("-");
                 lbPonerNombreUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                ventanaMostrarIncidente.add(lbPonerNombreUsuario,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 570, -1));
+                ventanaMostrarIncidente.add(lbPonerNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 570, -1));
 
                 lbPonerLikes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                lbPonerLikes.setForeground(new java.awt.Color(255, 255, 255));
                 lbPonerLikes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 lbPonerLikes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/likeVerdeGrande.png"))); // NOI18N
                 lbPonerLikes.setText("10");
-                ventanaMostrarIncidente.add(lbPonerLikes,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 570, -1));
+                ventanaMostrarIncidente.add(lbPonerLikes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 570, -1));
 
                 lbPonerTipoIncidente.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
                 lbPonerTipoIncidente.setForeground(new java.awt.Color(127, 90, 240));
                 lbPonerTipoIncidente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                lbPonerTipoIncidente.setText("INCENDIO FORESTAL");
-                ventanaMostrarIncidente.add(lbPonerTipoIncidente,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 570, -1));
+                lbPonerTipoIncidente.setText("-");
+                ventanaMostrarIncidente.add(lbPonerTipoIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 570, -1));
 
                 txtMostrarInfoIncidente.setEditable(false);
                 txtMostrarInfoIncidente.setBackground(new java.awt.Color(22, 22, 26));
                 txtMostrarInfoIncidente.setColumns(1);
                 txtMostrarInfoIncidente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 txtMostrarInfoIncidente.setForeground(new java.awt.Color(148, 161, 178));
+                txtMostrarInfoIncidente.setLineWrap(true);
                 txtMostrarInfoIncidente.setRows(3);
+                txtMostrarInfoIncidente.setWrapStyleWord(true);
                 txtMostrarInfoIncidente.setBorder(null);
                 txtMostrarInfoIncidente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
                 txtMostrarInfoIncidente.setFocusable(false);
                 scrollInfoIncidente.setViewportView(txtMostrarInfoIncidente);
 
-                ventanaMostrarIncidente.add(scrollInfoIncidente,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 200, 140));
+                ventanaMostrarIncidente.add(scrollInfoIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 200, 140));
 
-                imgPonerEvidenciaIncidente.setBorder(
-                                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(127, 90, 240)));
-                ventanaMostrarIncidente.add(imgPonerEvidenciaIncidente,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 150, 140));
+                imgPonerEvidenciaIncidente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(127, 90, 240)));
+                ventanaMostrarIncidente.add(imgPonerEvidenciaIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 150, 140));
 
                 lbPonerFechaIncidente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 lbPonerFechaIncidente.setForeground(new java.awt.Color(255, 255, 254));
                 lbPonerFechaIncidente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                lbPonerFechaIncidente.setText("11 - 05 -2024");
-                ventanaMostrarIncidente.add(lbPonerFechaIncidente,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 200, -1));
+                lbPonerFechaIncidente.setText("-");
+                ventanaMostrarIncidente.add(lbPonerFechaIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 200, -1));
 
                 lbPonerHoraIncidente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 lbPonerHoraIncidente.setForeground(new java.awt.Color(255, 255, 254));
                 lbPonerHoraIncidente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                lbPonerHoraIncidente.setText("12:30 pm");
-                ventanaMostrarIncidente.add(lbPonerHoraIncidente,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 330, 120, -1));
+                lbPonerHoraIncidente.setText("-");
+                ventanaMostrarIncidente.add(lbPonerHoraIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 330, 120, -1));
 
                 lbPonerUbicacionIncidente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 lbPonerUbicacionIncidente.setForeground(new java.awt.Color(255, 255, 254));
                 lbPonerUbicacionIncidente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                lbPonerUbicacionIncidente
-                                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/marcadorGrande.png"))); // NOI18N
-                lbPonerUbicacionIncidente.setText("Leticia - Amazonas");
-                ventanaMostrarIncidente.add(lbPonerUbicacionIncidente,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 570, -1));
+                lbPonerUbicacionIncidente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/marcadorGrande.png"))); // NOI18N
+                lbPonerUbicacionIncidente.setText("-");
+                ventanaMostrarIncidente.add(lbPonerUbicacionIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 570, -1));
 
                 btnSalir.setBackground(new java.awt.Color(127, 90, 240));
                 btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -142,29 +172,27 @@ public class ViewIncident extends javax.swing.JFrame {
                                 btnSalirActionPerformed(evt);
                         }
                 });
-                ventanaMostrarIncidente.add(btnSalir,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, -1, -1));
+                ventanaMostrarIncidente.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, -1, -1));
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(ventanaMostrarIncidente,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 568,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ventanaMostrarIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
+                );
                 layout.setVerticalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(ventanaMostrarIncidente,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                477,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(0, 0, Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(ventanaMostrarIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                );
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
         private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {
+                Principal principal = new Principal();
+                principal.setVisible(true);
                 this.setVisible(false);
         }
 

@@ -256,13 +256,6 @@ public class Ubicaciones {
         // Agregar la lista de municipios al departamento
         departamentos.put("Risaralda", risaralda);
 
-        // Departamento San Andrés y Providencia
-        List<String> sanAndresYProvidencia = new ArrayList<>();
-        sanAndresYProvidencia.add("San Andrés");
-        sanAndresYProvidencia.add("Providencia");
-        // Agregar la lista de municipios al departamento
-        departamentos.put("San Andrés y Providencia", sanAndresYProvidencia);
-
         // Departamento Santander
         List<String> santander = new ArrayList<>();
         santander.add("Bucaramanga");
@@ -318,5 +311,541 @@ public class Ubicaciones {
         vichada.add("Cumaribo");
         // Agregar la lista de municipios al departamento
         departamentos.put("Vichada", vichada);
+
+    }
+
+    public Map<String, ArrayList<ArrayList<Integer>>> generarPuntos() {
+        Map<String, ArrayList<ArrayList<Integer>>> puntos = new HashMap<>();
+
+        // Agregar los puntos al HashMap
+        puntos.put("Amazonas", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(270);
+                        add(460);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(230);
+                        add(450);
+                    }
+                });
+            }
+        });
+        puntos.put("Antioquia", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(118);
+                        add(171);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(95);
+                        add(227);
+                    }
+                });
+            }
+        });
+        puntos.put("Arauca", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(240);
+                        add(194);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(291);
+                        add(191);
+                    }
+                });
+            }
+        });
+        puntos.put("Atlántico", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(114);
+                        add(62);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(106);
+                        add(77);
+                    }
+                });
+            }
+        });
+        puntos.put("Bolívar", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(107);
+                        add(93);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(145);
+                        add(150);
+                    }
+                });
+            }
+        });
+        puntos.put("Boyacá", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(187);
+                        add(255);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(207);
+                        add(213);
+                    }
+                });
+            }
+        });
+        puntos.put("Caldas", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(129);
+                        add(224);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(110);
+                        add(262);
+                    }
+                });
+            }
+        });
+        puntos.put("Caquetá", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(123);
+                        add(400);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(215);
+                        add(417);
+                    }
+                });
+            }
+        });
+        puntos.put("Casanare", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(210);
+                        add(263);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(258);
+                        add(230);
+                    }
+                });
+            }
+        });
+        puntos.put("Cauca", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(47);
+                        add(356);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(89);
+                        add(343);
+                    }
+                });
+            }
+        });
+        puntos.put("Cesar", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(168);
+                        add(159);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(176);
+                        add(104);
+                    }
+                });
+            }
+        });
+        puntos.put("Chocó", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(63);
+                        add(275);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(35);
+                        add(205);
+                    }
+                });
+            }
+        });
+        puntos.put("Córdoba", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(78);
+                        add(170);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(89);
+                        add(130);
+                    }
+                });
+            }
+        });
+        puntos.put("Cundinamarca", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(154);
+                        add(285);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(168);
+                        add(258);
+                    }
+                });
+            }
+        });
+        puntos.put("Guainía", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(378);
+                        add(277);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(312);
+                        add(324);
+                    }
+                });
+            }
+        });
+        puntos.put("Guaviare", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(216);
+                        add(374);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(257);
+                        add(343);
+                    }
+                });
+            }
+        });
+        puntos.put("Huila", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(126);
+                        add(329);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(98);
+                        add(374);
+                    }
+                });
+            }
+        });
+        puntos.put("La Guajira", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(184);
+                        add(48);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(221);
+                        add(13);
+                    }
+                });
+            }
+        });
+        puntos.put("Magdalena", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(145);
+                        add(68);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(136);
+                        add(108);
+                    }
+                });
+            }
+        });
+        puntos.put("Meta", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(163);
+                        add(332);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(217);
+                        add(308);
+                    }
+                });
+            }
+        });
+        puntos.put("Nariño", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(23);
+                        add(368);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(61);
+                        add(417);
+                    }
+                });
+            }
+        });
+        puntos.put("Norte de Santander", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(208);
+                        add(175);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(191);
+                        add(141);
+                    }
+                });
+            }
+        });
+        puntos.put("Putumayo", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(127);
+                        add(424);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(84);
+                        add(416);
+                    }
+                });
+            }
+        });
+        puntos.put("Quindío", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(105);
+                        add(288);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(107);
+                        add(278);
+                    }
+                });
+            }
+        });
+        puntos.put("Risaralda", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(99);
+                        add(269);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(86);
+                        add(257);
+                    }
+                });
+            }
+        });
+        puntos.put("Santander", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(161);
+                        add(221);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(184);
+                        add(186);
+                    }
+                });
+            }
+        });
+        puntos.put("Sucre", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(117);
+                        add(139);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(99);
+                        add(111);
+                    }
+                });
+            }
+        });
+        puntos.put("Tolima", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(124);
+                        add(280);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(104);
+                        add(320);
+                    }
+                });
+            }
+        });
+        puntos.put("Valle del Cauca", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(59);
+                        add(320);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(90);
+                        add(302);
+                    }
+                });
+            }
+        });
+        puntos.put("Vaupés", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(274);
+                        add(404);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(307);
+                        add(382);
+                    }
+                });
+            }
+        });
+        puntos.put("Vichada", new ArrayList<ArrayList<Integer>>() {
+            {
+                add(new ArrayList<Integer>() {
+                    {
+                        add(301);
+                        add(255);
+                    }
+                });
+                add(new ArrayList<Integer>() {
+                    {
+                        add(364);
+                        add(242);
+                    }
+                });
+            }
+        });
+        return puntos;
     }
 }
+
+// Amazonas : [270,460], [230,450]
+// Antioquia: [118,171], [ 95,227 ]
+// Arauca: [ 240,194 ], [291 ,191 ]
+// Atlántico: [ 114,62 ], [106 ,77 ]
+// Bolívar: [107 , 93], [145 ,150 ]
+// Boyacá: [ 187,255 ], [ 207, 213]
+// Caldas: [129 , 224], [110 , 262]
+// Caquetá: [123 , 400], [ 215, 417]
+// Casanare: [ 210, 263], [258 ,230 ]
+// Cauca: [47 ,356 ], [ 89, 343]
+// Cesar: [168 , 159], [ 176, 104]
+// Chocó: [ 63,275 ], [ 35,205 ]
+// Córdoba: [78 ,170 ], [ 89, 130]
+// Cundinamarca: [154 , 285], [168 , 258]
+// Guainía: [416 ,355 ], [312 , 324]
+// Guaviare: [216 ,374 ], [257 ,343 ]
+// Huila: [ 126, 329], [98 ,374 ]
+// La Guajira: [184 ,48 ], [ 221, 13]
+// Magdalena: [ 145,68 ], [ 136, 108]
+// Meta: [163 ,332 ], [ 217, 308]
+// Nariño: [ 23, 368], [61 ,417 ]
+// Norte de Santander: [ 208, 175], [ 191,141 ]
+// Putumayo: [127 ,424], [84,416]
+// Quindío: [105 ,288 ], [ 107,278 ]
+// Risaralda: [99 , 269], [86 , 257]
+// Santander: [ 161, 221], [ 184,186 ]
+// Sucre: [ 117,139 ], [ 99, 111]
+// Tolima: [124 ,280 ], [ 104, 320]
+// Valle del Cauca: [ 59,320 ], [ 90, 302]
+// Vaupés: [274 ,404 ], [307 ,382 ]
+// Vichada: [301 ,255 ], [ 364, 242]
