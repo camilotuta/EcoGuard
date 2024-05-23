@@ -5,15 +5,14 @@
  */
 package Screens.Principal;
 
+import Screens.Custom.CambiarIU;
+import Screens.Custom.ComboBox;
 import Screens.Login.Login;
-
 import Screens.Principal.ReportIncident.ReportIncident;
 import Screens.Principal.ViewIncident.ViewIncident;
 import Screens.Profile.PersonalProfile;
 import Screens.Profile.ViewProfile;
-import Code.CambiarIU;
 import Code.Conexion;
-import Code.Incidentes;
 import Code.Ubicaciones;
 
 import java.awt.Cursor;
@@ -31,8 +30,6 @@ import java.awt.event.*;
  * @author tutaa
  */
 public class Principal extends javax.swing.JFrame {
-        Incidentes incidentes = new Incidentes();
-        Map<String, String> incidentesAmbientales = incidentes.incidentes;
         ArrayList<Integer> idsUsuarios = new ArrayList<>();
 
         Ubicaciones ubicacion = new Ubicaciones();
@@ -51,13 +48,13 @@ public class Principal extends javax.swing.JFrame {
                 this.setIconImage(Toolkit.getDefaultToolkit()
                                 .getImage(getClass().getResource("/img/icon.png")));
                 textosLabels();
-                llenarPublicaciones();
+                llenarPanelPublicaciones();
                 agregarMarcadores();
-                ponerUbicacion();
+                ponerUbicacionUsuario();
 
         }
 
-        public void crearLabel(int x, int y, String iconoPath, int idPublicacion) {
+        private void crearMarcador(int x, int y, String iconoPath, int idPublicacion) {
                 javax.swing.JLabel nuevoMarcador = new javax.swing.JLabel();
                 nuevoMarcador.setToolTipText(String.valueOf(idPublicacion));
                 CambiarIU.setImageLabelSize(nuevoMarcador, iconoPath, 30, 30);
@@ -68,34 +65,31 @@ public class Principal extends javax.swing.JFrame {
                         @Override
                         public void mouseClicked(MouseEvent e) {
                                 ViewIncident.idPublicacion = idPublicacion;
-                                irViewIncident();
+                                mostrarViewIncident();
                         }
                 });
 
         }
 
-        public void irViewIncident() {
+        private void mostrarViewIncident() {
                 ViewIncident view = new ViewIncident();
                 view.setVisible(true);
-
                 this.setVisible(false);
         }
 
-        public void ponerUbicacion() {
+        private void ponerUbicacionUsuario() {
                 try {
                         var ubi = Conexion.seleccionar(
                                         "Select * from usuarios where id_usuario =" + Login.idUsuarioGuardar,
                                         new String[] { "Ciudad", "departamento" });
 
-                        lbPonerUbicacion.setText(ubi.get(0).get(0) + " - " + ubi.get(0).get(1));
-
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacion, ubi.get(0).get(0) + " - " + ubi.get(0).get(1));
                 } catch (SQLException e) {
-                        e.printStackTrace();
+                        System.out.println(e);
                 }
-
         }
 
-        public void llenarPublicaciones() {
+        private void llenarPanelPublicaciones() {
 
                 try {
                         ArrayList<ArrayList<Object>> datosPublicaciones = solicitarPublicaciones();
@@ -103,7 +97,7 @@ public class Principal extends javax.swing.JFrame {
                         // 0
 
                         idsUsuarios.add((int) datosPublicaciones.get(0).get(1));
-                        String nombre0 = solicitarNombreUsuario((int) datosPublicaciones.get(0).get(1));
+                        String nombre0 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(0).get(1));
                         String tipo0 = (String) datosPublicaciones.get(0).get(2);
                         String hora0 = (String) datosPublicaciones.get(0).get(7);
                         String fecha0 = (String) datosPublicaciones.get(0).get(3);
@@ -112,19 +106,19 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente0 = (int) datosPublicaciones.get(0).get(0);
                         Conexion.recibirEvidencia(idIncidente0);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente0, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente0));
 
-                        lbPonerNombreUsuario0.setText(nombre0);
-                        lbPonerTipoIncidente0.setText(tipo0);
-                        lbPonerHoraIncidente0.setText(hora0);
-                        lbPonerFechaIncidente0.setText(fecha0);
-                        lbPonerUbicacionIncidente0.setText(ubicacion0);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario0, nombre0);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente0, tipo0);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente0, hora0);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente0, fecha0);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente0, ubicacion0);
 
                         // 1
 
                         idsUsuarios.add((int) datosPublicaciones.get(1).get(1));
-                        String nombre1 = solicitarNombreUsuario((int) datosPublicaciones.get(1).get(1));
+                        String nombre1 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(1).get(1));
                         String tipo1 = (String) datosPublicaciones.get(1).get(2);
                         String hora1 = (String) datosPublicaciones.get(1).get(7);
                         String fecha1 = (String) datosPublicaciones.get(1).get(3);
@@ -133,19 +127,19 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente1 = (int) datosPublicaciones.get(1).get(0);
                         Conexion.recibirEvidencia(idIncidente1);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente1, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente1));
 
-                        lbPonerNombreUsuario1.setText(nombre1);
-                        lbPonerTipoIncidente1.setText(tipo1);
-                        lbPonerHoraIncidente1.setText(hora1);
-                        lbPonerFechaIncidente1.setText(fecha1);
-                        lbPonerUbicacionIncidente1.setText(ubicacion1);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario1, nombre1);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente1, tipo1);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente1, hora1);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente1, fecha1);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente1, ubicacion1);
 
                         // 2
 
                         idsUsuarios.add((int) datosPublicaciones.get(2).get(1));
-                        String nombre2 = solicitarNombreUsuario((int) datosPublicaciones.get(2).get(1));
+                        String nombre2 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(2).get(1));
                         String tipo2 = (String) datosPublicaciones.get(2).get(2);
                         String hora2 = (String) datosPublicaciones.get(2).get(7);
                         String fecha2 = (String) datosPublicaciones.get(2).get(3);
@@ -154,19 +148,19 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente2 = (int) datosPublicaciones.get(2).get(0);
                         Conexion.recibirEvidencia(idIncidente2);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente2, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente2));
 
-                        lbPonerNombreUsuario2.setText(nombre2);
-                        lbPonerTipoIncidente2.setText(tipo2);
-                        lbPonerHoraIncidente2.setText(hora2);
-                        lbPonerFechaIncidente2.setText(fecha2);
-                        lbPonerUbicacionIncidente2.setText(ubicacion2);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario2, nombre2);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente2, tipo2);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente2, hora2);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente2, fecha2);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente2, ubicacion2);
 
                         // 3
 
                         idsUsuarios.add((int) datosPublicaciones.get(3).get(1));
-                        String nombre3 = solicitarNombreUsuario((int) datosPublicaciones.get(3).get(1));
+                        String nombre3 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(3).get(1));
                         String tipo3 = (String) datosPublicaciones.get(3).get(2);
                         String hora3 = (String) datosPublicaciones.get(3).get(7);
                         String fecha3 = (String) datosPublicaciones.get(3).get(3);
@@ -175,18 +169,18 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente3 = (int) datosPublicaciones.get(3).get(0);
                         Conexion.recibirEvidencia(idIncidente3);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente3, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente3));
 
-                        lbPonerNombreUsuario3.setText(nombre3);
-                        lbPonerTipoIncidente3.setText(tipo3);
-                        lbPonerHoraIncidente3.setText(hora3);
-                        lbPonerFechaIncidente3.setText(fecha3);
-                        lbPonerUbicacionIncidente3.setText(ubicacion3);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario3, nombre3);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente3, tipo3);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente3, hora3);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente3, fecha3);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente3, ubicacion3);
 
                         // 4
                         idsUsuarios.add((int) datosPublicaciones.get(4).get(1));
-                        String nombre4 = solicitarNombreUsuario((int) datosPublicaciones.get(4).get(1));
+                        String nombre4 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(4).get(1));
                         String tipo4 = (String) datosPublicaciones.get(4).get(2);
                         String hora4 = (String) datosPublicaciones.get(4).get(7);
                         String fecha4 = (String) datosPublicaciones.get(4).get(3);
@@ -195,18 +189,18 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente4 = (int) datosPublicaciones.get(4).get(0);
                         Conexion.recibirEvidencia(idIncidente4);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente4, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente4));
 
-                        lbPonerNombreUsuario4.setText(nombre4);
-                        lbPonerTipoIncidente4.setText(tipo4);
-                        lbPonerHoraIncidente4.setText(hora4);
-                        lbPonerFechaIncidente4.setText(fecha4);
-                        lbPonerUbicacionIncidente4.setText(ubicacion4);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario4, nombre4);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente4, tipo4);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente4, hora4);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente4, fecha4);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente4, ubicacion4);
 
                         // 5
                         idsUsuarios.add((int) datosPublicaciones.get(5).get(1));
-                        String nombre5 = solicitarNombreUsuario((int) datosPublicaciones.get(5).get(1));
+                        String nombre5 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(5).get(1));
                         String tipo5 = (String) datosPublicaciones.get(5).get(2);
                         String hora5 = (String) datosPublicaciones.get(5).get(7);
                         String fecha5 = (String) datosPublicaciones.get(5).get(3);
@@ -215,18 +209,18 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente5 = (int) datosPublicaciones.get(5).get(0);
                         Conexion.recibirEvidencia(idIncidente5);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente5, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente5));
 
-                        lbPonerNombreUsuario5.setText(nombre5);
-                        lbPonerTipoIncidente5.setText(tipo5);
-                        lbPonerHoraIncidente5.setText(hora5);
-                        lbPonerFechaIncidente5.setText(fecha5);
-                        lbPonerUbicacionIncidente5.setText(ubicacion5);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario5, nombre5);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente5, tipo5);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente5, hora5);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente5, fecha5);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente5, ubicacion5);
 
                         // 6
                         idsUsuarios.add((int) datosPublicaciones.get(6).get(1));
-                        String nombre6 = solicitarNombreUsuario((int) datosPublicaciones.get(6).get(1));
+                        String nombre6 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(6).get(1));
                         String tipo6 = (String) datosPublicaciones.get(6).get(2);
                         String hora6 = (String) datosPublicaciones.get(6).get(7);
                         String fecha6 = (String) datosPublicaciones.get(6).get(3);
@@ -235,17 +229,17 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente6 = (int) datosPublicaciones.get(6).get(0);
                         Conexion.recibirEvidencia(idIncidente6);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente6, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente6));
 
-                        lbPonerNombreUsuario6.setText(nombre6);
-                        lbPonerTipoIncidente6.setText(tipo6);
-                        lbPonerHoraIncidente6.setText(hora6);
-                        lbPonerFechaIncidente6.setText(fecha6);
-                        lbPonerUbicacionIncidente6.setText(ubicacion6);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario6, nombre6);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente6, tipo6);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente6, hora6);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente6, fecha6);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente6, ubicacion6);
                         // 7
                         idsUsuarios.add((int) datosPublicaciones.get(7).get(1));
-                        String nombre7 = solicitarNombreUsuario((int) datosPublicaciones.get(7).get(1));
+                        String nombre7 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(7).get(1));
                         String tipo7 = (String) datosPublicaciones.get(7).get(2);
                         String hora7 = (String) datosPublicaciones.get(7).get(7);
                         String fecha7 = (String) datosPublicaciones.get(7).get(3);
@@ -254,17 +248,17 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente7 = (int) datosPublicaciones.get(7).get(0);
                         Conexion.recibirEvidencia(idIncidente7);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente7, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente7));
 
-                        lbPonerNombreUsuario7.setText(nombre7);
-                        lbPonerTipoIncidente7.setText(tipo7);
-                        lbPonerHoraIncidente7.setText(hora7);
-                        lbPonerFechaIncidente7.setText(fecha7);
-                        lbPonerUbicacionIncidente7.setText(ubicacion7);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario7, nombre7);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente7, tipo7);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente7, hora7);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente7, fecha7);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente7, ubicacion7);
                         // 8
                         idsUsuarios.add((int) datosPublicaciones.get(8).get(1));
-                        String nombre8 = solicitarNombreUsuario((int) datosPublicaciones.get(8).get(1));
+                        String nombre8 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(8).get(1));
                         String tipo8 = (String) datosPublicaciones.get(8).get(2);
                         String hora8 = (String) datosPublicaciones.get(8).get(7);
                         String fecha8 = (String) datosPublicaciones.get(8).get(3);
@@ -273,17 +267,17 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente8 = (int) datosPublicaciones.get(8).get(0);
                         Conexion.recibirEvidencia(idIncidente8);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente8, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente8));
 
-                        lbPonerNombreUsuario8.setText(nombre8);
-                        lbPonerTipoIncidente8.setText(tipo8);
-                        lbPonerHoraIncidente8.setText(hora8);
-                        lbPonerFechaIncidente8.setText(fecha8);
-                        lbPonerUbicacionIncidente8.setText(ubicacion8);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario8, nombre8);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente8, tipo8);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente8, hora8);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente8, fecha8);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente8, ubicacion8);
                         // 9
                         idsUsuarios.add((int) datosPublicaciones.get(9).get(1));
-                        String nombre9 = solicitarNombreUsuario((int) datosPublicaciones.get(9).get(1));
+                        String nombre9 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(9).get(1));
                         String tipo9 = (String) datosPublicaciones.get(9).get(2);
                         String hora9 = (String) datosPublicaciones.get(9).get(7);
                         String fecha9 = (String) datosPublicaciones.get(9).get(3);
@@ -292,17 +286,17 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente9 = (int) datosPublicaciones.get(9).get(0);
                         Conexion.recibirEvidencia(idIncidente9);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente9, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente9));
 
-                        lbPonerNombreUsuario9.setText(nombre9);
-                        lbPonerTipoIncidente9.setText(tipo9);
-                        lbPonerHoraIncidente9.setText(hora9);
-                        lbPonerFechaIncidente9.setText(fecha9);
-                        lbPonerUbicacionIncidente9.setText(ubicacion9);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario9, nombre9);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente9, tipo9);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente9, hora9);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente9, fecha9);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente9, ubicacion9);
                         // 10
                         idsUsuarios.add((int) datosPublicaciones.get(10).get(1));
-                        String nombre10 = solicitarNombreUsuario((int) datosPublicaciones.get(10).get(1));
+                        String nombre10 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(10).get(1));
                         String tipo10 = (String) datosPublicaciones.get(10).get(2);
                         String hora10 = (String) datosPublicaciones.get(10).get(7);
                         String fecha10 = (String) datosPublicaciones.get(10).get(3);
@@ -311,17 +305,17 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente10 = (int) datosPublicaciones.get(10).get(0);
                         Conexion.recibirEvidencia(idIncidente10);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente10, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente10));
 
-                        lbPonerNombreUsuario10.setText(nombre10);
-                        lbPonerTipoIncidente10.setText(tipo10);
-                        lbPonerHoraIncidente10.setText(hora10);
-                        lbPonerFechaIncidente10.setText(fecha10);
-                        lbPonerUbicacionIncidente10.setText(ubicacion10);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario10, nombre10);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente10, tipo10);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente10, hora10);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente10, fecha10);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente10, ubicacion10);
                         // 11
                         idsUsuarios.add((int) datosPublicaciones.get(11).get(1));
-                        String nombre11 = solicitarNombreUsuario((int) datosPublicaciones.get(11).get(1));
+                        String nombre11 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(11).get(1));
                         String tipo11 = (String) datosPublicaciones.get(11).get(2);
                         String hora11 = (String) datosPublicaciones.get(11).get(7);
                         String fecha11 = (String) datosPublicaciones.get(11).get(3);
@@ -330,17 +324,17 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente11 = (int) datosPublicaciones.get(11).get(0);
                         Conexion.recibirEvidencia(idIncidente11);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente11, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente11));
 
-                        lbPonerNombreUsuario11.setText(nombre11);
-                        lbPonerTipoIncidente11.setText(tipo11);
-                        lbPonerHoraIncidente11.setText(hora11);
-                        lbPonerFechaIncidente11.setText(fecha11);
-                        lbPonerUbicacionIncidente11.setText(ubicacion11);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario11, nombre11);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente11, tipo11);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente11, hora11);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente11, fecha11);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente11, ubicacion11);
                         // 12
                         idsUsuarios.add((int) datosPublicaciones.get(12).get(1));
-                        String nombre12 = solicitarNombreUsuario((int) datosPublicaciones.get(12).get(1));
+                        String nombre12 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(12).get(1));
                         String tipo12 = (String) datosPublicaciones.get(12).get(2);
                         String hora12 = (String) datosPublicaciones.get(12).get(7);
                         String fecha12 = (String) datosPublicaciones.get(12).get(3);
@@ -349,17 +343,17 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente12 = (int) datosPublicaciones.get(12).get(0);
                         Conexion.recibirEvidencia(idIncidente12);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente12, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente12));
 
-                        lbPonerNombreUsuario12.setText(nombre12);
-                        lbPonerTipoIncidente12.setText(tipo12);
-                        lbPonerHoraIncidente12.setText(hora12);
-                        lbPonerFechaIncidente12.setText(fecha12);
-                        lbPonerUbicacionIncidente12.setText(ubicacion12);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario12, nombre12);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente12, tipo12);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente12, hora12);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente12, fecha12);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente12, ubicacion12);
                         // 13
                         idsUsuarios.add((int) datosPublicaciones.get(13).get(1));
-                        String nombre13 = solicitarNombreUsuario((int) datosPublicaciones.get(13).get(1));
+                        String nombre13 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(13).get(1));
                         String tipo13 = (String) datosPublicaciones.get(13).get(2);
                         String hora13 = (String) datosPublicaciones.get(13).get(7);
                         String fecha13 = (String) datosPublicaciones.get(13).get(3);
@@ -368,18 +362,18 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente13 = (int) datosPublicaciones.get(13).get(0);
                         Conexion.recibirEvidencia(idIncidente13);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente13, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente13));
 
-                        lbPonerNombreUsuario13.setText(nombre13);
-                        lbPonerTipoIncidente13.setText(tipo13);
-                        lbPonerHoraIncidente13.setText(hora13);
-                        lbPonerFechaIncidente13.setText(fecha13);
-                        lbPonerUbicacionIncidente13.setText(ubicacion13);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario13, nombre13);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente13, tipo13);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente13, hora13);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente13, fecha13);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente13, ubicacion13);
 
                         // 14
                         idsUsuarios.add((int) datosPublicaciones.get(14).get(1));
-                        String nombre14 = solicitarNombreUsuario((int) datosPublicaciones.get(14).get(1));
+                        String nombre14 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(14).get(1));
                         String tipo14 = (String) datosPublicaciones.get(14).get(2);
                         String hora14 = (String) datosPublicaciones.get(14).get(7);
                         String fecha14 = (String) datosPublicaciones.get(14).get(3);
@@ -388,17 +382,17 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente14 = (int) datosPublicaciones.get(14).get(0);
                         Conexion.recibirEvidencia(idIncidente14);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente14, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente14));
 
-                        lbPonerNombreUsuario14.setText(nombre14);
-                        lbPonerTipoIncidente14.setText(tipo14);
-                        lbPonerHoraIncidente14.setText(hora14);
-                        lbPonerFechaIncidente14.setText(fecha14);
-                        lbPonerUbicacionIncidente14.setText(ubicacion14);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario14, nombre14);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente14, tipo14);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente14, hora14);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente14, fecha14);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente14, ubicacion14);
                         // 15
                         idsUsuarios.add((int) datosPublicaciones.get(15).get(1));
-                        String nombre15 = solicitarNombreUsuario((int) datosPublicaciones.get(15).get(1));
+                        String nombre15 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(15).get(1));
                         String tipo15 = (String) datosPublicaciones.get(15).get(2);
                         String hora15 = (String) datosPublicaciones.get(15).get(7);
                         String fecha15 = (String) datosPublicaciones.get(15).get(3);
@@ -407,38 +401,27 @@ public class Principal extends javax.swing.JFrame {
                         int idIncidente15 = (int) datosPublicaciones.get(15).get(0);
                         Conexion.recibirEvidencia(idIncidente15);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente15, String.format(
-                                        "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg",
+                                        Conexion.rutaEvidencia,
                                         idIncidente15));
 
-                        lbPonerNombreUsuario15.setText(nombre15);
-                        lbPonerTipoIncidente15.setText(tipo15);
-                        lbPonerHoraIncidente15.setText(hora15);
-                        lbPonerFechaIncidente15.setText(fecha15);
-                        lbPonerUbicacionIncidente15.setText(ubicacion15);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario15, nombre15);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerTipoIncidente15, tipo15);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerHoraIncidente15, hora15);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerFechaIncidente15, fecha15);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente15, ubicacion15);
 
                 } catch (Exception e) {
                 }
         }
 
-        public String solicitarNombreUsuario(int id_usuario) {
-                String nombre = "";
-                try {
-                        nombre = (String) Conexion.seleccionar(
-                                        String.format("SELECT * FROM usuarios WHERE id_usuario = %d ",
-                                                        id_usuario),
-                                        new String[] { "nombre" }).get(0).get(0);
-                } catch (SQLException e) {
-                        e.printStackTrace();
-                }
-                return nombre;
-        }
-
-        public ArrayList<ArrayList<Object>> solicitarPublicaciones() {
+        private ArrayList<ArrayList<Object>> solicitarPublicaciones() {
                 ArrayList<ArrayList<Object>> publicaciones = new ArrayList<>();
                 try {
-                        publicaciones = Conexion.seleccionar("SELECT * FROM incidentes_ambientales",
-                                        new String[] { "id_incidente", "id_usuario", "tipo", "fecha", "departamento",
-                                                        "ciudad", "informacion", "hora" });
+                        publicaciones = Conexion
+                                        .seleccionar("SELECT * FROM incidentes_ambientales ORDER BY id_incidente DESC",
+                                                        new String[] { "id_incidente", "id_usuario", "tipo", "fecha",
+                                                                        "departamento",
+                                                                        "ciudad", "informacion", "hora" });
                         return publicaciones;
                 } catch (SQLException e) {
                         e.printStackTrace();
@@ -446,20 +429,19 @@ public class Principal extends javax.swing.JFrame {
                 return publicaciones;
         }
 
-        public void agregarMarcadores() {
+        private void agregarMarcadores() {
                 var marcadores = solicitarPublicaciones();
 
                 for (int i = 0; i < marcadores.size(); i++) {
                         int idPublicacion = (int) marcadores.get(i).get(0);
                         int x = (puntos.get(marcadores.get(i).get(4))).get(0).get(0);
                         int y = (puntos.get(marcadores.get(i).get(4))).get(0).get(1);
-                        String rutaIcono = incidentesAmbientales.get(marcadores.get(i).get(2));
-                        crearLabel(x, y, rutaIcono, idPublicacion);
+                        String rutaIcono = ComboBox.incidentesAmbientales.get(marcadores.get(i).get(2));
+                        crearMarcador(x, y, rutaIcono, idPublicacion);
                 }
-
         }
 
-        public void mostrarUsuario(int idUsuario) {
+        private void mostrarUsuario(int idUsuario) {
                 if (idUsuario != 0) {
                         ViewProfile.idUsuarioMostrar = idUsuario;
                         ViewProfile ver = new ViewProfile();
@@ -495,6 +477,8 @@ public class Principal extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
         // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
@@ -509,7 +493,7 @@ public class Principal extends javax.swing.JFrame {
                 lbPonerUbicacion = new javax.swing.JLabel();
                 lbPublicaciones = new javax.swing.JLabel();
                 panelMapa = new javax.swing.JPanel();
-                scrollPublicaciones = new Screens.Principal.Custom.ScrollPaneWin11();
+                scrollPublicaciones = new Screens.Custom.ScrollPaneWin11();
                 panelPublicaciones = new javax.swing.JPanel();
                 panelPublicacion15 = new javax.swing.JPanel();
                 imgLike15 = new javax.swing.JLabel();
@@ -672,6 +656,7 @@ public class Principal extends javax.swing.JFrame {
                 imgPonerEvidenciaIncidente0 = new javax.swing.JLabel();
                 imgFondoPub0 = new javax.swing.JLabel();
                 imgMapa = new javax.swing.JLabel();
+                imgFondo = new javax.swing.JLabel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -698,6 +683,7 @@ public class Principal extends javax.swing.JFrame {
                 ventanaPrincipal.add(imgReload, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 110, -1, -1));
 
                 panelMenu.setBackground(new java.awt.Color(22, 22, 26));
+                panelMenu.setOpaque(false);
                 panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
                 imgCasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/casaHover2.png"))); // NOI18N
@@ -741,15 +727,6 @@ public class Principal extends javax.swing.JFrame {
                 imgMenuBar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 imgMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lineaVertical.png"))); // NOI18N
                 imgMenuBar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-                imgMenuBar.addMouseListener(new java.awt.event.MouseAdapter() {
-                        public void mouseEntered(java.awt.event.MouseEvent evt) {
-                                imgMenuBarMouseEntered(evt);
-                        }
-
-                        public void mouseExited(java.awt.event.MouseEvent evt) {
-                                imgMenuBarMouseExited(evt);
-                        }
-                });
                 panelMenu.add(imgMenuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, -1));
 
                 ventanaPrincipal.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 230, 60, 220));
@@ -1906,6 +1883,10 @@ public class Principal extends javax.swing.JFrame {
                 imgMapa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mapaColombiaNuevo.png"))); // NOI18N
                 ventanaPrincipal.add(imgMapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 420, 550));
 
+                imgFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo.png"))); // NOI18N
+                imgFondo.setText("jLabel1");
+                ventanaPrincipal.add(imgFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
@@ -1923,166 +1904,135 @@ public class Principal extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
         private void imgReloadMouseClicked(java.awt.event.MouseEvent evt) {
-                llenarPublicaciones();
+                llenarPanelPublicaciones();
+                agregarMarcadores();
         }
 
         private void lbPonerNombreUsuario0MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(0));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario1MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(1));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario2MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(2));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario3MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(3));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario4MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(4));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario5MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(5));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario6MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(6));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario7MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(7));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario8MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(8));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario9MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(9));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario10MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(10));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario11MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(11));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario12MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(12));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario13MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(13));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario14MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(14));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
         private void lbPonerNombreUsuario15MouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-
                         mostrarUsuario(idsUsuarios.get(14));
                 } catch (Exception e) {
                         mostrarUsuario(0);
-
                 }
         }
 
@@ -2097,36 +2047,25 @@ public class Principal extends javax.swing.JFrame {
                 imgReload.setToolTipText("Recargar Pestaña");
                 imgVolver.setToolTipText("Salir");
                 imgUsuario.setToolTipText("Usuario");
-
-        }
-
-        private void imgMenuBarMouseExited(java.awt.event.MouseEvent evt) {
         }
 
         private void imgUsuarioMouseEntered(java.awt.event.MouseEvent evt) {
                 CambiarIU.setImageLabel(imgUsuario, "src/img/perfilHover2.png");
-
         }
 
         private void imgUsuarioMouseExited(java.awt.event.MouseEvent evt) {
                 CambiarIU.setImageLabel(imgUsuario, "src/img/usuario.png");
-
         }
 
         private void imgVolverMouseEntered(java.awt.event.MouseEvent evt) {
                 CambiarIU.setImageLabel(imgVolver, "src/img/volverHover2.png");
-
         }
 
         private void imgVolverMouseExited(java.awt.event.MouseEvent evt) {
                 CambiarIU.setImageLabel(imgVolver, "src/img/volver.png");
         }
 
-        private void imgMenuBarMouseEntered(java.awt.event.MouseEvent evt) {
-        }
-
         private void imgVolverMouseClicked(java.awt.event.MouseEvent evt) {
-
                 Login login = new Login();
                 login.setVisible(true);
                 this.setVisible(false);
@@ -2183,6 +2122,7 @@ public class Principal extends javax.swing.JFrame {
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JLabel imgCasa;
+        private javax.swing.JLabel imgFondo;
         private javax.swing.JLabel imgFondoPub0;
         private javax.swing.JLabel imgFondoPub1;
         private javax.swing.JLabel imgFondoPub10;
