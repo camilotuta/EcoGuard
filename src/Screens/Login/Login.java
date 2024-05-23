@@ -15,11 +15,14 @@ import Code.Now;
 import Screens.Principal.Principal;
 import Screens.Signup.Signup;
 import Screens.Custom.CambiarIU;
+import Screens.Custom.ObtenerIU;
 
 /**
  *
  * @author tutaa
  */
+// TODO: CAMBIAR COLOR TITLE BAR
+// TODO: RECUPERAR CONTRASEÑA
 public class Login extends javax.swing.JFrame {
 
 	public static int idUsuarioGuardar;
@@ -43,9 +46,9 @@ public class Login extends javax.swing.JFrame {
 	}
 
 	private void desactivarBotonIngresar() {
-		String contraseña = Desencriptar.desencriptarContra(pfContraseña);
-		btnIngresar.setEnabled((contraseña.length() >= 8) && tfCorreo.getText().contains("@")
-				&& tfCorreo.getText().length() > 13);
+		String contraseña = Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña));
+		btnIngresar.setEnabled((contraseña.length() >= 8) && ObtenerIU.obtenerTextoCampo(tfCorreo).contains("@")
+				&& ObtenerIU.obtenerTextoCampo(tfCorreo).length() > 13);
 
 	}
 
@@ -63,8 +66,8 @@ public class Login extends javax.swing.JFrame {
 	}
 
 	private void ingresarUsuario() throws SQLException {
-		String correo = tfCorreo.getText().toLowerCase();
-		String contraseña = Desencriptar.desencriptarContra(pfContraseña);
+		String correo = ObtenerIU.obtenerTextoCampo(tfCorreo).toLowerCase();
+		String contraseña = Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña));
 
 		if (usuarioEstaRegistrado(correo, contraseña)) {
 			correoGuardar = correo;
@@ -74,7 +77,8 @@ public class Login extends javax.swing.JFrame {
 		} else {
 			JOptionPane.showMessageDialog(this, "CORREO O CONTRASEÑA NO VALIDOS \n", "AVISO!",
 					javax.swing.JOptionPane.INFORMATION_MESSAGE);
-			pfContraseña.setText("");
+
+			CambiarIU.ponerTextoCampoContraseña(pfContraseña, "");
 			pfContraseña.requestFocus();
 			desactivarBotonIngresar();
 		}

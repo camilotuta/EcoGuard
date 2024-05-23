@@ -16,6 +16,8 @@ import Screens.Custom.CambiarIU;
  * @author tutaa
  */
 public class ViewProfile extends javax.swing.JFrame {
+        // TODO: MOSTRAR IMAGEN
+        // TODO PODER SEGUIR AL USUARIO
         public static int idUsuarioMostrar;
 
         /**

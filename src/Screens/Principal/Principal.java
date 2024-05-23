@@ -29,6 +29,9 @@ import java.awt.event.*;
  *
  * @author tutaa
  */
+// TODO: Poner likes y comentarios
+// TODO: AGREGAR PANELES AUTOMÁTICAMENTE
+// TODO: BOTON ELIMINAR PANELES
 public class Principal extends javax.swing.JFrame {
         ArrayList<Integer> idsUsuarios = new ArrayList<>();
 

@@ -3,6 +3,7 @@ package Screens.Custom;
 import java.awt.Image;
 
 import javax.swing.Icon;
+import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -40,5 +41,9 @@ public class CambiarIU {
 
     public static void ponerTextoPanel(JTextPane txtPanel, String texto) {
         txtPanel.setText(texto);
+    }
+
+    public static void ponerTextoCampoContraseña(JPasswordField contraseñaField, String texto) {
+        contraseñaField.setText(texto);
     }
 }

@@ -10,12 +10,4 @@ package Code;
  */
 public class Main {
 
-	// TODO: AGREGAR PANELES AUTOMÁTICAMENTE
-	// TODO: BOTON ELIMINAR PANELES
-	// TODO: Poner boton seguir en view profile
-	// TODO: eliminar funciones innecesarias
-	// TODO: Cambiar visualización de los métodos
-	// TODO: eliminar eventos innecesarios
-	// TODO: Poner likes y comentarios
-
 }

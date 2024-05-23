@@ -1,4 +1,5 @@
 /*
+	cSpell:ignore desencriptar
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -11,8 +12,10 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import Code.Conexion;
+import Code.Desencriptar;
 import Code.EnviarCorreo;
 import Screens.Custom.ComboBox;
+import Screens.Custom.ObtenerIU;
 import Screens.Login.Login;
 
 /**
@@ -20,6 +23,7 @@ import Screens.Login.Login;
  * @author tutaa
  */
 public class Signup extends javax.swing.JFrame {
+	// TODO: SOLICITAR IMAGEN O PONER IMAGEN POR DEFECTO
 
 	Random random = new Random();
 	private Boolean correoVerificado = false;
@@ -48,28 +52,30 @@ public class Signup extends javax.swing.JFrame {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	private void desactivarBotonRegistrarse() {
-		btnRegistrarse.setEnabled((correoVerificado && (tfNombre.getText().length() >= 10)
+		btnRegistrarse.setEnabled((correoVerificado && (ObtenerIU.obtenerTextoCampo(tfNombre).length() >= 10)
 				&& (!comboEdad.getSelectedItem().equals("Seleccionar"))
 				&& (!comboDepartamento.getSelectedItem().equals("Seleccionar"))
 				&& (!comboCiudad.getSelectedItem().equals("Seleccionar"))
-				&& (tfCorreo.getText().contains("@")) && (pfContraseña.getText().length() >= 8)
-				&& (pfConfirmarContraseña.getText().length() >= 8)
-				&& (tfCorreo.getText().length() >= 13)
-				&& (pfContraseña.getText().equals(pfConfirmarContraseña.getText()))));
+				&& (ObtenerIU.obtenerTextoCampo(tfCorreo).contains("@"))
+				&& (Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña)).length() >= 8)
+				&& (Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfConfirmarContraseña)).length() >= 8)
+				&& (ObtenerIU.obtenerTextoCampo(tfCorreo).length() >= 13)
+				&& (Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña))
+						.equals(Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfConfirmarContraseña))))));
 	}
 
 	private void desactivarBotonEnviarCodigo() {
 		btnEnviarCodigo.setEnabled(
-				tfNombre.getText().length() > 8 && tfCorreo.getText().contains("@") && tfCorreo
-						.getText().length() >= 13);
+				ObtenerIU.obtenerTextoCampo(tfNombre).length() > 8
+						&& ObtenerIU.obtenerTextoCampo(tfCorreo).contains("@")
+						&& ObtenerIU.obtenerTextoCampo(tfCorreo).length() >= 13);
 	}
 
 	private void desactivarBotonVerificarCodigo() {
-		btnVerificarCodigo.setEnabled(tfRecibirCodigo.getText().length() == 6
-				&& tfCorreo.getText().contains("@") && tfCorreo
-						.getText().length() >= 13);
+		btnVerificarCodigo.setEnabled(ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).length() == 6
+				&& ObtenerIU.obtenerTextoCampo(tfCorreo).contains("@")
+				&& ObtenerIU.obtenerTextoCampo(tfCorreo).length() >= 13);
 	}
 
 	private void activarCamposContraseña() {
@@ -88,7 +94,7 @@ public class Signup extends javax.swing.JFrame {
 
 	private void verificarCodigo() {
 
-		if (tfRecibirCodigo.getText().equals(codigo) && intentos > 0) {
+		if (ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).equals(codigo) && intentos > 0) {
 			JOptionPane.showMessageDialog(null, "EL CÓDIGO ES CORRECTO.");
 			pfContraseña.setEnabled(true);
 			pfConfirmarContraseña.setEnabled(true);
@@ -121,9 +127,9 @@ public class Signup extends javax.swing.JFrame {
 	}
 
 	private void enviarCodigo() throws HeadlessException, SQLException {
-		String correo = tfCorreo.getText().toLowerCase();
+		String correo = ObtenerIU.obtenerTextoCampo(tfCorreo).toLowerCase();
 
-		String nombre = tfNombre.getText();
+		String nombre = ObtenerIU.obtenerTextoCampo(tfNombre);
 
 		if (!correoEstaRegistrado(correo)) {
 
@@ -158,11 +164,10 @@ public class Signup extends javax.swing.JFrame {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	private void registrarUsuario() throws SQLException {
-		String correo = tfCorreo.getText().toLowerCase();
-		String contraseña = pfContraseña.getText();
-		String nombre = tfNombre.getText();
+		String correo = ObtenerIU.obtenerTextoCampo(tfCorreo).toLowerCase();
+		String contraseña = Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña));
+		String nombre = ObtenerIU.obtenerTextoCampo(tfNombre);
 		String departamento = (String) comboDepartamento.getSelectedItem();
 		String ciudad = (String) comboCiudad.getSelectedItem();
 		int edad = Integer.parseInt((String) comboEdad.getSelectedItem());
@@ -444,7 +449,7 @@ public class Signup extends javax.swing.JFrame {
 	private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {
 		registrarUsuario();
 
-		Login.correoGuardar = tfCorreo.getText();
+		Login.correoGuardar = ObtenerIU.obtenerTextoCampo(tfCorreo);
 		Login login = new Login();
 		login.setVisible(true);
 		this.setVisible(false);

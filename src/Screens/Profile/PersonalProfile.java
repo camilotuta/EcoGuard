@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import Code.Conexion;
 import Screens.Custom.CambiarIU;
+import Screens.Custom.ObtenerIU;
 import Screens.Login.Login;
 import Screens.Principal.Principal;
 
@@ -18,6 +19,10 @@ import Screens.Principal.Principal;
  * @author tutaa
  */
 public class PersonalProfile extends javax.swing.JFrame {
+        // TODO: CAMBIAR IMAGEN USUARIO
+        // TODO: CAMBIAR NOMBRE
+        // TODO: CAMBIAR CONTRASEÑA
+        // TODO: CAMBIAR UBICACIÓN
 
         /**
          * Creates new form PersonalProfile
@@ -65,12 +70,13 @@ public class PersonalProfile extends javax.swing.JFrame {
         }
 
         private void desactivarBotonGuardar() {
-                btnGuardarBiografia.setEnabled(!tfCambiarBiografia.getText().equals(txtMostrarBiografia.getText())
-                                && tfCambiarBiografia.getText().length() > 5);
+                btnGuardarBiografia.setEnabled(!ObtenerIU.obtenerTextoPanel(tfCambiarBiografia)
+                                .equals(ObtenerIU.obtenerTextoArea(txtMostrarBiografia))
+                                && ObtenerIU.obtenerTextoPanel(tfCambiarBiografia).length() > 5);
         }
 
         private void actualizarBiografia() throws SQLException {
-                var nuevaBiografia = tfCambiarBiografia.getText();
+                var nuevaBiografia = ObtenerIU.obtenerTextoPanel(tfCambiarBiografia);
                 Conexion.actualizar(String.format("UPDATE usuarios SET biografia = '%s' WHERE id_usuario = %d",
                                 nuevaBiografia, Login.idUsuarioGuardar));
                 ponerInformacion();

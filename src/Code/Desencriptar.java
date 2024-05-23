@@ -3,12 +3,9 @@
 
 package Code;
 
-import javax.swing.JPasswordField;
-
 public class Desencriptar {
 
-    public static String desencriptarContra(JPasswordField pfContraseña) {
-        char[] contraseñaEncriptada = pfContraseña.getPassword();
+    public static String desencriptarContra(char[] contraseñaEncriptada) {
         return new String(contraseñaEncriptada);
     }
 }

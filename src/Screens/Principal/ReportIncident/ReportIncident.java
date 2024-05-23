@@ -14,6 +14,7 @@ import Code.Conexion;
 import Code.Files;
 import Screens.Custom.CambiarIU;
 import Screens.Custom.ComboBox;
+import Screens.Custom.ObtenerIU;
 import Screens.Login.Login;
 import Screens.Principal.Principal;
 
@@ -47,12 +48,12 @@ public class ReportIncident extends javax.swing.JFrame {
         }
 
         private void publicar() {
-                String tipo = (String) comboTipoIncidente.getSelectedItem();
-                String hora = (String) comboHora.getSelectedItem();
-                String departamento = (String) comboDepartamento.getSelectedItem();
-                String ciudad = (String) comboCiudad.getSelectedItem();
-                String informacion = tfInformacion.getText();
-                byte[] fileData = Files.readFile(tfRutaImagen.getText());
+                String tipo = (String) ObtenerIU.obtenerSeleccionCombo(comboTipoIncidente);
+                String hora = (String) ObtenerIU.obtenerSeleccionCombo(comboHora);
+                String departamento = (String) ObtenerIU.obtenerSeleccionCombo(comboDepartamento);
+                String ciudad = (String) ObtenerIU.obtenerSeleccionCombo(comboCiudad);
+                String informacion = ObtenerIU.obtenerTextoPanel(tfInformacion);
+                byte[] fileData = Files.readFile(ObtenerIU.obtenerTextoCampo(tfRutaImagen));
 
                 try {
                         Conexion.registrarPublicacion(Login.idUsuarioGuardar, tipo, hora, departamento, ciudad,
@@ -85,27 +86,29 @@ public class ReportIncident extends javax.swing.JFrame {
         }
 
         private void ponerImgEvidencia() {
-                String ruta = tfRutaImagen.getText();
+                String ruta = ObtenerIU.obtenerTextoCampo(tfRutaImagen);
                 CambiarIU.setImageLabel(mostrarImgEvidencia, ruta);
         }
 
         private void cambiarIconoIncidente() {
-                String tipo = (String) comboTipoIncidente.getSelectedItem();
+                String tipo = (String) ObtenerIU.obtenerSeleccionCombo(comboTipoIncidente);
                 String ruta = ComboBox.incidentesAmbientales.get(tipo);
                 CambiarIU.setImageLabel(imgIconoIncidente, ruta);
         }
 
         private void desactivarComboCiudad() {
-                comboCiudad.setEnabled(!comboDepartamento.getSelectedItem().equals("Seleccionar"));
+                comboCiudad.setEnabled(!ObtenerIU.obtenerSeleccionCombo(comboDepartamento).equals("Seleccionar"));
         }
 
         private void desactivarBotonPublicar() {
                 btnPublicar.setEnabled(imagenSubida
-                                && (!comboTipoIncidente.getSelectedItem().toString().equals("Seleccionar"))
-                                && (!comboDepartamento.getSelectedItem().toString().equals("Seleccionar"))
-                                && (!comboCiudad.getSelectedItem().toString().equals("Seleccionar"))
-                                && tfInformacion.getText().length() >= 5
-                                && (!comboHora.getSelectedItem().toString().equals("Seleccionar")));
+                                && (!ObtenerIU.obtenerSeleccionCombo(comboTipoIncidente).toString()
+                                                .equals("Seleccionar"))
+                                && (!ObtenerIU.obtenerSeleccionCombo(comboDepartamento).toString()
+                                                .equals("Seleccionar"))
+                                && (!ObtenerIU.obtenerSeleccionCombo(comboCiudad).toString().equals("Seleccionar"))
+                                && ObtenerIU.obtenerTextoPanel(tfInformacion).length() >= 5
+                                && (!ObtenerIU.obtenerSeleccionCombo(comboHora).toString().equals("Seleccionar")));
         }
 
         private void desactivarRutaImagen() {
