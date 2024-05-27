@@ -1,5 +1,5 @@
 /*
- cSpell:ignore Ubicacion
+ cspell:ignore ubicacion dias
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import Code.Conexion;
 import Screens.Custom.CambiarIU;
 import Screens.Custom.ScrollPaneWin11;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -18,6 +21,7 @@ import Screens.Custom.ScrollPaneWin11;
  */
 public class ViewProfile extends javax.swing.JFrame {
         // TODO PODER SEGUIR AL USUARIO
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         public static int idUsuarioMostrar;
 
         /**
@@ -39,15 +43,17 @@ public class ViewProfile extends javax.swing.JFrame {
                 try {
                         var datos = Conexion.seleccionar(String.format("SELECT * FROM usuarios where id_usuario = %d",
                                         idUsuarioMostrar),
-                                        new String[] { "nombre", "correo", "departamento", "ciudad", "edad",
-                                                        "seguidores",
-                                                        "biografia" });
+                                        new String[] { "nombre", "correo", "departamento", "ciudad", "fecha_nacimiento",
+                                                        "seguidores", "biografia" });
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombre, ((String) datos.get(0).get(0)));
                         CambiarIU.ponerTextoEtiqueta(lbPonerCorreo, ((String) datos.get(0).get(1)));
                         CambiarIU.ponerTextoEtiqueta(lbPonerUbicacion,
                                         (((String) datos.get(0).get(3)) + " - " + ((String) datos.get(0).get(2))));
-                        CambiarIU.ponerTextoEtiqueta(lbPonerEdad, (datos.get(0).get(4) + " años"));
+
+                        int edad = (int) Math
+                                        .floor(restarFechas((String) datos.get(0).get(4), obtenerFechaHoy()) / 365);
+                        CambiarIU.ponerTextoEtiqueta(lbPonerEdad, (String.valueOf(edad) + " años"));
                         CambiarIU.ponerTextoEtiqueta(lbPonerSeguidores, (datos.get(0).get(5) + " Seguidores"));
                         CambiarIU.ponerTextoArea(txtMostrarBiografia, ((String) datos.get(0).get(6)));
 
@@ -55,6 +61,20 @@ public class ViewProfile extends javax.swing.JFrame {
                 } catch (SQLException e) {
                         e.printStackTrace();
                 }
+        }
+
+        private String obtenerFechaHoy() {
+                LocalDate fechaActual = LocalDate.now();
+                return fechaActual.format(formatter);
+        }
+
+        private double restarFechas(String fInicio, String fFinal) {
+                LocalDate fechaInicio = LocalDate.parse(fInicio, formatter);
+                LocalDate fechaFin = LocalDate.parse(fFinal, formatter);
+
+                long diasEntre = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
+
+                return diasEntre;
         }
 
         /**

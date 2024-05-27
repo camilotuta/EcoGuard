@@ -1,5 +1,5 @@
 /*
-	cSpell:ignore desencriptar
+	cspell:ignore desencriptar correogir dias metodo
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.Period;
 import Code.Conexion;
 import Code.Desencriptar;
 import Code.EnviarCorreo;
@@ -21,6 +20,7 @@ import Screens.Custom.CambiarIU;
 import Screens.Custom.ComboBox;
 import Screens.Custom.ObtenerIU;
 import Screens.Login.Login;
+import java.time.temporal.ChronoUnit;
 import net.miginfocom.swing.MigLayout;
 import raven.datetime.component.date.DateEvent;
 import raven.datetime.component.date.DatePicker;
@@ -36,7 +36,7 @@ public class Signup extends javax.swing.JFrame {
         // TODO: CORREOGIR METODO REGISTRAR, CAMBIAR EN LA BASE DE DATOS EDAD POR FECHA
         // Y HACER LA DEBIDA RESTA PARA PONERLA EN PERSONAL PROFILE Y EN VIEW PROFILE
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Random random = new Random();
         private Boolean correoVerificado = false;
         private String codigo = String.valueOf(random.nextInt(100_000, 999_999));
@@ -184,11 +184,14 @@ public class Signup extends javax.swing.JFrame {
                 String nombre = ObtenerIU.obtenerTextoCampo(tfNombre);
                 String departamento = (String) ObtenerIU.obtenerSeleccionCombo(comboDepartamento);
                 String ciudad = (String) ObtenerIU.obtenerSeleccionCombo(comboCiudad);
+                String fechaNacimiento = datePicker.getSelectedDate().format(formatter);
+                System.out.println(fechaNacimiento);
+
                 int edad = 0;
                 Conexion.registrar(
-                                String.format("INSERT INTO usuarios (correo,contraseña,nombre,departamento,ciudad,edad,"
-                                                + "fecha_registro,biografia ) VALUES ('%s','%s','%s','%s','%s',%d,DATE ('now'),' ');",
-                                                correo, contraseña, nombre, departamento, ciudad, edad));
+                                String.format("INSERT INTO usuarios (correo,contraseña,nombre,departamento,ciudad,fecha_nacimiento,"
+                                                + "fecha_registro) VALUES ('%s','%s','%s','%s','%s','%s', DATE ('now'));",
+                                                correo, contraseña, nombre, departamento, ciudad, fechaNacimiento));
                 JOptionPane.showMessageDialog(this, "¡REGISTRO EXITOSO!", "¡AVISO!",
                                 javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
@@ -199,22 +202,17 @@ public class Signup extends javax.swing.JFrame {
         }
 
         private double restarFechas(String fInicio, String fFinal) {
-
                 LocalDate fechaInicio = LocalDate.parse(fInicio, formatter);
                 LocalDate fechaFin = LocalDate.parse(fFinal, formatter);
-                System.out.println(fechaInicio);
-                System.out.println(fechaFin);
+                long diasEntre = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
 
-                Period periodo = Period.between(fechaInicio, fechaFin);
-
-                System.out.println(periodo.getYears() * 365);
-                return periodo.getYears() * 365;
+                return diasEntre;
         }
 
         private String obtenerFechaSeleccionada(JFormattedTextField ftFechaNacimiento) {
-                var date = datePicker.getSelectedDate();
+                var fecha = datePicker.getSelectedDate();
 
-                return formatter.format(date);
+                return formatter.format(fecha);
         }
 
         private void mostrarErrores() {
@@ -234,8 +232,9 @@ public class Signup extends javax.swing.JFrame {
                         CambiarIU.setImageLabel(lbErrorFechaNacimiento,
                                         "src/img/error.png");
                         lbErrorFechaNacimiento.setToolTipText("Debe seleccionar una fecha válida.");
+                        fechaValida = false;
                 } else {
-                        if (restarFechas(obtenerFechaSeleccionada(ftFechaNacimiento), obtenerFechaHoy()) > 6570) {
+                        if (restarFechas(obtenerFechaSeleccionada(ftFechaNacimiento), obtenerFechaHoy()) > 6575) {
                                 CambiarIU.setImageLabel(lbErrorFechaNacimiento,
                                                 "src/img/check.png");
                                 lbErrorFechaNacimiento.setToolTipText("Ha seleccionado una fecha.");
@@ -421,6 +420,7 @@ public class Signup extends javax.swing.JFrame {
                         @Override
                         public void dateSelected(DateEvent dateEvent) {
                                 mostrarErrores();
+                                desactivarBotonRegistrarse();
                         }
                 });
 
