@@ -310,8 +310,7 @@ public class Login extends javax.swing.JFrame {
 				+ "especificando tu problema a alguno\nde los siguientes correos de"
 				+ " contacto:\n\nJeffry Steve Sahagún Beleño:"
 				+ " jefrysahagun.sb@academia.umb.edu.co\nMiguel Ángel Bejarano Muñoz:"
-				+ " miguelbejarano.am@academia.umb.edu.co\nLuis Alejandro Mora Ubaque:"
-				+ " luismora.au@academia.umb.edu.co";
+				+ " miguelbejarano.am@academia.umb.edu.co";
 
 		JOptionPane.showMessageDialog(null, texto, "AYUDA", JOptionPane.INFORMATION_MESSAGE);
 	}
