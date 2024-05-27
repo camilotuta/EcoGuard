@@ -13,9 +13,11 @@ import javax.swing.JOptionPane;
 import Screens.Login.Login;
 
 public class Conexion {
+    // TODO: Separar la clase Conexion en múltiples clases, cada una con una única
+    // responsabilidad (e.g., conexión a la base de datos, operaciones CRUD, etc.).
 
     static String url = "jdbc:sqlite:C:/Users/tutaa/Workspace/Java/Projects/EcoGuard/db/es.db";
-    public static String rutaEvidencia = "C:\\Users\\tutaa\\Workspace\\Java\\Projects\\EcoGuard\\imgPublicaciones\\%d.jpg";
+    public static String rutaEvidencia = "C:/Users/tutaa/Workspace/Java/Projects/EcoGuard/imgPublicaciones/%d.jpg";
     static Connection connect;
     static PreparedStatement pSt;
     static ResultSet result = null;

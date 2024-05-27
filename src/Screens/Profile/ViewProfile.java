@@ -10,13 +10,13 @@ import java.sql.SQLException;
 
 import Code.Conexion;
 import Screens.Custom.CambiarIU;
+import Screens.Custom.ScrollPaneWin11;
 
 /**
  *
  * @author tutaa
  */
 public class ViewProfile extends javax.swing.JFrame {
-        // TODO: MOSTRAR IMAGEN
         // TODO PODER SEGUIR AL USUARIO
         public static int idUsuarioMostrar;
 
@@ -66,6 +66,7 @@ public class ViewProfile extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
         // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
@@ -76,7 +77,7 @@ public class ViewProfile extends javax.swing.JFrame {
                 lbPonerEdad = new javax.swing.JLabel();
                 lbPonerCorreo = new javax.swing.JLabel();
                 lbBiografía = new javax.swing.JLabel();
-                scrollPonerBiografia = new Screens.Custom.ScrollPaneWin11();
+                scrollPonerBiografia = new ScrollPaneWin11();
                 txtMostrarBiografia = new javax.swing.JTextArea();
                 btnSalir = new javax.swing.JButton();
                 imgFondo = new javax.swing.JLabel();
@@ -130,10 +131,10 @@ public class ViewProfile extends javax.swing.JFrame {
                 ventanaMostrarIncidente.add(lbBiografía,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
 
-                scrollPonerBiografia.setOpaque(false);
+                scrollPonerBiografia.setBackground(new java.awt.Color(0, 2, 2));
 
                 txtMostrarBiografia.setEditable(false);
-                txtMostrarBiografia.setBackground(new java.awt.Color(22, 22, 26));
+                txtMostrarBiografia.setBackground(new java.awt.Color(0, 2, 2));
                 txtMostrarBiografia.setColumns(1);
                 txtMostrarBiografia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 txtMostrarBiografia.setForeground(new java.awt.Color(148, 161, 178));
@@ -143,7 +144,6 @@ public class ViewProfile extends javax.swing.JFrame {
                 txtMostrarBiografia.setBorder(null);
                 txtMostrarBiografia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
                 txtMostrarBiografia.setFocusable(false);
-                txtMostrarBiografia.setOpaque(false);
                 scrollPonerBiografia.setViewportView(txtMostrarBiografia);
 
                 ventanaMostrarIncidente.add(scrollPonerBiografia,

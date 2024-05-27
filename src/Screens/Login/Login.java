@@ -9,20 +9,23 @@ import java.awt.Toolkit;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
+import com.formdev.flatlaf.themes.*;
+
 import Code.Conexion;
+import Code.DeleteFiles;
 import Code.Desencriptar;
 import Code.Now;
 import Screens.Principal.Principal;
+import Screens.RecoverPassword.RecoverPassword;
 import Screens.Signup.Signup;
 import Screens.Custom.CambiarIU;
 import Screens.Custom.ObtenerIU;
+import java.awt.EventQueue;
 
 /**
  *
  * @author tutaa
  */
-// TODO: CAMBIAR COLOR TITLE BAR
-// TODO: RECUPERAR CONTRASEÑA
 public class Login extends javax.swing.JFrame {
 
 	public static int idUsuarioGuardar;
@@ -71,6 +74,9 @@ public class Login extends javax.swing.JFrame {
 
 		if (usuarioEstaRegistrado(correo, contraseña)) {
 			correoGuardar = correo;
+
+			DeleteFiles.eliminarArchivos("C:/Users/tutaa/Workspace/Java/Projects/EcoGuard/imgPublicaciones");
+
 			Principal pantallaPrincipal = new Principal();
 			pantallaPrincipal.setVisible(true);
 			this.setVisible(false);
@@ -95,10 +101,15 @@ public class Login extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
 		ventanaLogIn = new javax.swing.JPanel();
+		lbCambiarContraseña = new javax.swing.JLabel();
 		lbTitulo = new javax.swing.JLabel();
 		btnErroresComunes = new javax.swing.JButton();
 		lbCorreo = new javax.swing.JLabel();
@@ -115,6 +126,25 @@ public class Login extends javax.swing.JFrame {
 		ventanaLogIn.setBackground(new java.awt.Color(22, 22, 26));
 		ventanaLogIn.setPreferredSize(new java.awt.Dimension(1080, 720));
 		ventanaLogIn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+		lbCambiarContraseña.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+		lbCambiarContraseña.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/help.png"))); // NOI18N
+		lbCambiarContraseña.setToolTipText("¿Deseas recuperar o cambiar tu contraseña? Click aquí.");
+		lbCambiarContraseña.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+		lbCambiarContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				lbCambiarContraseñaMouseClicked(evt);
+			}
+
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
+				lbCambiarContraseñaMouseEntered(evt);
+			}
+
+			public void mouseExited(java.awt.event.MouseEvent evt) {
+				lbCambiarContraseñaMouseExited(evt);
+			}
+		});
+		ventanaLogIn.add(lbCambiarContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 440, 30, 30));
 
 		lbTitulo.setFont(new java.awt.Font("Crabs", 1, 100)); // NOI18N
 		lbTitulo.setForeground(new java.awt.Color(255, 255, 254));
@@ -220,6 +250,20 @@ public class Login extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
+	private void lbCambiarContraseñaMouseClicked(java.awt.event.MouseEvent evt) {
+		RecoverPassword recoverPassword = new RecoverPassword();
+		recoverPassword.setVisible(true);
+		this.setVisible(false);
+	}
+
+	private void lbCambiarContraseñaMouseEntered(java.awt.event.MouseEvent evt) {
+		CambiarIU.setImageLabel(lbCambiarContraseña, "src/img/helpHover.png");
+	}
+
+	private void lbCambiarContraseñaMouseExited(java.awt.event.MouseEvent evt) {
+		CambiarIU.setImageLabel(lbCambiarContraseña, "src/img/help.png");
+	}
+
 	private void pfContraseñaKeyReleased(java.awt.event.KeyEvent evt) {
 		desactivarBotonIngresar();
 	}
@@ -276,42 +320,8 @@ public class Login extends javax.swing.JFrame {
 	 * @param args the command line arguments
 	 */
 	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		// <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
-		// (optional) ">
-		/*
-		 * If Nimbus (introduced in Java SE 6) is not available, stay with the default
-		 * look and feel.
-		 * For details see
-		 * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
-					.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE,
-					null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE,
-					null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE,
-					null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE,
-					null, ex);
-		}
-		// </editor-fold>
-
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(() -> {
-			new Login().setVisible(true);
-		});
+		FlatMacDarkLaf.setup();
+		EventQueue.invokeLater(() -> new Login().setVisible(true));
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
@@ -319,6 +329,7 @@ public class Login extends javax.swing.JFrame {
 	private javax.swing.JButton btnIngresar;
 	private javax.swing.JButton btnRegistrarse;
 	private javax.swing.JLabel imgFondo;
+	private javax.swing.JLabel lbCambiarContraseña;
 	private javax.swing.JLabel lbContraseña;
 	private javax.swing.JLabel lbCorreo;
 	private javax.swing.JLabel lbTitulo;

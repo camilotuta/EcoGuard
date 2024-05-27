@@ -15,6 +15,7 @@ import Code.Files;
 import Screens.Custom.CambiarIU;
 import Screens.Custom.ComboBox;
 import Screens.Custom.ObtenerIU;
+import Screens.Custom.ScrollPaneWin11;
 import Screens.Login.Login;
 import Screens.Principal.Principal;
 
@@ -133,6 +134,8 @@ public class ReportIncident extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
         // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
@@ -145,7 +148,7 @@ public class ReportIncident extends javax.swing.JFrame {
                 lbCiudad = new javax.swing.JLabel();
                 comboCiudad = new javax.swing.JComboBox<>();
                 lbInformacion = new javax.swing.JLabel();
-                scrollInformacion = new Screens.Custom.ScrollPaneWin11();
+                scrollInformacion = new ScrollPaneWin11();
                 tfInformacion = new javax.swing.JTextPane();
                 lbEvidencia = new javax.swing.JLabel();
                 tfRutaImagen = new javax.swing.JTextField();
@@ -233,12 +236,11 @@ public class ReportIncident extends javax.swing.JFrame {
                 ventanaReportarIncidente.add(lbInformacion,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
 
-                scrollInformacion.setOpaque(false);
+                scrollInformacion.setBackground(new java.awt.Color(0, 2, 2));
 
-                tfInformacion.setBackground(new java.awt.Color(22, 22, 26));
+                tfInformacion.setBackground(new java.awt.Color(0, 2, 2));
                 tfInformacion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 tfInformacion.setForeground(new java.awt.Color(148, 161, 178));
-                tfInformacion.setOpaque(false);
                 tfInformacion.addKeyListener(new java.awt.event.KeyAdapter() {
                         public void keyReleased(java.awt.event.KeyEvent evt) {
                                 tfInformacionKeyReleased(evt);
@@ -327,7 +329,7 @@ public class ReportIncident extends javax.swing.JFrame {
                         }
                 });
                 ventanaReportarIncidente.add(btnPublicar,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 650, -1, -1));
+                                new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 650, -1, -1));
 
                 btnRegresar.setBackground(new java.awt.Color(127, 90, 240));
                 btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -340,7 +342,7 @@ public class ReportIncident extends javax.swing.JFrame {
                         }
                 });
                 ventanaReportarIncidente.add(btnRegresar,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 650, -1, -1));
+                                new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 650, -1, -1));
 
                 panelIconoIncidente.setBackground(new java.awt.Color(36, 38, 41));
 

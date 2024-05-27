@@ -24,11 +24,14 @@ public class ComboBox {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static void ponerCiudades(JComboBox comboCiudad, JComboBox comboDepartamento) {
+
         comboCiudad.removeAllItems();
         comboCiudad.addItem("Seleccionar");
-        List<String> ciudades = departamentos.get(comboDepartamento.getSelectedItem());
-        for (String i : ciudades) {
-            comboCiudad.addItem(i);
+        if (!comboDepartamento.getSelectedItem().toString().equals("Seleccionar")) {
+            List<String> ciudades = departamentos.get(comboDepartamento.getSelectedItem().toString());
+            for (String i : ciudades) {
+                comboCiudad.addItem(i);
+            }
         }
     }
 

@@ -7,6 +7,7 @@ package Screens.Principal.ViewIncident;
 
 import Code.Conexion;
 import Screens.Custom.CambiarIU;
+import Screens.Custom.ScrollPaneWin11;
 import Screens.Principal.Principal;
 
 import java.awt.Toolkit;
@@ -81,6 +82,7 @@ public class ViewIncident extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
         // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
@@ -88,7 +90,7 @@ public class ViewIncident extends javax.swing.JFrame {
                 lbPonerNombreUsuario = new javax.swing.JLabel();
                 lbPonerLikes = new javax.swing.JLabel();
                 lbPonerTipoIncidente = new javax.swing.JLabel();
-                scrollInfoIncidente = new Screens.Custom.ScrollPaneWin11();
+                scrollInfoIncidente = new ScrollPaneWin11();
                 txtMostrarInfoIncidente = new javax.swing.JTextArea();
                 imgPonerEvidenciaIncidente = new javax.swing.JLabel();
                 lbPonerFechaIncidente = new javax.swing.JLabel();
@@ -126,8 +128,10 @@ public class ViewIncident extends javax.swing.JFrame {
                 ventanaMostrarIncidente.add(lbPonerTipoIncidente,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 570, -1));
 
+                scrollInfoIncidente.setBackground(new java.awt.Color(0, 2, 2));
+
                 txtMostrarInfoIncidente.setEditable(false);
-                txtMostrarInfoIncidente.setBackground(new java.awt.Color(22, 22, 26));
+                txtMostrarInfoIncidente.setBackground(new java.awt.Color(0, 2, 2));
                 txtMostrarInfoIncidente.setColumns(1);
                 txtMostrarInfoIncidente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 txtMostrarInfoIncidente.setForeground(new java.awt.Color(148, 161, 178));
@@ -142,9 +146,8 @@ public class ViewIncident extends javax.swing.JFrame {
                 ventanaMostrarIncidente.add(scrollInfoIncidente,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 200, 140));
 
-                imgPonerEvidenciaIncidente
-                                .setBorder(javax.swing.BorderFactory
-                                                .createLineBorder(new java.awt.Color(127, 90, 240)));
+                imgPonerEvidenciaIncidente.setBorder(
+                                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(127, 90, 240)));
                 ventanaMostrarIncidente.add(imgPonerEvidenciaIncidente,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 150, 140));
 

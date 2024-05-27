@@ -35,4 +35,8 @@ public class ObtenerIU {
         return (String) comboBox.getSelectedItem();
     }
 
+    @SuppressWarnings("rawtypes")
+    public static int obtenerIndiceSeleccionCombo(JComboBox comboBox) {
+        return comboBox.getSelectedIndex();
+    }
 }

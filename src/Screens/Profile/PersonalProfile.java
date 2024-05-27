@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import Code.Conexion;
 import Screens.Custom.CambiarIU;
 import Screens.Custom.ObtenerIU;
+import Screens.Custom.ScrollPaneWin11;
 import Screens.Login.Login;
 import Screens.Principal.Principal;
 
@@ -19,10 +20,6 @@ import Screens.Principal.Principal;
  * @author tutaa
  */
 public class PersonalProfile extends javax.swing.JFrame {
-        // TODO: CAMBIAR IMAGEN USUARIO
-        // TODO: CAMBIAR NOMBRE
-        // TODO: CAMBIAR CONTRASEÑA
-        // TODO: CAMBIAR UBICACIÓN
 
         /**
          * Creates new form PersonalProfile
@@ -98,6 +95,10 @@ public class PersonalProfile extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
         // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
@@ -114,10 +115,10 @@ public class PersonalProfile extends javax.swing.JFrame {
                 lbPonerEdad = new javax.swing.JLabel();
                 lbPonerCorreo = new javax.swing.JLabel();
                 lbBiografía = new javax.swing.JLabel();
-                scrollPonerBiografia = new Screens.Custom.ScrollPaneWin11();
+                scrollPonerBiografia = new ScrollPaneWin11();
                 txtMostrarBiografia = new javax.swing.JTextArea();
                 lbCambiarBiografia = new javax.swing.JLabel();
-                scrollCambiarBiografia = new Screens.Custom.ScrollPaneWin11();
+                scrollCambiarBiografia = new ScrollPaneWin11();
                 tfCambiarBiografia = new javax.swing.JTextPane();
                 btnGuardarBiografia = new javax.swing.JButton();
                 btnCancelarBiografia = new javax.swing.JButton();
@@ -191,6 +192,7 @@ public class PersonalProfile extends javax.swing.JFrame {
                 lbPonerUbicacion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
                 lbPonerUbicacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/marcador.png"))); // NOI18N
                 lbPonerUbicacion.setText("-");
+                lbPonerUbicacion.setToolTipText("");
                 ventanaProfile.add(lbPonerUbicacion,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 440, -1));
 
@@ -204,6 +206,7 @@ public class PersonalProfile extends javax.swing.JFrame {
                 lbPonerNombre.setForeground(new java.awt.Color(148, 161, 178));
                 lbPonerNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 lbPonerNombre.setText("-");
+                lbPonerNombre.setToolTipText("");
                 ventanaProfile.add(lbPonerNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1080, -1));
 
                 lbPonerEdad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -223,10 +226,10 @@ public class PersonalProfile extends javax.swing.JFrame {
                 lbBiografía.setText("BIOGRAFÍA: ");
                 ventanaProfile.add(lbBiografía, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
 
-                scrollPonerBiografia.setOpaque(false);
+                scrollPonerBiografia.setBackground(new java.awt.Color(0, 2, 2));
 
                 txtMostrarBiografia.setEditable(false);
-                txtMostrarBiografia.setBackground(new java.awt.Color(22, 22, 26));
+                txtMostrarBiografia.setBackground(new java.awt.Color(0, 2, 2));
                 txtMostrarBiografia.setColumns(1);
                 txtMostrarBiografia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 txtMostrarBiografia.setForeground(new java.awt.Color(148, 161, 178));
@@ -236,7 +239,6 @@ public class PersonalProfile extends javax.swing.JFrame {
                 txtMostrarBiografia.setBorder(null);
                 txtMostrarBiografia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
                 txtMostrarBiografia.setFocusable(false);
-                txtMostrarBiografia.setOpaque(false);
                 scrollPonerBiografia.setViewportView(txtMostrarBiografia);
 
                 ventanaProfile.add(scrollPonerBiografia,
@@ -248,12 +250,11 @@ public class PersonalProfile extends javax.swing.JFrame {
                 ventanaProfile.add(lbCambiarBiografia,
                                 new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 490, -1, -1));
 
-                scrollCambiarBiografia.setOpaque(false);
+                scrollCambiarBiografia.setBackground(new java.awt.Color(0, 2, 2));
 
-                tfCambiarBiografia.setBackground(new java.awt.Color(22, 22, 26));
+                tfCambiarBiografia.setBackground(new java.awt.Color(0, 2, 2));
                 tfCambiarBiografia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 tfCambiarBiografia.setForeground(new java.awt.Color(148, 161, 178));
-                tfCambiarBiografia.setOpaque(false);
                 tfCambiarBiografia.addKeyListener(new java.awt.event.KeyAdapter() {
                         public void keyReleased(java.awt.event.KeyEvent evt) {
                                 tfCambiarBiografiaKeyReleased(evt);
@@ -280,7 +281,7 @@ public class PersonalProfile extends javax.swing.JFrame {
                         }
                 });
                 ventanaProfile.add(btnGuardarBiografia,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 650, -1, -1));
+                                new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 650, -1, -1));
 
                 btnCancelarBiografia.setBackground(new java.awt.Color(127, 90, 240));
                 btnCancelarBiografia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -293,7 +294,7 @@ public class PersonalProfile extends javax.swing.JFrame {
                         }
                 });
                 ventanaProfile.add(btnCancelarBiografia,
-                                new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 650, -1, -1));
+                                new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 650, -1, -1));
 
                 imgFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo.png"))); // NOI18N
                 imgFondo.setText("jLabel1");
