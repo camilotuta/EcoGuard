@@ -30,7 +30,7 @@ import javax.swing.JFormattedTextField;
 
 /**
  *
- * @author migue
+ * @author tutaa
  */
 public class Signup extends javax.swing.JFrame {
         // TODO: CORREOGIR METODO REGISTRAR, CAMBIAR EN LA BASE DE DATOS EDAD POR FECHA

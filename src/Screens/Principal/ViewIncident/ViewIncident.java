@@ -15,7 +15,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author migue
+ * @author tutaa
  */
 public class ViewIncident extends javax.swing.JFrame {
         public static int idPublicacion;

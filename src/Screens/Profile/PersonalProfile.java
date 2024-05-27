@@ -20,7 +20,7 @@ import java.time.temporal.ChronoUnit;
 
 /**
  *
- * @author migue
+ * @author tutaa
  */
 public class PersonalProfile extends javax.swing.JFrame {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

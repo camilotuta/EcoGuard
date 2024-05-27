@@ -25,7 +25,7 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 /**
  *
- * @author migue
+ * @author Raven
  */
 public class ScrollBarWin11UI extends BasicScrollBarUI {
 

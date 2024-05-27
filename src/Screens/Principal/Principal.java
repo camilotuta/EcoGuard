@@ -27,7 +27,7 @@ import java.awt.event.*;
 
 /**
  *
- * @author migue
+ * @author tutaa
  */
 // TODO: Poner likes y comentarios
 // TODO: AGREGAR PANELES AUTOMÁTICAMENTE

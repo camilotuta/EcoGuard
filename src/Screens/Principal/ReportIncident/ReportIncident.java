@@ -21,7 +21,7 @@ import Screens.Principal.Principal;
 
 /**
  *
- * @author migue
+ * @author tutaa
  */
 public class ReportIncident extends javax.swing.JFrame {
         public Boolean imagenSubida = false;

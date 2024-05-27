@@ -17,7 +17,7 @@ import java.time.temporal.ChronoUnit;
 
 /**
  *
- * @author migue
+ * @author tutaa
  */
 public class ViewProfile extends javax.swing.JFrame {
         // TODO PODER SEGUIR AL USUARIO
