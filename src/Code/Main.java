@@ -6,7 +6,7 @@ package Code;
 
 /**
  *
- * @author tutaa
+ * @author migue
  */
 public class Main {
 

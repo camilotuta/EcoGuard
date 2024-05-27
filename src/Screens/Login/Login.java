@@ -24,8 +24,8 @@ import java.awt.EventQueue;
 
 /**
  *
- * @author tutaa
- */
+ * @author migue
+ /
 public class Login extends javax.swing.JFrame {
 
 	public static int idUsuarioGuardar;

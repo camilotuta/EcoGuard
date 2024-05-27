@@ -20,7 +20,7 @@ import Screens.Login.Login;
 
 /**
  *
- * @author tutaa
+ * @author migue
  */
 public class RecoverPassword extends javax.swing.JFrame {
 
