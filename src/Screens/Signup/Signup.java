@@ -1,5 +1,5 @@
 /*
-	cspell:ignore desencriptar correogir dias metodo
+ cspell:ignore desencriptar correogir dias metodo operacion verificacion
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -8,19 +8,19 @@ package Screens.Signup;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.SQLException;
-import java.util.Random;
 import javax.swing.JOptionPane;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import Code.Conexion;
+import java.util.ArrayList;
+
+import Code.OperacionCRUD;
+import Code.Dates;
+import Code.EnviarCodigoVerificacion;
 import Code.Desencriptar;
-import Code.EnviarCorreo;
 import Screens.Custom.CambiarIU;
 import Screens.Custom.ComboBox;
 import Screens.Custom.ObtenerIU;
 import Screens.Login.Login;
-import java.time.temporal.ChronoUnit;
 import net.miginfocom.swing.MigLayout;
 import raven.datetime.component.date.DateEvent;
 import raven.datetime.component.date.DatePicker;
@@ -33,15 +33,9 @@ import javax.swing.JFormattedTextField;
  * @author tutaa
  */
 public class Signup extends javax.swing.JFrame {
-        // TODO: CORREOGIR METODO REGISTRAR, CAMBIAR EN LA BASE DE DATOS EDAD POR FECHA
-        // Y HACER LA DEBIDA RESTA PARA PONERLA EN PERSONAL PROFILE Y EN VIEW PROFILE
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        Random random = new Random();
-        private Boolean correoVerificado = false;
-        private String codigo = String.valueOf(random.nextInt(100_000, 999_999));
-        private Integer intentos = 3;
-
+        private EnviarCodigoVerificacion enviarCodigo;
+        private boolean correoVerificado = false;
         private boolean fechaValida = false;
 
         /**
@@ -110,30 +104,30 @@ public class Signup extends javax.swing.JFrame {
 
         private void verificarCodigo() {
 
-                if (ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).equals(codigo) && intentos > 0) {
+                if (ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).equals(enviarCodigo.getCodigo()) && enviarCodigo.getIntentos() > 0) {
                         JOptionPane.showMessageDialog(null, "EL CÓDIGO ES CORRECTO.");
                         pfContraseña.setEnabled(true);
                         pfConfirmarContraseña.setEnabled(true);
-                        intentos = 3;
+                        enviarCodigo.setIntentos(3);
                         correoVerificado = true;
                         activarCamposContraseña();
                         btnEnviarCodigo.setEnabled(false);
                         btnVerificarCodigo.setEnabled(false);
-                } else if (intentos == 0) {
+                } else if (enviarCodigo.getIntentos() == 0) {
                         JOptionPane.showMessageDialog(rootPane, "NO TIENE MÁS INTENTOS.");
                         tfRecibirCodigo.setEnabled(false);
                         tfCorreo.setEnabled(false);
                         btnEnviarCodigo.setEnabled(false);
                         btnVerificarCodigo.setEnabled(false);
                 } else {
-                        intentos--;
+                        enviarCodigo.setIntentos(enviarCodigo.getIntentos()-1);
                         JOptionPane.showMessageDialog(null,
-                                        "EL CÓDIGO NO ES CORRECTO.\nTIENE " + intentos + " INTENTOS.");
+                                        "EL CÓDIGO NO ES CORRECTO.\nTIENE " + enviarCodigo.getIntentos() + " INTENTOS.");
                 }
         }
 
-        private Boolean correoEstaRegistrado(String correo) throws SQLException {
-                var datosUsuarioRegistrado = Conexion.seleccionar(
+        private boolean correoEstaRegistrado(String correo) throws SQLException {
+                ArrayList<ArrayList<Object>> datosUsuarioRegistrado = OperacionCRUD.seleccionar(
                                 String.format("SELECT * FROM usuarios WHERE correo = '%s'",
                                                 correo),
                                 new String[] { "correo" });
@@ -147,10 +141,7 @@ public class Signup extends javax.swing.JFrame {
 
                 if (!correoEstaRegistrado(correo)) {
 
-                        Random rand = new Random();
-                        codigo = String.valueOf(rand.nextInt(100_000, 999_999));
-
-                        String listaCodigo[] = codigo.split(""), text = "";
+                        String listaCodigo[] = enviarCodigo.getCodigo().split(""), text = "";
 
                         for (int i = 0; i < listaCodigo.length; i++) {
                                 if (i != listaCodigo.length - 1) {
@@ -172,7 +163,7 @@ public class Signup extends javax.swing.JFrame {
                                         + "Atentamente,<br>"
                                         + "El equipo de EcoGuard. &#128170;";
 
-                        new EnviarCorreo(correo, asunto, mensaje);
+                        enviarCodigo = new EnviarCodigoVerificacion(correo, asunto, mensaje);
                 } else {
                         JOptionPane.showMessageDialog(null, "YA EXISTE UNA CUENTA CON ESTE CORREO.");
                 }
@@ -184,35 +175,14 @@ public class Signup extends javax.swing.JFrame {
                 String nombre = ObtenerIU.obtenerTextoCampo(tfNombre);
                 String departamento = (String) ObtenerIU.obtenerSeleccionCombo(comboDepartamento);
                 String ciudad = (String) ObtenerIU.obtenerSeleccionCombo(comboCiudad);
-                String fechaNacimiento = datePicker.getSelectedDate().format(formatter);
-                System.out.println(fechaNacimiento);
+                String fechaNacimiento = ObtenerIU.obtenerFechaSeleccionada(datePicker);
 
-                int edad = 0;
-                Conexion.registrar(
+                OperacionCRUD.registrar(
                                 String.format("INSERT INTO usuarios (correo,contraseña,nombre,departamento,ciudad,fecha_nacimiento,"
                                                 + "fecha_registro) VALUES ('%s','%s','%s','%s','%s','%s', DATE ('now'));",
                                                 correo, contraseña, nombre, departamento, ciudad, fechaNacimiento));
                 JOptionPane.showMessageDialog(this, "¡REGISTRO EXITOSO!", "¡AVISO!",
                                 javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        }
-
-        private String obtenerFechaHoy() {
-                LocalDate fechaActual = LocalDate.now();
-                return fechaActual.format(formatter);
-        }
-
-        private double restarFechas(String fInicio, String fFinal) {
-                LocalDate fechaInicio = LocalDate.parse(fInicio, formatter);
-                LocalDate fechaFin = LocalDate.parse(fFinal, formatter);
-                long diasEntre = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
-
-                return diasEntre;
-        }
-
-        private String obtenerFechaSeleccionada(JFormattedTextField ftFechaNacimiento) {
-                var fecha = datePicker.getSelectedDate();
-
-                return formatter.format(fecha);
         }
 
         private void mostrarErrores() {
@@ -234,7 +204,8 @@ public class Signup extends javax.swing.JFrame {
                         lbErrorFechaNacimiento.setToolTipText("Debe seleccionar una fecha válida.");
                         fechaValida = false;
                 } else {
-                        if (restarFechas(obtenerFechaSeleccionada(ftFechaNacimiento), obtenerFechaHoy()) > 6575) {
+                        if (Dates.restarFechasSinDiasBisiestos(ObtenerIU.obtenerFechaSeleccionada(datePicker),
+                                        Dates.obtenerFechaHoy()) > 6575) {
                                 CambiarIU.setImageLabel(lbErrorFechaNacimiento,
                                                 "src/img/check.png");
                                 lbErrorFechaNacimiento.setToolTipText("Ha seleccionado una fecha.");

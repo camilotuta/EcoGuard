@@ -1,5 +1,5 @@
 /*
- cspell:ignore ubicacion dias
+ cspell:ignore ubicacion dias operacion
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -7,23 +7,20 @@ package Screens.Profile;
 
 import java.awt.Toolkit;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-import Code.Conexion;
+import Code.OperacionCRUD;
+import Code.Dates;
 import Screens.Custom.CambiarIU;
 import Screens.Custom.ObtenerIU;
 import Screens.Custom.ScrollPaneWin11;
 import Screens.Login.Login;
 import Screens.Principal.Principal;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-
 /**
  *
  * @author tutaa
  */
 public class PersonalProfile extends javax.swing.JFrame {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         /**
          * Creates new form PersonalProfile
@@ -51,7 +48,7 @@ public class PersonalProfile extends javax.swing.JFrame {
 
         private void ponerInformacion() {
                 try {
-                        var datos = Conexion.seleccionar(String.format("SELECT * FROM usuarios where id_usuario = %d",
+                        ArrayList<ArrayList<Object>> datos = OperacionCRUD.seleccionar(String.format("SELECT * FROM usuarios where id_usuario = %d",
                                         Login.idUsuarioGuardar),
                                         new String[] { "nombre", "correo", "departamento", "ciudad", "fecha_nacimiento",
                                                         "seguidores", "biografia" });
@@ -61,8 +58,8 @@ public class PersonalProfile extends javax.swing.JFrame {
                         CambiarIU.ponerTextoEtiqueta(lbPonerUbicacion,
                                         (((String) datos.get(0).get(3)) + " - " + ((String) datos.get(0).get(2))));
 
-                        int edad = (int) Math
-                                        .floor(restarFechas((String) datos.get(0).get(4), obtenerFechaHoy()) / 365);
+                        int edad = (Dates.restarFechasSinDiasBisiestos((String) datos.get(0).get(4),
+                                        Dates.obtenerFechaHoy()));
                         CambiarIU.ponerTextoEtiqueta(lbPonerEdad, (String.valueOf(edad) + " años"));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerSeguidores, (datos.get(0).get(5) + " Seguidores"));
@@ -80,26 +77,12 @@ public class PersonalProfile extends javax.swing.JFrame {
         }
 
         private void actualizarBiografia() throws SQLException {
-                var nuevaBiografia = ObtenerIU.obtenerTextoPanel(tfCambiarBiografia);
-                Conexion.actualizar(String.format("UPDATE usuarios SET biografia = '%s' WHERE id_usuario = %d",
+                String nuevaBiografia = ObtenerIU.obtenerTextoPanel(tfCambiarBiografia);
+                OperacionCRUD.actualizar(String.format("UPDATE usuarios SET biografia = '%s' WHERE id_usuario = %d",
                                 nuevaBiografia, Login.idUsuarioGuardar));
                 ponerInformacion();
                 CambiarIU.ponerTextoPanel(tfCambiarBiografia, "");
                 desactivarBotonGuardar();
-        }
-
-        private String obtenerFechaHoy() {
-                LocalDate fechaActual = LocalDate.now();
-                return fechaActual.format(formatter);
-        }
-
-        private double restarFechas(String fInicio, String fFinal) {
-                LocalDate fechaInicio = LocalDate.parse(fInicio, formatter);
-                LocalDate fechaFin = LocalDate.parse(fFinal, formatter);
-
-                long diasEntre = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
-
-                return diasEntre;
         }
 
         /**

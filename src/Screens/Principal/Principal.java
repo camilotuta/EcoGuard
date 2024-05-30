@@ -1,5 +1,5 @@
 /*
- cSpell:ignore publicacion ubicacion
+ cSpell:ignore publicacion ubicacion operacion
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -12,7 +12,7 @@ import Screens.Principal.ReportIncident.ReportIncident;
 import Screens.Principal.ViewIncident.ViewIncident;
 import Screens.Profile.PersonalProfile;
 import Screens.Profile.ViewProfile;
-import Code.Conexion;
+import Code.OperacionPublicacion;
 import Code.Ubicaciones;
 
 import java.awt.Cursor;
@@ -82,7 +82,7 @@ public class Principal extends javax.swing.JFrame {
 
         private void ponerUbicacionUsuario() {
                 try {
-                        var ubi = Conexion.seleccionar(
+                        ArrayList<ArrayList<Object>> ubi = OperacionPublicacion.seleccionar(
                                         "Select * from usuarios where id_usuario =" + Login.idUsuarioGuardar,
                                         new String[] { "Ciudad", "departamento" });
 
@@ -100,16 +100,16 @@ public class Principal extends javax.swing.JFrame {
                         // 0
 
                         idsUsuarios.add((int) datosPublicaciones.get(0).get(1));
-                        String nombre0 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(0).get(1));
+                        String nombre0 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(0).get(1));
                         String tipo0 = (String) datosPublicaciones.get(0).get(2);
                         String hora0 = (String) datosPublicaciones.get(0).get(7);
                         String fecha0 = (String) datosPublicaciones.get(0).get(3);
                         String ubicacion0 = (String) datosPublicaciones.get(0).get(5) + " - "
                                         + (String) datosPublicaciones.get(0).get(4);
                         int idIncidente0 = (int) datosPublicaciones.get(0).get(0);
-                        Conexion.recibirEvidencia(idIncidente0);
+                        OperacionPublicacion.recibirEvidencia(idIncidente0);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente0, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente0));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario0, nombre0);
@@ -121,16 +121,16 @@ public class Principal extends javax.swing.JFrame {
                         // 1
 
                         idsUsuarios.add((int) datosPublicaciones.get(1).get(1));
-                        String nombre1 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(1).get(1));
+                        String nombre1 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(1).get(1));
                         String tipo1 = (String) datosPublicaciones.get(1).get(2);
                         String hora1 = (String) datosPublicaciones.get(1).get(7);
                         String fecha1 = (String) datosPublicaciones.get(1).get(3);
                         String ubicacion1 = (String) datosPublicaciones.get(1).get(5) + " - "
                                         + (String) datosPublicaciones.get(1).get(4);
                         int idIncidente1 = (int) datosPublicaciones.get(1).get(0);
-                        Conexion.recibirEvidencia(idIncidente1);
+                        OperacionPublicacion.recibirEvidencia(idIncidente1);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente1, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente1));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario1, nombre1);
@@ -142,16 +142,16 @@ public class Principal extends javax.swing.JFrame {
                         // 2
 
                         idsUsuarios.add((int) datosPublicaciones.get(2).get(1));
-                        String nombre2 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(2).get(1));
+                        String nombre2 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(2).get(1));
                         String tipo2 = (String) datosPublicaciones.get(2).get(2);
                         String hora2 = (String) datosPublicaciones.get(2).get(7);
                         String fecha2 = (String) datosPublicaciones.get(2).get(3);
                         String ubicacion2 = (String) datosPublicaciones.get(2).get(5) + " - "
                                         + (String) datosPublicaciones.get(2).get(4);
                         int idIncidente2 = (int) datosPublicaciones.get(2).get(0);
-                        Conexion.recibirEvidencia(idIncidente2);
+                        OperacionPublicacion.recibirEvidencia(idIncidente2);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente2, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente2));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario2, nombre2);
@@ -163,16 +163,16 @@ public class Principal extends javax.swing.JFrame {
                         // 3
 
                         idsUsuarios.add((int) datosPublicaciones.get(3).get(1));
-                        String nombre3 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(3).get(1));
+                        String nombre3 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(3).get(1));
                         String tipo3 = (String) datosPublicaciones.get(3).get(2);
                         String hora3 = (String) datosPublicaciones.get(3).get(7);
                         String fecha3 = (String) datosPublicaciones.get(3).get(3);
                         String ubicacion3 = (String) datosPublicaciones.get(3).get(5) + " - "
                                         + (String) datosPublicaciones.get(3).get(4);
                         int idIncidente3 = (int) datosPublicaciones.get(3).get(0);
-                        Conexion.recibirEvidencia(idIncidente3);
+                        OperacionPublicacion.recibirEvidencia(idIncidente3);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente3, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente3));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario3, nombre3);
@@ -183,16 +183,16 @@ public class Principal extends javax.swing.JFrame {
 
                         // 4
                         idsUsuarios.add((int) datosPublicaciones.get(4).get(1));
-                        String nombre4 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(4).get(1));
+                        String nombre4 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(4).get(1));
                         String tipo4 = (String) datosPublicaciones.get(4).get(2);
                         String hora4 = (String) datosPublicaciones.get(4).get(7);
                         String fecha4 = (String) datosPublicaciones.get(4).get(3);
                         String ubicacion4 = (String) datosPublicaciones.get(4).get(5) + " - "
                                         + (String) datosPublicaciones.get(4).get(4);
                         int idIncidente4 = (int) datosPublicaciones.get(4).get(0);
-                        Conexion.recibirEvidencia(idIncidente4);
+                        OperacionPublicacion.recibirEvidencia(idIncidente4);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente4, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente4));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario4, nombre4);
@@ -203,16 +203,16 @@ public class Principal extends javax.swing.JFrame {
 
                         // 5
                         idsUsuarios.add((int) datosPublicaciones.get(5).get(1));
-                        String nombre5 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(5).get(1));
+                        String nombre5 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(5).get(1));
                         String tipo5 = (String) datosPublicaciones.get(5).get(2);
                         String hora5 = (String) datosPublicaciones.get(5).get(7);
                         String fecha5 = (String) datosPublicaciones.get(5).get(3);
                         String ubicacion5 = (String) datosPublicaciones.get(5).get(5) + " - "
                                         + (String) datosPublicaciones.get(5).get(4);
                         int idIncidente5 = (int) datosPublicaciones.get(5).get(0);
-                        Conexion.recibirEvidencia(idIncidente5);
+                        OperacionPublicacion.recibirEvidencia(idIncidente5);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente5, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente5));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario5, nombre5);
@@ -223,16 +223,16 @@ public class Principal extends javax.swing.JFrame {
 
                         // 6
                         idsUsuarios.add((int) datosPublicaciones.get(6).get(1));
-                        String nombre6 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(6).get(1));
+                        String nombre6 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(6).get(1));
                         String tipo6 = (String) datosPublicaciones.get(6).get(2);
                         String hora6 = (String) datosPublicaciones.get(6).get(7);
                         String fecha6 = (String) datosPublicaciones.get(6).get(3);
                         String ubicacion6 = (String) datosPublicaciones.get(6).get(5) + " - "
                                         + (String) datosPublicaciones.get(6).get(4);
                         int idIncidente6 = (int) datosPublicaciones.get(6).get(0);
-                        Conexion.recibirEvidencia(idIncidente6);
+                        OperacionPublicacion.recibirEvidencia(idIncidente6);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente6, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente6));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario6, nombre6);
@@ -242,16 +242,16 @@ public class Principal extends javax.swing.JFrame {
                         CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente6, ubicacion6);
                         // 7
                         idsUsuarios.add((int) datosPublicaciones.get(7).get(1));
-                        String nombre7 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(7).get(1));
+                        String nombre7 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(7).get(1));
                         String tipo7 = (String) datosPublicaciones.get(7).get(2);
                         String hora7 = (String) datosPublicaciones.get(7).get(7);
                         String fecha7 = (String) datosPublicaciones.get(7).get(3);
                         String ubicacion7 = (String) datosPublicaciones.get(7).get(5) + " - "
                                         + (String) datosPublicaciones.get(7).get(4);
                         int idIncidente7 = (int) datosPublicaciones.get(7).get(0);
-                        Conexion.recibirEvidencia(idIncidente7);
+                        OperacionPublicacion.recibirEvidencia(idIncidente7);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente7, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente7));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario7, nombre7);
@@ -261,16 +261,16 @@ public class Principal extends javax.swing.JFrame {
                         CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente7, ubicacion7);
                         // 8
                         idsUsuarios.add((int) datosPublicaciones.get(8).get(1));
-                        String nombre8 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(8).get(1));
+                        String nombre8 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(8).get(1));
                         String tipo8 = (String) datosPublicaciones.get(8).get(2);
                         String hora8 = (String) datosPublicaciones.get(8).get(7);
                         String fecha8 = (String) datosPublicaciones.get(8).get(3);
                         String ubicacion8 = (String) datosPublicaciones.get(8).get(5) + " - "
                                         + (String) datosPublicaciones.get(8).get(4);
                         int idIncidente8 = (int) datosPublicaciones.get(8).get(0);
-                        Conexion.recibirEvidencia(idIncidente8);
+                        OperacionPublicacion.recibirEvidencia(idIncidente8);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente8, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente8));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario8, nombre8);
@@ -280,16 +280,16 @@ public class Principal extends javax.swing.JFrame {
                         CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente8, ubicacion8);
                         // 9
                         idsUsuarios.add((int) datosPublicaciones.get(9).get(1));
-                        String nombre9 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(9).get(1));
+                        String nombre9 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(9).get(1));
                         String tipo9 = (String) datosPublicaciones.get(9).get(2);
                         String hora9 = (String) datosPublicaciones.get(9).get(7);
                         String fecha9 = (String) datosPublicaciones.get(9).get(3);
                         String ubicacion9 = (String) datosPublicaciones.get(9).get(5) + " - "
                                         + (String) datosPublicaciones.get(9).get(4);
                         int idIncidente9 = (int) datosPublicaciones.get(9).get(0);
-                        Conexion.recibirEvidencia(idIncidente9);
+                        OperacionPublicacion.recibirEvidencia(idIncidente9);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente9, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente9));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario9, nombre9);
@@ -299,16 +299,16 @@ public class Principal extends javax.swing.JFrame {
                         CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente9, ubicacion9);
                         // 10
                         idsUsuarios.add((int) datosPublicaciones.get(10).get(1));
-                        String nombre10 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(10).get(1));
+                        String nombre10 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(10).get(1));
                         String tipo10 = (String) datosPublicaciones.get(10).get(2);
                         String hora10 = (String) datosPublicaciones.get(10).get(7);
                         String fecha10 = (String) datosPublicaciones.get(10).get(3);
                         String ubicacion10 = (String) datosPublicaciones.get(10).get(5) + " - "
                                         + (String) datosPublicaciones.get(10).get(4);
                         int idIncidente10 = (int) datosPublicaciones.get(10).get(0);
-                        Conexion.recibirEvidencia(idIncidente10);
+                        OperacionPublicacion.recibirEvidencia(idIncidente10);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente10, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente10));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario10, nombre10);
@@ -318,16 +318,16 @@ public class Principal extends javax.swing.JFrame {
                         CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente10, ubicacion10);
                         // 11
                         idsUsuarios.add((int) datosPublicaciones.get(11).get(1));
-                        String nombre11 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(11).get(1));
+                        String nombre11 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(11).get(1));
                         String tipo11 = (String) datosPublicaciones.get(11).get(2);
                         String hora11 = (String) datosPublicaciones.get(11).get(7);
                         String fecha11 = (String) datosPublicaciones.get(11).get(3);
                         String ubicacion11 = (String) datosPublicaciones.get(11).get(5) + " - "
                                         + (String) datosPublicaciones.get(11).get(4);
                         int idIncidente11 = (int) datosPublicaciones.get(11).get(0);
-                        Conexion.recibirEvidencia(idIncidente11);
+                        OperacionPublicacion.recibirEvidencia(idIncidente11);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente11, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente11));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario11, nombre11);
@@ -337,16 +337,16 @@ public class Principal extends javax.swing.JFrame {
                         CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente11, ubicacion11);
                         // 12
                         idsUsuarios.add((int) datosPublicaciones.get(12).get(1));
-                        String nombre12 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(12).get(1));
+                        String nombre12 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(12).get(1));
                         String tipo12 = (String) datosPublicaciones.get(12).get(2);
                         String hora12 = (String) datosPublicaciones.get(12).get(7);
                         String fecha12 = (String) datosPublicaciones.get(12).get(3);
                         String ubicacion12 = (String) datosPublicaciones.get(12).get(5) + " - "
                                         + (String) datosPublicaciones.get(12).get(4);
                         int idIncidente12 = (int) datosPublicaciones.get(12).get(0);
-                        Conexion.recibirEvidencia(idIncidente12);
+                        OperacionPublicacion.recibirEvidencia(idIncidente12);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente12, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente12));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario12, nombre12);
@@ -356,16 +356,16 @@ public class Principal extends javax.swing.JFrame {
                         CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente12, ubicacion12);
                         // 13
                         idsUsuarios.add((int) datosPublicaciones.get(13).get(1));
-                        String nombre13 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(13).get(1));
+                        String nombre13 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(13).get(1));
                         String tipo13 = (String) datosPublicaciones.get(13).get(2);
                         String hora13 = (String) datosPublicaciones.get(13).get(7);
                         String fecha13 = (String) datosPublicaciones.get(13).get(3);
                         String ubicacion13 = (String) datosPublicaciones.get(13).get(5) + " - "
                                         + (String) datosPublicaciones.get(13).get(4);
                         int idIncidente13 = (int) datosPublicaciones.get(13).get(0);
-                        Conexion.recibirEvidencia(idIncidente13);
+                        OperacionPublicacion.recibirEvidencia(idIncidente13);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente13, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente13));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario13, nombre13);
@@ -376,16 +376,16 @@ public class Principal extends javax.swing.JFrame {
 
                         // 14
                         idsUsuarios.add((int) datosPublicaciones.get(14).get(1));
-                        String nombre14 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(14).get(1));
+                        String nombre14 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(14).get(1));
                         String tipo14 = (String) datosPublicaciones.get(14).get(2);
                         String hora14 = (String) datosPublicaciones.get(14).get(7);
                         String fecha14 = (String) datosPublicaciones.get(14).get(3);
                         String ubicacion14 = (String) datosPublicaciones.get(14).get(5) + " - "
                                         + (String) datosPublicaciones.get(14).get(4);
                         int idIncidente14 = (int) datosPublicaciones.get(14).get(0);
-                        Conexion.recibirEvidencia(idIncidente14);
+                        OperacionPublicacion.recibirEvidencia(idIncidente14);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente14, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente14));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario14, nombre14);
@@ -395,16 +395,16 @@ public class Principal extends javax.swing.JFrame {
                         CambiarIU.ponerTextoEtiqueta(lbPonerUbicacionIncidente14, ubicacion14);
                         // 15
                         idsUsuarios.add((int) datosPublicaciones.get(15).get(1));
-                        String nombre15 = Conexion.solicitarNombreUsuario((int) datosPublicaciones.get(15).get(1));
+                        String nombre15 = OperacionPublicacion.solicitarNombreUsuario((int) datosPublicaciones.get(15).get(1));
                         String tipo15 = (String) datosPublicaciones.get(15).get(2);
                         String hora15 = (String) datosPublicaciones.get(15).get(7);
                         String fecha15 = (String) datosPublicaciones.get(15).get(3);
                         String ubicacion15 = (String) datosPublicaciones.get(15).get(5) + " - "
                                         + (String) datosPublicaciones.get(15).get(4);
                         int idIncidente15 = (int) datosPublicaciones.get(15).get(0);
-                        Conexion.recibirEvidencia(idIncidente15);
+                        OperacionPublicacion.recibirEvidencia(idIncidente15);
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente15, String.format(
-                                        Conexion.rutaEvidencia,
+                                        OperacionPublicacion.rutaEvidencia,
                                         idIncidente15));
 
                         CambiarIU.ponerTextoEtiqueta(lbPonerNombreUsuario15, nombre15);
@@ -420,7 +420,7 @@ public class Principal extends javax.swing.JFrame {
         private ArrayList<ArrayList<Object>> solicitarPublicaciones() {
                 ArrayList<ArrayList<Object>> publicaciones = new ArrayList<>();
                 try {
-                        publicaciones = Conexion
+                        publicaciones = OperacionPublicacion
                                         .seleccionar("SELECT * FROM incidentes_ambientales ORDER BY id_incidente DESC",
                                                         new String[] { "id_incidente", "id_usuario", "tipo", "fecha",
                                                                         "departamento",

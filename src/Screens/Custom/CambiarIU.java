@@ -1,5 +1,6 @@
 package Screens.Custom;
 
+import static Code.Dates.formatter;
 import java.awt.Image;
 
 import javax.swing.Icon;
@@ -9,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import raven.datetime.component.date.DatePicker;
 
 public class CambiarIU {
     public static void setImageLabel(JLabel labelName, String root) {
@@ -45,5 +47,9 @@ public class CambiarIU {
 
     public static void ponerTextoCampoContraseña(JPasswordField contraseñaField, String texto) {
         contraseñaField.setText(texto);
+    }
+
+    public static String obtenerFechaSeleccionada(DatePicker datePicker) {
+        return formatter.format(datePicker.getSelectedDate());
     }
 }

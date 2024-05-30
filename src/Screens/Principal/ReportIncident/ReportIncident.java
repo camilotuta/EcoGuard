@@ -1,5 +1,5 @@
 /*
- cSpell:ignore pstmt 
+ cSpell:ignore pstmt operacion publicacion
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -10,8 +10,8 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.sql.SQLException;
 
-import Code.Conexion;
 import Code.Files;
+import Code.OperacionPublicacion;
 import Screens.Custom.CambiarIU;
 import Screens.Custom.ComboBox;
 import Screens.Custom.ObtenerIU;
@@ -24,7 +24,7 @@ import Screens.Principal.Principal;
  * @author tutaa
  */
 public class ReportIncident extends javax.swing.JFrame {
-        public Boolean imagenSubida = false;
+        public boolean imagenSubida = false;
 
         /**
          * Creates new form ReportIncident
@@ -57,7 +57,7 @@ public class ReportIncident extends javax.swing.JFrame {
                 byte[] fileData = Files.readFile(ObtenerIU.obtenerTextoCampo(tfRutaImagen));
 
                 try {
-                        Conexion.registrarPublicacion(Login.idUsuarioGuardar, tipo, hora, departamento, ciudad,
+                        OperacionPublicacion.registrarPublicacion(Login.idUsuarioGuardar, tipo, hora, departamento, ciudad,
                                         fileData, informacion);
                 } catch (SQLException e) {
                         e.printStackTrace();

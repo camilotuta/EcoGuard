@@ -1,5 +1,5 @@
 /*
- cspell:ignore beleño sahagún desencriptar ubaque
+ cspell:ignore beleño sahagún desencriptar ubaque operacion
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -7,14 +7,16 @@ package Screens.Login;
 
 import java.awt.Toolkit;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import com.formdev.flatlaf.themes.*;
 
-import Code.Conexion;
 import Code.DeleteFiles;
 import Code.Desencriptar;
-import Code.Now;
+import Code.OperacionCRUD;
+import Code.Dates;
 import Screens.Principal.Principal;
 import Screens.RecoverPassword.RecoverPassword;
 import Screens.Signup.Signup;
@@ -42,7 +44,7 @@ public class Login extends javax.swing.JFrame {
 		this.setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(getClass().getResource("/img/icon.png")));
 		CambiarIU.ponerTextoEtiqueta(txtMostrarCopy,
-				"©" + Now.obtenerAño() + " EcoGuard . Todos los derechos reservados.");
+				"©" + Dates.obtenerAño() + " EcoGuard . Todos los derechos reservados.");
 		tfCorreo.requestFocus();
 		CambiarIU.ponerTextoCampo(tfCorreo, correoGuardar);
 		desactivarBotonIngresar();
@@ -55,14 +57,14 @@ public class Login extends javax.swing.JFrame {
 
 	}
 
-	private Boolean usuarioEstaRegistrado(String correo, String contraseña) throws SQLException {
-		var datosUsuarioRegistrado = Conexion.seleccionar(
+	private boolean usuarioEstaRegistrado(String correo, String contraseña) throws SQLException {
+		ArrayList<ArrayList<Object>> datosUsuarioRegistrado = OperacionCRUD.seleccionar(
 				String.format("SELECT * FROM usuarios WHERE correo = '%s' AND contraseña = '%s'",
 						correo, contraseña),
 				new String[] { "id_usuario", "correo", "contraseña" });
 
 		if (datosUsuarioRegistrado.size() < 4 && !datosUsuarioRegistrado.isEmpty()) {
-			idUsuarioGuardar = (Integer) datosUsuarioRegistrado.get(0).get(0);
+			idUsuarioGuardar = (int) datosUsuarioRegistrado.get(0).get(0);
 			return true;
 		}
 		return false;
@@ -105,150 +107,150 @@ public class Login extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
-	// Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+        // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+        private void initComponents() {
 
-		ventanaLogIn = new javax.swing.JPanel();
-		lbCambiarContraseña = new javax.swing.JLabel();
-		lbTitulo = new javax.swing.JLabel();
-		btnErroresComunes = new javax.swing.JButton();
-		lbCorreo = new javax.swing.JLabel();
-		tfCorreo = new javax.swing.JTextField();
-		lbContraseña = new javax.swing.JLabel();
-		pfContraseña = new javax.swing.JPasswordField();
-		btnRegistrarse = new javax.swing.JButton();
-		btnIngresar = new javax.swing.JButton();
-		txtMostrarCopy = new javax.swing.JLabel();
-		imgFondo = new javax.swing.JLabel();
+                ventanaLogIn = new javax.swing.JPanel();
+                lbCambiarContraseña = new javax.swing.JLabel();
+                lbTitulo = new javax.swing.JLabel();
+                btnErroresComunes = new javax.swing.JButton();
+                lbCorreo = new javax.swing.JLabel();
+                tfCorreo = new javax.swing.JTextField();
+                lbContraseña = new javax.swing.JLabel();
+                pfContraseña = new javax.swing.JPasswordField();
+                btnRegistrarse = new javax.swing.JButton();
+                btnIngresar = new javax.swing.JButton();
+                txtMostrarCopy = new javax.swing.JLabel();
+                imgFondo = new javax.swing.JLabel();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		ventanaLogIn.setBackground(new java.awt.Color(22, 22, 26));
-		ventanaLogIn.setPreferredSize(new java.awt.Dimension(1080, 720));
-		ventanaLogIn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                ventanaLogIn.setBackground(new java.awt.Color(22, 22, 26));
+                ventanaLogIn.setPreferredSize(new java.awt.Dimension(1080, 720));
+                ventanaLogIn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-		lbCambiarContraseña.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-		lbCambiarContraseña.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/help.png"))); // NOI18N
-		lbCambiarContraseña.setToolTipText("¿Deseas recuperar o cambiar tu contraseña? Click aquí.");
-		lbCambiarContraseña.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-		lbCambiarContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				lbCambiarContraseñaMouseClicked(evt);
-			}
+                lbCambiarContraseña.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+                lbCambiarContraseña.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/help.png"))); // NOI18N
+                lbCambiarContraseña.setToolTipText("¿Deseas recuperar o cambiar tu contraseña? Click aquí.");
+                lbCambiarContraseña.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                lbCambiarContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                lbCambiarContraseñaMouseClicked(evt);
+                        }
+                        public void mouseEntered(java.awt.event.MouseEvent evt) {
+                                lbCambiarContraseñaMouseEntered(evt);
+                        }
+                        public void mouseExited(java.awt.event.MouseEvent evt) {
+                                lbCambiarContraseñaMouseExited(evt);
+                        }
+                });
+                ventanaLogIn.add(lbCambiarContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 440, 30, 30));
 
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
-				lbCambiarContraseñaMouseEntered(evt);
-			}
+                lbTitulo.setFont(new java.awt.Font("Crabs", 1, 100)); // NOI18N
+                lbTitulo.setForeground(new java.awt.Color(255, 255, 254));
+                lbTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                lbTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoPequeño.png"))); // NOI18N
+                lbTitulo.setText("EcoGuard");
+                ventanaLogIn.add(lbTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 1080, -1));
 
-			public void mouseExited(java.awt.event.MouseEvent evt) {
-				lbCambiarContraseñaMouseExited(evt);
-			}
-		});
-		ventanaLogIn.add(lbCambiarContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 440, 30, 30));
+                btnErroresComunes.setBackground(new java.awt.Color(127, 90, 240));
+                btnErroresComunes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+                btnErroresComunes.setForeground(new java.awt.Color(255, 255, 254));
+                btnErroresComunes.setText("?");
+                btnErroresComunes.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btnErroresComunesActionPerformed(evt);
+                        }
+                });
+                ventanaLogIn.add(btnErroresComunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 30));
 
-		lbTitulo.setFont(new java.awt.Font("Crabs", 1, 100)); // NOI18N
-		lbTitulo.setForeground(new java.awt.Color(255, 255, 254));
-		lbTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lbTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoPequeño.png"))); // NOI18N
-		lbTitulo.setText("EcoGuard");
-		ventanaLogIn.add(lbTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 1080, -1));
+                lbCorreo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                lbCorreo.setForeground(new java.awt.Color(255, 255, 254));
+                lbCorreo.setText("CORREO: ");
+                ventanaLogIn.add(lbCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, -1, -1));
 
-		btnErroresComunes.setBackground(new java.awt.Color(127, 90, 240));
-		btnErroresComunes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-		btnErroresComunes.setForeground(new java.awt.Color(255, 255, 254));
-		btnErroresComunes.setText("?");
-		btnErroresComunes.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnErroresComunesActionPerformed(evt);
-			}
-		});
-		ventanaLogIn.add(btnErroresComunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 30));
+                tfCorreo.setBackground(new java.awt.Color(36, 38, 41));
+                tfCorreo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                tfCorreo.setForeground(new java.awt.Color(148, 161, 178));
+                tfCorreo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+                tfCorreo.setOpaque(true);
+                tfCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+                        public void keyReleased(java.awt.event.KeyEvent evt) {
+                                tfCorreoKeyReleased(evt);
+                        }
+                });
+                ventanaLogIn.add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 310, 30));
 
-		lbCorreo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-		lbCorreo.setForeground(new java.awt.Color(255, 255, 254));
-		lbCorreo.setText("CORREO: ");
-		ventanaLogIn.add(lbCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, -1, -1));
+                lbContraseña.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                lbContraseña.setForeground(new java.awt.Color(255, 255, 254));
+                lbContraseña.setText("CONTRASEÑA: ");
+                ventanaLogIn.add(lbContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, -1, -1));
 
-		tfCorreo.setBackground(new java.awt.Color(36, 38, 41));
-		tfCorreo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-		tfCorreo.setForeground(new java.awt.Color(148, 161, 178));
-		tfCorreo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-		tfCorreo.setOpaque(true);
-		tfCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
-				tfCorreoKeyReleased(evt);
-			}
-		});
-		ventanaLogIn.add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 310, 30));
+                pfContraseña.setBackground(new java.awt.Color(36, 38, 41));
+                pfContraseña.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                pfContraseña.setForeground(new java.awt.Color(148, 161, 178));
+                pfContraseña.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+                pfContraseña.setOpaque(true);
+                pfContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+                        public void keyReleased(java.awt.event.KeyEvent evt) {
+                                pfContraseñaKeyReleased(evt);
+                        }
+                });
+                ventanaLogIn.add(pfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 310, 30));
 
-		lbContraseña.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-		lbContraseña.setForeground(new java.awt.Color(255, 255, 254));
-		lbContraseña.setText("CONTRASEÑA: ");
-		ventanaLogIn.add(lbContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, -1, -1));
+                btnRegistrarse.setBackground(new java.awt.Color(127, 90, 240));
+                btnRegistrarse.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+                btnRegistrarse.setForeground(new java.awt.Color(255, 255, 254));
+                btnRegistrarse.setText("Registrarse");
+                btnRegistrarse.setActionCommand("Ingresar");
+                btnRegistrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btnRegistrarseActionPerformed(evt);
+                        }
+                });
+                ventanaLogIn.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 520, -1, -1));
 
-		pfContraseña.setBackground(new java.awt.Color(36, 38, 41));
-		pfContraseña.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-		pfContraseña.setForeground(new java.awt.Color(148, 161, 178));
-		pfContraseña.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-		pfContraseña.setOpaque(true);
-		pfContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
-				pfContraseñaKeyReleased(evt);
-			}
-		});
-		ventanaLogIn.add(pfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 310, 30));
+                btnIngresar.setBackground(new java.awt.Color(127, 90, 240));
+                btnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+                btnIngresar.setForeground(new java.awt.Color(255, 255, 254));
+                btnIngresar.setText("Ingresar");
+                btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                try {
+                                        btnIngresarActionPerformed(evt);
+                                } catch (SQLException e) {
+                                        e.printStackTrace();
+                                }
+                        }
 
-		btnRegistrarse.setBackground(new java.awt.Color(127, 90, 240));
-		btnRegistrarse.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-		btnRegistrarse.setForeground(new java.awt.Color(255, 255, 254));
-		btnRegistrarse.setText("Registrarse");
-		btnRegistrarse.setActionCommand("Ingresar");
-		btnRegistrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-		btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnRegistrarseActionPerformed(evt);
-			}
-		});
-		ventanaLogIn.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 520, -1, -1));
 
-		btnIngresar.setBackground(new java.awt.Color(127, 90, 240));
-		btnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-		btnIngresar.setForeground(new java.awt.Color(255, 255, 254));
-		btnIngresar.setText("Ingresar");
-		btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-		btnIngresar.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				try {
-					btnIngresarActionPerformed(evt);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		ventanaLogIn.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 520, -1, -1));
+                });
+                ventanaLogIn.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 520, -1, -1));
 
-		txtMostrarCopy.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-		txtMostrarCopy.setForeground(new java.awt.Color(255, 255, 254));
-		txtMostrarCopy.setText("©");
-		ventanaLogIn.add(txtMostrarCopy, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 690, -1, -1));
+                txtMostrarCopy.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+                txtMostrarCopy.setForeground(new java.awt.Color(255, 255, 254));
+                txtMostrarCopy.setText("©");
+                ventanaLogIn.add(txtMostrarCopy, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 690, -1, -1));
 
-		imgFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo.png"))); // NOI18N
-		imgFondo.setText("jLabel1");
-		ventanaLogIn.add(imgFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+                imgFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo.png"))); // NOI18N
+                imgFondo.setText("jLabel1");
+                ventanaLogIn.add(imgFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(ventanaLogIn, javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE));
-		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(ventanaLogIn, javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE));
+                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+                getContentPane().setLayout(layout);
+                layout.setHorizontalGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ventanaLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                );
+                layout.setVerticalGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ventanaLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                );
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+                pack();
+        }// </editor-fold>//GEN-END:initComponents
 
 	private void lbCambiarContraseñaMouseClicked(java.awt.event.MouseEvent evt) {
 		RecoverPassword recoverPassword = new RecoverPassword();
@@ -284,7 +286,7 @@ public class Login extends javax.swing.JFrame {
 	}
 
 	private void btnErroresComunesActionPerformed(java.awt.event.ActionEvent evt) {
-		var texto = "¡Hola! Aquí te dejo un apartado de ayuda con algunos errores comunes y"
+		String texto = "¡Hola! Aquí te dejo un apartado de ayuda con algunos errores comunes y"
 				+ " sus\nposibles soluciones:\n\nNo puedes ingresar:\nVerifica tus "
 				+ "credenciales de inicio de sesión.\nRestablece tu contraseña si "
 				+ "la has olvidado.\nVerifica tu conexión a internet.\nSi el "
@@ -323,18 +325,18 @@ public class Login extends javax.swing.JFrame {
 		EventQueue.invokeLater(() -> new Login().setVisible(true));
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton btnErroresComunes;
-	private javax.swing.JButton btnIngresar;
-	private javax.swing.JButton btnRegistrarse;
-	private javax.swing.JLabel imgFondo;
-	private javax.swing.JLabel lbCambiarContraseña;
-	private javax.swing.JLabel lbContraseña;
-	private javax.swing.JLabel lbCorreo;
-	private javax.swing.JLabel lbTitulo;
-	private javax.swing.JPasswordField pfContraseña;
-	private javax.swing.JTextField tfCorreo;
-	private javax.swing.JLabel txtMostrarCopy;
-	private javax.swing.JPanel ventanaLogIn;
-	// End of variables declaration//GEN-END:variables
+        // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JButton btnErroresComunes;
+        private javax.swing.JButton btnIngresar;
+        private javax.swing.JButton btnRegistrarse;
+        private javax.swing.JLabel imgFondo;
+        private javax.swing.JLabel lbCambiarContraseña;
+        private javax.swing.JLabel lbContraseña;
+        private javax.swing.JLabel lbCorreo;
+        private javax.swing.JLabel lbTitulo;
+        private javax.swing.JPasswordField pfContraseña;
+        private javax.swing.JTextField tfCorreo;
+        private javax.swing.JLabel txtMostrarCopy;
+        private javax.swing.JPanel ventanaLogIn;
+        // End of variables declaration//GEN-END:variables
 }

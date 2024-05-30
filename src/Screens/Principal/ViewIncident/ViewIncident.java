@@ -1,11 +1,12 @@
 /*
- cSpell:ignore Ubicacion publicacion
+ cspell:ignore ubicacion publicacion operacion
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Screens.Principal.ViewIncident;
 
-import Code.Conexion;
+import Code.OperacionCRUD;
+import Code.OperacionPublicacion;
 import Screens.Custom.CambiarIU;
 import Screens.Custom.ScrollPaneWin11;
 import Screens.Principal.Principal;
@@ -36,18 +37,18 @@ public class ViewIncident extends javax.swing.JFrame {
 
         private void ponerDatos() {
 
-                Conexion.recibirEvidencia(idPublicacion);
+                OperacionPublicacion.recibirEvidencia(idPublicacion);
 
                 try {
 
-                        var publicacion = Conexion.seleccionar(
+                        var publicacion = OperacionCRUD.seleccionar(
                                         String.format("SELECT * FROM incidentes_ambientales where id_incidente = %d",
                                                         idPublicacion),
                                         new String[] { "id_usuario", "tipo", "fecha", "hora", "departamento", "ciudad",
                                                         "evidencia", "informacion" });
                         int idUsuarioPublicacion = (int) publicacion.get(0).get(0);
 
-                        var datos = Conexion.seleccionar(
+                        var datos = OperacionCRUD.seleccionar(
                                         String.format("SELECT * FROM usuarios where id_usuario = %d",
                                                         idUsuarioPublicacion),
                                         new String[] { "nombre" });
@@ -65,7 +66,7 @@ public class ViewIncident extends javax.swing.JFrame {
                         CambiarIU.ponerTextoArea(txtMostrarInfoIncidente, (String) publicacion.get(0).get(7));
 
                         CambiarIU.setImageLabel(imgPonerEvidenciaIncidente,
-                                        String.format(Conexion.rutaEvidencia, idPublicacion));
+                                        String.format(OperacionPublicacion.rutaEvidencia, idPublicacion));
 
                 } catch (SQLException e) {
                         System.out.println(e);

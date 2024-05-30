@@ -1,5 +1,5 @@
 /*
-	cSpell:ignore desencriptar
+	cSpell:ignore desencriptar operacion verificacion
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -8,12 +8,13 @@ package Screens.RecoverPassword;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.SQLException;
-import java.util.Random;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
-import Code.Conexion;
+import Code.OperacionCRUD;
 import Code.Desencriptar;
-import Code.EnviarCorreo;
+import Code.EnviarCodigoVerificacion;
 import Screens.Custom.CambiarIU;
 import Screens.Custom.ObtenerIU;
 import Screens.Login.Login;
@@ -23,12 +24,8 @@ import Screens.Login.Login;
  * @author tutaa
  */
 public class RecoverPassword extends javax.swing.JFrame {
-
-        Random random = new Random();
-        private Boolean correoVerificado = false;
-        private String codigo = String.valueOf(random.nextInt(100_000, 999_999));
-        private Integer intentos = 3;
-
+        private boolean correoVerificado = false;
+        private EnviarCodigoVerificacion enviarCodigo;
         /**
          * Creates new form RecoverPassword
          */
@@ -84,30 +81,30 @@ public class RecoverPassword extends javax.swing.JFrame {
 
         private void verificarCodigo() {
 
-                if (ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).equals(codigo) && intentos > 0) {
+                if (ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).equals(enviarCodigo.getCodigo()) && enviarCodigo.getIntentos() > 0) {
                         JOptionPane.showMessageDialog(null, "EL CÓDIGO ES CORRECTO.");
                         pfContraseña.setEnabled(true);
                         pfConfirmarContraseña.setEnabled(true);
-                        intentos = 3;
+                        enviarCodigo.setIntentos(3);
                         correoVerificado = true;
                         activarCamposContraseña();
                         btnEnviarCodigo.setEnabled(false);
                         btnVerificarCodigo.setEnabled(false);
-                } else if (intentos == 0) {
+                } else if (enviarCodigo.getIntentos() == 0) {
                         JOptionPane.showMessageDialog(rootPane, "NO TIENE MÁS INTENTOS.");
                         tfRecibirCodigo.setEnabled(false);
                         tfCorreo.setEnabled(false);
                         btnEnviarCodigo.setEnabled(false);
                         btnVerificarCodigo.setEnabled(false);
                 } else {
-                        intentos--;
+                        enviarCodigo.setIntentos(enviarCodigo.getIntentos()-1);
                         JOptionPane.showMessageDialog(null,
-                                        "EL CÓDIGO NO ES CORRECTO.\nTIENE " + intentos + " INTENTOS.");
+                                        "EL CÓDIGO NO ES CORRECTO.\nTIENE " + enviarCodigo.getIntentos() + " INTENTOS.");
                 }
         }
 
-        private Boolean correoEstaRegistrado(String correo) throws SQLException {
-                var datosUsuarioRegistrado = Conexion.seleccionar(
+        private boolean correoEstaRegistrado(String correo) throws SQLException {
+                ArrayList<ArrayList<Object>> datosUsuarioRegistrado = OperacionCRUD.seleccionar(
                                 String.format("SELECT * FROM usuarios WHERE correo = '%s'",
                                                 correo),
                                 new String[] { "correo" });
@@ -119,11 +116,7 @@ public class RecoverPassword extends javax.swing.JFrame {
                 String correo = ObtenerIU.obtenerTextoCampo(tfCorreo).toLowerCase();
 
                 if (correoEstaRegistrado(correo)) {
-
-                        Random rand = new Random();
-                        codigo = String.valueOf(rand.nextInt(100_000, 999_999));
-
-                        String listaCodigo[] = codigo.split(""), text = "";
+                        String listaCodigo[] = enviarCodigo.getCodigo().split(""), text = "";
 
                         for (int i = 0; i < listaCodigo.length; i++) {
                                 if (i != listaCodigo.length - 1) {
@@ -145,7 +138,7 @@ public class RecoverPassword extends javax.swing.JFrame {
                                         + "Atentamente,<br>"
                                         + "El equipo de EcoGuard. &#128170;";
 
-                        new EnviarCorreo(correo, asunto, mensaje);
+                        enviarCodigo = new EnviarCodigoVerificacion(correo, asunto, mensaje);
                 } else {
                         JOptionPane.showMessageDialog(null, "NO EXISTE UNA CUENTA CON ESTE CORREO.");
                 }
@@ -153,7 +146,7 @@ public class RecoverPassword extends javax.swing.JFrame {
 
         private String obtenerNombre(String correo) throws SQLException {
 
-                return (String) (Conexion.seleccionar(
+                return (String) (OperacionCRUD.seleccionar(
                                 String.format("SELECT nombre FROM usuarios WHERE correo = '%s'", correo),
                                 new String[] { "nombre" })).get(0).get(0);
 
@@ -162,7 +155,7 @@ public class RecoverPassword extends javax.swing.JFrame {
         private void actualizarContraseña() throws SQLException {
                 String correo = ObtenerIU.obtenerTextoCampo(tfCorreo).toLowerCase();
                 String contraseña = Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfConfirmarContraseña));
-                Conexion.registrar(
+                OperacionCRUD.registrar(
                                 String.format("UPDATE usuarios SET contraseña = '%s' WHERE correo = '%s'",
                                                 contraseña, correo));
                 JOptionPane.showMessageDialog(this, "¡CONTRASEÑA ACTUALIZADA!", "¡AVISO!",
