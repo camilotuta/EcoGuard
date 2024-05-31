@@ -13,9 +13,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import Code.OperacionCRUD;
+import Code.VerificarDato;
 import Code.Desencriptar;
 import Code.EnviarCodigoVerificacion;
-import Screens.Custom.CambiarIU;
+import Code.GenerarCodigo;
 import Screens.Custom.ObtenerIU;
 import Screens.Login.Login;
 
@@ -26,6 +27,8 @@ import Screens.Login.Login;
 public class RecoverPassword extends javax.swing.JFrame {
         private boolean correoVerificado = false;
         private EnviarCodigoVerificacion enviarCodigo;
+        private boolean correoEnviado = false;
+
         /**
          * Creates new form RecoverPassword
          */
@@ -46,7 +49,8 @@ public class RecoverPassword extends javax.swing.JFrame {
         }
 
         private void desactivarBotonRegistrarse() {
-                btnRegistrarse.setEnabled((correoVerificado && (ObtenerIU.obtenerTextoCampo(tfCorreo).contains("@"))
+                btnRegistrarse.setEnabled((correoVerificado
+                                && (ObtenerIU.obtenerTextoCampo(tfCorreo).contains("@"))
                                 && (Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña))
                                                 .length() >= 8)
                                 && (Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfConfirmarContraseña))
@@ -64,9 +68,10 @@ public class RecoverPassword extends javax.swing.JFrame {
         }
 
         private void desactivarBotonVerificarCodigo() {
-                btnVerificarCodigo.setEnabled(ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).length() == 6
-                                && ObtenerIU.obtenerTextoCampo(tfCorreo).contains("@")
-                                && ObtenerIU.obtenerTextoCampo(tfCorreo).length() >= 13);
+                btnVerificarCodigo
+                                .setEnabled(correoEnviado && ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).length() == 6
+                                                && ObtenerIU.obtenerTextoCampo(tfCorreo).contains("@")
+                                                && ObtenerIU.obtenerTextoCampo(tfCorreo).length() >= 13);
         }
 
         private void activarCamposContraseña() {
@@ -81,7 +86,8 @@ public class RecoverPassword extends javax.swing.JFrame {
 
         private void verificarCodigo() {
 
-                if (ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).equals(enviarCodigo.getCodigo()) && enviarCodigo.getIntentos() > 0) {
+                if (ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).equals(enviarCodigo.getCodigo())
+                                && enviarCodigo.getIntentos() > 0) {
                         JOptionPane.showMessageDialog(null, "EL CÓDIGO ES CORRECTO.");
                         pfContraseña.setEnabled(true);
                         pfConfirmarContraseña.setEnabled(true);
@@ -97,9 +103,10 @@ public class RecoverPassword extends javax.swing.JFrame {
                         btnEnviarCodigo.setEnabled(false);
                         btnVerificarCodigo.setEnabled(false);
                 } else {
-                        enviarCodigo.setIntentos(enviarCodigo.getIntentos()-1);
+                        enviarCodigo.setIntentos(enviarCodigo.getIntentos() - 1);
                         JOptionPane.showMessageDialog(null,
-                                        "EL CÓDIGO NO ES CORRECTO.\nTIENE " + enviarCodigo.getIntentos() + " INTENTOS.");
+                                        "EL CÓDIGO NO ES CORRECTO.\nTIENE " + enviarCodigo.getIntentos()
+                                                        + " INTENTOS.");
                 }
         }
 
@@ -114,9 +121,10 @@ public class RecoverPassword extends javax.swing.JFrame {
 
         private void enviarCodigo() throws HeadlessException, SQLException {
                 String correo = ObtenerIU.obtenerTextoCampo(tfCorreo).toLowerCase();
+                String codigo = GenerarCodigo.getCodigo();
 
                 if (correoEstaRegistrado(correo)) {
-                        String listaCodigo[] = enviarCodigo.getCodigo().split(""), text = "";
+                        String listaCodigo[] = codigo.split(""), text = "";
 
                         for (int i = 0; i < listaCodigo.length; i++) {
                                 if (i != listaCodigo.length - 1) {
@@ -138,7 +146,10 @@ public class RecoverPassword extends javax.swing.JFrame {
                                         + "Atentamente,<br>"
                                         + "El equipo de EcoGuard. &#128170;";
 
-                        enviarCodigo = new EnviarCodigoVerificacion(correo, asunto, mensaje);
+                        enviarCodigo = new EnviarCodigoVerificacion(correo, asunto, mensaje, codigo);
+                        tfCorreo.setEditable(false);
+                        correoEnviado = true;
+
                 } else {
                         JOptionPane.showMessageDialog(null, "NO EXISTE UNA CUENTA CON ESTE CORREO.");
                 }
@@ -165,29 +176,22 @@ public class RecoverPassword extends javax.swing.JFrame {
         private void mostrarErrores() {
 
                 // pfContraseña
-                if (Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña)).length() < 8) {
-                        CambiarIU.setImageLabel(lbErrorContraseña,
-                                        "src/img/error.png");
-                        lbErrorContraseña.setToolTipText("La contraseña debe tener mínimo 8 caracteres.");
-                } else {
-                        CambiarIU.setImageLabel(lbErrorContraseña,
-                                        "src/img/check.png");
-                        lbErrorContraseña.setToolTipText("La contraseña tiene mínimo 8 caracteres.");
-                }
+                // pfContraseña
+                VerificarDato.verificarCampo(
+                                Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña)).length() < 8,
+                                lbErrorContraseña, "La contraseña tiene mínimo 8 caracteres.",
+                                "La contraseña debe tener mínimo 8 caracteres.");
 
                 // pfConfContraseña
-                if ((!Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfConfirmarContraseña))
-                                .equals(Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña))))
-                                || Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfConfirmarContraseña))
-                                                .equals("")) {
-                        CambiarIU.setImageLabel(lbErrorConfContraseña,
-                                        "src/img/error.png");
-                        lbErrorConfContraseña.setToolTipText("Las contraseñas deben ser iguales.");
-                } else {
-                        CambiarIU.setImageLabel(lbErrorConfContraseña,
-                                        "src/img/check.png");
-                        lbErrorConfContraseña.setToolTipText("Las contraseñas son iguales.");
-                }
+                VerificarDato.verificarCampo(
+                                (!Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfConfirmarContraseña))
+                                                .equals(Desencriptar.desencriptarContra(
+                                                                ObtenerIU.obtenerContraseña(pfContraseña))))
+                                                || Desencriptar.desencriptarContra(
+                                                                ObtenerIU.obtenerContraseña(pfConfirmarContraseña))
+                                                                .equals(""),
+                                lbErrorConfContraseña, "Las contraseñas son iguales.",
+                                "Las contraseñas deben ser iguales.");
         }
 
         /**

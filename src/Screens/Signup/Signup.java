@@ -14,10 +14,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Code.OperacionCRUD;
-import Code.Dates;
+import Code.VerificarDato;
 import Code.EnviarCodigoVerificacion;
+import Code.GenerarCodigo;
 import Code.Desencriptar;
-import Screens.Custom.CambiarIU;
 import Screens.Custom.ComboBox;
 import Screens.Custom.ObtenerIU;
 import Screens.Login.Login;
@@ -36,7 +36,8 @@ public class Signup extends javax.swing.JFrame {
 
         private EnviarCodigoVerificacion enviarCodigo;
         private boolean correoVerificado = false;
-        private boolean fechaValida = false;
+        public static boolean fechaValida = false;
+        private boolean correoEnviado = false;
 
         /**
          * Creates new form Signup
@@ -83,7 +84,9 @@ public class Signup extends javax.swing.JFrame {
         }
 
         private void desactivarBotonVerificarCodigo() {
-                btnVerificarCodigo.setEnabled(ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).length() == 6
+                btnVerificarCodigo.setEnabled(correoEnviado
+                                && ObtenerIU.obtenerTextoCampo(
+                                                tfRecibirCodigo).length() == 6
                                 && ObtenerIU.obtenerTextoCampo(tfCorreo).contains("@")
                                 && ObtenerIU.obtenerTextoCampo(tfCorreo).length() >= 13);
         }
@@ -104,7 +107,8 @@ public class Signup extends javax.swing.JFrame {
 
         private void verificarCodigo() {
 
-                if (ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).equals(enviarCodigo.getCodigo()) && enviarCodigo.getIntentos() > 0) {
+                if (ObtenerIU.obtenerTextoCampo(tfRecibirCodigo).equals(enviarCodigo.getCodigo())
+                                && enviarCodigo.getIntentos() > 0) {
                         JOptionPane.showMessageDialog(null, "EL CÓDIGO ES CORRECTO.");
                         pfContraseña.setEnabled(true);
                         pfConfirmarContraseña.setEnabled(true);
@@ -120,9 +124,10 @@ public class Signup extends javax.swing.JFrame {
                         btnEnviarCodigo.setEnabled(false);
                         btnVerificarCodigo.setEnabled(false);
                 } else {
-                        enviarCodigo.setIntentos(enviarCodigo.getIntentos()-1);
+                        enviarCodigo.setIntentos(enviarCodigo.getIntentos() - 1);
                         JOptionPane.showMessageDialog(null,
-                                        "EL CÓDIGO NO ES CORRECTO.\nTIENE " + enviarCodigo.getIntentos() + " INTENTOS.");
+                                        "EL CÓDIGO NO ES CORRECTO.\nTIENE " + enviarCodigo.getIntentos()
+                                                        + " INTENTOS.");
                 }
         }
 
@@ -138,10 +143,11 @@ public class Signup extends javax.swing.JFrame {
         private void enviarCodigo() throws HeadlessException, SQLException {
                 String correo = ObtenerIU.obtenerTextoCampo(tfCorreo).toLowerCase();
                 String nombre = ObtenerIU.obtenerTextoCampo(tfNombre);
+                String codigo = GenerarCodigo.getCodigo();
 
                 if (!correoEstaRegistrado(correo)) {
 
-                        String listaCodigo[] = enviarCodigo.getCodigo().split(""), text = "";
+                        String listaCodigo[] = codigo.split(""), text = "";
 
                         for (int i = 0; i < listaCodigo.length; i++) {
                                 if (i != listaCodigo.length - 1) {
@@ -163,7 +169,11 @@ public class Signup extends javax.swing.JFrame {
                                         + "Atentamente,<br>"
                                         + "El equipo de EcoGuard. &#128170;";
 
-                        enviarCodigo = new EnviarCodigoVerificacion(correo, asunto, mensaje);
+                        enviarCodigo = new EnviarCodigoVerificacion(correo, asunto, mensaje, codigo);
+                        tfNombre.setEditable(false);
+                        tfCorreo.setEditable(false);
+                        correoEnviado = true;
+
                 } else {
                         JOptionPane.showMessageDialog(null, "YA EXISTE UNA CUENTA CON ESTE CORREO.");
                 }
@@ -186,96 +196,45 @@ public class Signup extends javax.swing.JFrame {
         }
 
         private void mostrarErrores() {
+
                 // tfNombre
-                if (ObtenerIU.obtenerTextoCampo(tfNombre).length() < 8) {
-                        CambiarIU.setImageLabel(lbErrorNombre,
-                                        "src/img/error.png");
-                        lbErrorNombre.setToolTipText("El nombre debe tener mínimo 8 caracteres.");
-                } else {
-                        CambiarIU.setImageLabel(lbErrorNombre,
-                                        "src/img/check.png");
-                        lbErrorNombre.setToolTipText("El nombre tiene mínimo 8 caracteres.");
-                }
+                VerificarDato.verificarCampo(ObtenerIU.obtenerTextoCampo(tfNombre).length() < 8,
+                                lbErrorNombre, "El nombre tiene mínimo 8 caracteres.",
+                                "El nombre debe tener mínimo 8 caracteres.");
+
                 // fechaNacimiento
-
-                if (ftFechaNacimiento.getText().equals("--/--/----")) {
-                        CambiarIU.setImageLabel(lbErrorFechaNacimiento,
-                                        "src/img/error.png");
-                        lbErrorFechaNacimiento.setToolTipText("Debe seleccionar una fecha válida.");
-                        fechaValida = false;
-                } else {
-                        if (Dates.restarFechasSinDiasBisiestos(ObtenerIU.obtenerFechaSeleccionada(datePicker),
-                                        Dates.obtenerFechaHoy()) > 6575) {
-                                CambiarIU.setImageLabel(lbErrorFechaNacimiento,
-                                                "src/img/check.png");
-                                lbErrorFechaNacimiento.setToolTipText("Ha seleccionado una fecha.");
-                                fechaValida = true;
-                        } else {
-
-                                CambiarIU.setImageLabel(lbErrorFechaNacimiento,
-                                                "src/img/error.png");
-                                lbErrorFechaNacimiento.setToolTipText("Debe ser mayor de edad.");
-                                fechaValida = false;
-                        }
-                }
+                VerificarDato.verificarFechaNacimiento(ftFechaNacimiento.getText().equals("--/--/----"),
+                                lbErrorFechaNacimiento, "Ha seleccionado una fecha.", "Debe ser mayor de edad.");
 
                 // comboDepartamento
-                if (ObtenerIU.obtenerIndiceSeleccionCombo(comboDepartamento) == 0) {
-                        CambiarIU.setImageLabel(lbErrorDepartamento,
-                                        "src/img/error.png");
-                        lbErrorDepartamento.setToolTipText("Debe seleccionar un departamento.");
-                } else {
-                        CambiarIU.setImageLabel(lbErrorDepartamento,
-                                        "src/img/check.png");
-                        lbErrorDepartamento.setToolTipText("Ha seleccionado un departamento.");
-                }
+                VerificarDato.verificarCampo(
+                                ObtenerIU.obtenerIndiceSeleccionCombo(comboDepartamento) == 0, lbErrorDepartamento,
+                                "Ha seleccionado un departamento.", "Debe seleccionar un departamento.");
 
                 // comboCiudad
-                if (ObtenerIU.obtenerIndiceSeleccionCombo(comboCiudad) == 0) {
-                        CambiarIU.setImageLabel(lbErrorCiudad,
-                                        "src/img/error.png");
-                        lbErrorCiudad.setToolTipText("Debe seleccionar una ciudad.");
-                } else {
-                        CambiarIU.setImageLabel(lbErrorCiudad,
-                                        "src/img/check.png");
-                        lbErrorCiudad.setToolTipText("Ha seleccionado una ciudad.");
-                }
+                VerificarDato.verificarCampo(ObtenerIU.obtenerIndiceSeleccionCombo(comboCiudad) == 0,
+                                lbErrorCiudad, "Ha seleccionado una ciudad.", "Debe seleccionar una ciudad.");
 
                 // tfCorreo
-                if (!ObtenerIU.obtenerTextoCampo(tfCorreo).contains("@")) {
-                        CambiarIU.setImageLabel(lbErrorCorreo,
-                                        "src/img/error.png");
-                        lbErrorCorreo.setToolTipText("El correo no es válido.");
-                } else {
-                        CambiarIU.setImageLabel(lbErrorCorreo,
-                                        "src/img/check.png");
-                        lbErrorCorreo.setToolTipText("El correo debe ser válido.");
-                }
+                VerificarDato.verificarCampo(!ObtenerIU.obtenerTextoCampo(tfCorreo)
+                                .contains("@"), lbErrorCorreo, "El correo es válido.", "El correo no es válido.");
 
                 // pfContraseña
-                if (Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña)).length() < 8) {
-                        CambiarIU.setImageLabel(lbErrorContraseña,
-                                        "src/img/error.png");
-                        lbErrorContraseña.setToolTipText("La contraseña debe tener mínimo 8 caracteres.");
-                } else {
-                        CambiarIU.setImageLabel(lbErrorContraseña,
-                                        "src/img/check.png");
-                        lbErrorContraseña.setToolTipText("La contraseña tiene mínimo 8 caracteres.");
-                }
+                VerificarDato.verificarCampo(
+                                Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña)).length() < 8,
+                                lbErrorContraseña, "La contraseña tiene mínimo 8 caracteres.",
+                                "La contraseña debe tener mínimo 8 caracteres.");
 
                 // pfConfContraseña
-                if ((!Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfConfirmarContraseña))
-                                .equals(Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña))))
-                                || Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfConfirmarContraseña))
-                                                .equals("")) {
-                        CambiarIU.setImageLabel(lbErrorConfContraseña,
-                                        "src/img/error.png");
-                        lbErrorConfContraseña.setToolTipText("Las contraseñas deben ser iguales.");
-                } else {
-                        CambiarIU.setImageLabel(lbErrorConfContraseña,
-                                        "src/img/check.png");
-                        lbErrorConfContraseña.setToolTipText("Las contraseñas son iguales.");
-                }
+                VerificarDato.verificarCampo(
+                                (!Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfConfirmarContraseña))
+                                                .equals(Desencriptar.desencriptarContra(
+                                                                ObtenerIU.obtenerContraseña(pfContraseña))))
+                                                || Desencriptar.desencriptarContra(
+                                                                ObtenerIU.obtenerContraseña(pfConfirmarContraseña))
+                                                                .equals(""),
+                                lbErrorConfContraseña, "Las contraseñas son iguales.",
+                                "Las contraseñas deben ser iguales.");
         }
 
         /**
@@ -635,11 +594,6 @@ public class Signup extends javax.swing.JFrame {
                 enviarCodigo();
         }
 
-        private void comboEdadActionPerformed(java.awt.event.ActionEvent evt) {
-                desactivarBotonRegistrarse();
-                mostrarErrores();
-        }
-
         /**
          * @param args the command line arguments
          */
@@ -692,7 +646,7 @@ public class Signup extends javax.swing.JFrame {
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btnEnviarCodigo;
         private javax.swing.JButton btnRegistrarse;
-        private DatePicker datePicker;
+        public static DatePicker datePicker;
         private javax.swing.JButton btnRegresar;
         private javax.swing.JButton btnVerificarCodigo;
         private javax.swing.JComboBox<String> comboCiudad;

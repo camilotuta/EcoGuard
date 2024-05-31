@@ -15,8 +15,15 @@ public class ComboBox {
     static Incidentes incidentes = new Incidentes();
     public static Map<String, String> incidentesAmbientales = incidentes.incidentes;
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static void vaciarCombo(JComboBox comboBox) {
+        comboBox.removeAllItems();
+        comboBox.addItem("Seleccionar");
+    }
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static void ponerDepartamentos(JComboBox comboDepartamento) {
+        vaciarCombo(comboDepartamento);
         for (String departamento : departamentos.keySet()) {
             comboDepartamento.addItem(departamento);
         }
@@ -24,11 +31,10 @@ public class ComboBox {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static void ponerCiudades(JComboBox comboCiudad, JComboBox comboDepartamento) {
-
-        comboCiudad.removeAllItems();
-        comboCiudad.addItem("Seleccionar");
-        if (!comboDepartamento.getSelectedItem().toString().equals("Seleccionar")) {
-            List<String> ciudades = departamentos.get(comboDepartamento.getSelectedItem().toString());
+        vaciarCombo(comboCiudad);
+        String seleccionDepartamento = ObtenerIU.obtenerSeleccionCombo(comboDepartamento);
+        if (seleccionDepartamento != null && !seleccionDepartamento.equals("Seleccionar")) {
+            List<String> ciudades = departamentos.get(seleccionDepartamento);
             for (String i : ciudades) {
                 comboCiudad.addItem(i);
             }

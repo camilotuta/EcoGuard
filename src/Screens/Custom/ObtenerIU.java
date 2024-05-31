@@ -34,7 +34,8 @@ public class ObtenerIU {
 
     @SuppressWarnings("rawtypes")
     public static String obtenerSeleccionCombo(JComboBox comboBox) {
-        return (String) comboBox.getSelectedItem();
+        Object selectedItem = comboBox.getSelectedItem();
+        return selectedItem != null ? selectedItem.toString() : null;
     }
 
     @SuppressWarnings("rawtypes")

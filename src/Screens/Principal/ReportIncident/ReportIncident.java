@@ -24,7 +24,7 @@ import Screens.Principal.Principal;
  * @author tutaa
  */
 public class ReportIncident extends javax.swing.JFrame {
-        public boolean imagenSubida = false;
+        private boolean imagenSubida = false;
 
         /**
          * Creates new form ReportIncident
@@ -39,13 +39,12 @@ public class ReportIncident extends javax.swing.JFrame {
                 this.setIconImage(Toolkit.getDefaultToolkit()
                                 .getImage(getClass().getResource("/img/icon.png")));
 
-                desactivarRutaImagen();
                 desactivarBotonPublicar();
                 desactivarComboCiudad();
                 desactivarRutaImagen();
-
                 ComboBox.ponerTipoIncidente(comboTipoIncidente);
                 ComboBox.ponerDepartamentos(comboDepartamento);
+
         }
 
         private void publicar() {
@@ -57,7 +56,8 @@ public class ReportIncident extends javax.swing.JFrame {
                 byte[] fileData = Files.readFile(ObtenerIU.obtenerTextoCampo(tfRutaImagen));
 
                 try {
-                        OperacionPublicacion.registrarPublicacion(Login.idUsuarioGuardar, tipo, hora, departamento, ciudad,
+                        OperacionPublicacion.registrarPublicacion(Login.idUsuarioGuardar, tipo, hora, departamento,
+                                        ciudad,
                                         fileData, informacion);
                 } catch (SQLException e) {
                         e.printStackTrace();
@@ -73,7 +73,6 @@ public class ReportIncident extends javax.swing.JFrame {
                 int respuesta = fileChooser.showOpenDialog(this);
                 if (respuesta == JFileChooser.APPROVE_OPTION) {
                         ruta = fileChooser.getSelectedFile().getPath();
-                        imagenSubida = true;
                 } else {
                         imagenSubida = false;
                 }
@@ -89,6 +88,7 @@ public class ReportIncident extends javax.swing.JFrame {
         private void ponerImgEvidencia() {
                 String ruta = ObtenerIU.obtenerTextoCampo(tfRutaImagen);
                 CambiarIU.setImageLabel(mostrarImgEvidencia, ruta);
+                imagenSubida = true;
         }
 
         private void cambiarIconoIncidente() {
@@ -98,18 +98,16 @@ public class ReportIncident extends javax.swing.JFrame {
         }
 
         private void desactivarComboCiudad() {
-                comboCiudad.setEnabled(!ObtenerIU.obtenerSeleccionCombo(comboDepartamento).equals("Seleccionar"));
+                comboCiudad.setEnabled(ObtenerIU.obtenerIndiceSeleccionCombo(comboDepartamento) != 0);
         }
 
         private void desactivarBotonPublicar() {
-                btnPublicar.setEnabled(imagenSubida
-                                && (!ObtenerIU.obtenerSeleccionCombo(comboTipoIncidente).toString()
-                                                .equals("Seleccionar"))
-                                && (!ObtenerIU.obtenerSeleccionCombo(comboDepartamento).toString()
-                                                .equals("Seleccionar"))
-                                && (!ObtenerIU.obtenerSeleccionCombo(comboCiudad).toString().equals("Seleccionar"))
-                                && ObtenerIU.obtenerTextoPanel(tfInformacion).length() >= 5
-                                && (!ObtenerIU.obtenerSeleccionCombo(comboHora).toString().equals("Seleccionar")));
+                btnPublicar.setEnabled((imagenSubida
+                                && (!ObtenerIU.obtenerSeleccionCombo(comboTipoIncidente).equals("Seleccionar")))
+                                && (ObtenerIU.obtenerIndiceSeleccionCombo(comboDepartamento) != 0)
+                                && (ObtenerIU.obtenerIndiceSeleccionCombo(comboCiudad) != 0)
+                                && (ObtenerIU.obtenerTextoPanel(tfInformacion).length() >= 5)
+                                && (!ObtenerIU.obtenerSeleccionCombo(comboHora).equals("Seleccionar")));
         }
 
         private void desactivarRutaImagen() {
@@ -392,7 +390,6 @@ public class ReportIncident extends javax.swing.JFrame {
                 ComboBox.ponerCiudades(comboCiudad, comboDepartamento);
                 desactivarBotonPublicar();
                 desactivarComboCiudad();
-
         }
 
         private void comboCiudadActionPerformed(java.awt.event.ActionEvent evt) {
