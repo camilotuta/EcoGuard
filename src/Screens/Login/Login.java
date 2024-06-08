@@ -30,84 +30,86 @@ import java.awt.EventQueue;
  */
 public class Login extends javax.swing.JFrame {
 
-	public static int idUsuarioGuardar;
-	public static String correoGuardar = "";
+        public static int idUsuarioGuardar;
+        public static String correoGuardar = "";
 
-	/**
-	 * Creates new form Login
-	 */
-	public Login() {
-		initComponents();
-		this.setTitle("Ingresar");
-		this.setResizable(false);
-		this.setLocationRelativeTo(null);
-		this.setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(getClass().getResource("/img/icon.png")));
-		CambiarIU.ponerTextoEtiqueta(txtMostrarCopy,
-				"©" + Dates.obtenerAño() + " EcoGuard . Todos los derechos reservados.");
-		tfCorreo.requestFocus();
-		CambiarIU.ponerTextoCampo(tfCorreo, correoGuardar);
-		desactivarBotonIngresar();
-	}
+        /**
+         * Creates new form Login
+         */
+        public Login() {
+                initComponents();
+                this.setTitle("Ingresar");
+                this.setResizable(false);
+                this.setLocationRelativeTo(null);
+                this.setIconImage(Toolkit.getDefaultToolkit()
+                                .getImage(getClass().getResource("/img/icon.png")));
+                CambiarIU.ponerTextoEtiqueta(txtMostrarCopy,
+                                "©" + Dates.obtenerAño() + " EcoGuard . Todos los derechos reservados.");
+                tfCorreo.requestFocus();
+                CambiarIU.ponerTextoCampo(tfCorreo, correoGuardar);
+                desactivarBotonIngresar();
+        }
 
-	private void desactivarBotonIngresar() {
-		String contraseña = Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña));
-		btnIngresar.setEnabled((contraseña.length() >= 8) && ObtenerIU.obtenerTextoCampo(tfCorreo).contains("@")
-				&& ObtenerIU.obtenerTextoCampo(tfCorreo).length() > 13);
+        private void desactivarBotonIngresar() {
+                String contraseña = Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña));
+                btnIngresar.setEnabled((contraseña.length() >= 8) && ObtenerIU.obtenerTextoCampo(tfCorreo).contains("@")
+                                && ObtenerIU.obtenerTextoCampo(tfCorreo).length() > 13);
 
-	}
+        }
 
-	private boolean usuarioEstaRegistrado(String correo, String contraseña) throws SQLException {
-		ArrayList<ArrayList<Object>> datosUsuarioRegistrado = OperacionCRUD.seleccionar(
-				String.format("SELECT * FROM usuarios WHERE correo = '%s' AND contraseña = '%s'",
-						correo, contraseña),
-				new String[] { "id_usuario", "correo", "contraseña" });
+        private boolean usuarioEstaRegistrado(String correo, String contraseña) throws SQLException {
+                ArrayList<ArrayList<Object>> datosUsuarioRegistrado = OperacionCRUD.seleccionar(
+                                String.format("SELECT * FROM usuarios WHERE correo = '%s' AND contraseña = '%s'",
+                                                correo, contraseña),
+                                new String[] { "id_usuario", "correo", "contraseña" });
 
-		if (datosUsuarioRegistrado.size() < 4 && !datosUsuarioRegistrado.isEmpty()) {
-			idUsuarioGuardar = (int) datosUsuarioRegistrado.get(0).get(0);
-			return true;
-		}
-		return false;
-	}
+                if (datosUsuarioRegistrado.size() < 4 && !datosUsuarioRegistrado.isEmpty()) {
+                        idUsuarioGuardar = (int) datosUsuarioRegistrado.get(0).get(0);
+                        return true;
+                }
+                return false;
+        }
 
-	private void ingresarUsuario() throws SQLException {
-		String correo = ObtenerIU.obtenerTextoCampo(tfCorreo).toLowerCase();
-		String contraseña = Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña));
+        private void ingresarUsuario() throws SQLException {
+                String correo = ObtenerIU.obtenerTextoCampo(tfCorreo).toLowerCase();
+                String contraseña = Desencriptar.desencriptarContra(ObtenerIU.obtenerContraseña(pfContraseña));
 
-		if (usuarioEstaRegistrado(correo, contraseña)) {
-			correoGuardar = correo;
+                if (usuarioEstaRegistrado(correo, contraseña)) {
+                        correoGuardar = correo;
 
-			DeleteFiles.eliminarArchivos("C:/Users/tutaa/Workspace/Java/Projects/EcoGuard/imgPublicaciones");
+                        DeleteFiles.eliminarArchivos(
+                                        "C:/Users/tutaa/Workspace/Java/Projects/EcoGuard/imgPublicaciones");
 
-			Principal pantallaPrincipal = new Principal();
-			pantallaPrincipal.setVisible(true);
-			this.setVisible(false);
-		} else {
-			JOptionPane.showMessageDialog(this, "CORREO O CONTRASEÑA NO VALIDOS \n", "AVISO!",
-					javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                        Principal pantallaPrincipal = new Principal();
+                        pantallaPrincipal.setVisible(true);
+                        this.setVisible(false);
+                } else {
+                        JOptionPane.showMessageDialog(this, "CORREO O CONTRASEÑA NO VALIDOS \n", "AVISO!",
+                                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-			CambiarIU.ponerTextoCampoContraseña(pfContraseña, "");
-			pfContraseña.requestFocus();
-			desactivarBotonIngresar();
-		}
-	}
+                        CambiarIU.ponerTextoCampoContraseña(pfContraseña, "");
+                        pfContraseña.requestFocus();
+                        desactivarBotonIngresar();
+                }
+        }
 
-	/**
-	 * This method is called from within the constructor to initialize the
-	 * form. WARNING: Do NOT modify this code. The content of this method is
-	 * always regenerated by the Form Editor.
-	 */
-	@SuppressWarnings("unchecked")
-	// <editor-fold defaultstate="collapsed" desc="Generated
-	// <editor-fold defaultstate="collapsed" desc="Generated
-	// <editor-fold defaultstate="collapsed" desc="Generated
-	// <editor-fold defaultstate="collapsed" desc="Generated
-	// <editor-fold defaultstate="collapsed" desc="Generated
-	// <editor-fold defaultstate="collapsed" desc="Generated
-	// <editor-fold defaultstate="collapsed" desc="Generated
-	// <editor-fold defaultstate="collapsed" desc="Generated
-	// <editor-fold defaultstate="collapsed" desc="Generated
-        // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+        /**
+         * This method is called from within the constructor to initialize the
+         * form. WARNING: Do NOT modify this code. The content of this method is
+         * always regenerated by the Form Editor.
+         */
+        @SuppressWarnings("unchecked")
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
                 ventanaLogIn = new javax.swing.JPanel();
@@ -137,14 +139,17 @@ public class Login extends javax.swing.JFrame {
                         public void mouseClicked(java.awt.event.MouseEvent evt) {
                                 lbCambiarContraseñaMouseClicked(evt);
                         }
+
                         public void mouseEntered(java.awt.event.MouseEvent evt) {
                                 lbCambiarContraseñaMouseEntered(evt);
                         }
+
                         public void mouseExited(java.awt.event.MouseEvent evt) {
                                 lbCambiarContraseñaMouseExited(evt);
                         }
                 });
-                ventanaLogIn.add(lbCambiarContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 440, 30, 30));
+                ventanaLogIn.add(lbCambiarContraseña,
+                                new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 440, 30, 30));
 
                 lbTitulo.setFont(new java.awt.Font("Crabs", 1, 100)); // NOI18N
                 lbTitulo.setForeground(new java.awt.Color(255, 255, 254));
@@ -225,7 +230,6 @@ public class Login extends javax.swing.JFrame {
                                 }
                         }
 
-
                 });
                 ventanaLogIn.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 520, -1, -1));
 
@@ -241,89 +245,90 @@ public class Login extends javax.swing.JFrame {
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ventanaLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                );
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(ventanaLogIn, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE));
                 layout.setVerticalGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ventanaLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                );
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(ventanaLogIn, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE));
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
-	private void lbCambiarContraseñaMouseClicked(java.awt.event.MouseEvent evt) {
-		RecoverPassword recoverPassword = new RecoverPassword();
-		recoverPassword.setVisible(true);
-		this.setVisible(false);
-	}
+        private void lbCambiarContraseñaMouseClicked(java.awt.event.MouseEvent evt) {
+                RecoverPassword recoverPassword = new RecoverPassword();
+                recoverPassword.setVisible(true);
+                this.setVisible(false);
+        }
 
-	private void lbCambiarContraseñaMouseEntered(java.awt.event.MouseEvent evt) {
-		CambiarIU.setImageLabel(lbCambiarContraseña, "src/img/helpHover.png");
-	}
+        private void lbCambiarContraseñaMouseEntered(java.awt.event.MouseEvent evt) {
+                CambiarIU.setImageLabel(lbCambiarContraseña, "src/img/helpHover.png");
+        }
 
-	private void lbCambiarContraseñaMouseExited(java.awt.event.MouseEvent evt) {
-		CambiarIU.setImageLabel(lbCambiarContraseña, "src/img/help.png");
-	}
+        private void lbCambiarContraseñaMouseExited(java.awt.event.MouseEvent evt) {
+                CambiarIU.setImageLabel(lbCambiarContraseña, "src/img/help.png");
+        }
 
-	private void pfContraseñaKeyReleased(java.awt.event.KeyEvent evt) {
-		desactivarBotonIngresar();
-	}
+        private void pfContraseñaKeyReleased(java.awt.event.KeyEvent evt) {
+                desactivarBotonIngresar();
+        }
 
-	private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {
-		Signup pantallaRegistro = new Signup();
-		pantallaRegistro.setVisible(true);
-		this.setVisible(false);
-	}
+        private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {
+                Signup pantallaRegistro = new Signup();
+                pantallaRegistro.setVisible(true);
+                this.setVisible(false);
+        }
 
-	private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {
-		ingresarUsuario();
+        private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {
+                ingresarUsuario();
 
-	}
+        }
 
-	private void tfCorreoKeyReleased(java.awt.event.KeyEvent evt) {
-		desactivarBotonIngresar();
-	}
+        private void tfCorreoKeyReleased(java.awt.event.KeyEvent evt) {
+                desactivarBotonIngresar();
+        }
 
-	private void btnErroresComunesActionPerformed(java.awt.event.ActionEvent evt) {
-		String texto = "¡Hola! Aquí te dejo un apartado de ayuda con algunos errores comunes y"
-				+ " sus\nposibles soluciones:\n\nNo puedes ingresar:\nVerifica tus "
-				+ "credenciales de inicio de sesión.\nRestablece tu contraseña si "
-				+ "la has olvidado.\nVerifica tu conexión a internet.\nSi el "
-				+ "problema persiste, contacta al soporte técnico de la plataforma."
-				+ "\n\nNo puedes registrarte:\nVerifica que completaste todos los "
-				+ "campos requeridos y que usaste una\ndirección de correo "
-				+ "institucional válida.\nSi el problema persiste, intenta utilizar"
-				+ " una dirección de correo electrónico\ndiferente o contacta al "
-				+ "soporte técnico de la plataforma.\n\nError al actualizar "
-				+ "biografía:\nAsegúrate de seguir los requisitos de longitud y "
-				+ "formato para la biografía.\nSi el problema persiste, intenta "
-				+ "actualizar tu biografía desde otro\ndispositivo o navegador o "
-				+ "contacta al soporte técnico de la plataforma.\n\nError al"
-				+ " agendar tutoría:\nVerifica que seleccionaste la fecha y hora "
-				+ "correctas.\nVerifica que tienes los permisos necesarios para"
-				+ " agendar una tutoría.\nSi el problema persiste, intenta utilizar"
-				+ " otro dispositivo o navegador o\ncontacta al soporte técnico de"
-				+ " la plataforma.\n\nError al actualizar lista de tareas:"
-				+ "\nAsegúrate de seguir los requisitos de longitud y formato para"
-				+ " cada tarea en\nla lista.\nVerifica que tienes los permisos "
-				+ "necesarios para actualizar la lista de\ntareas en la plataforma."
-				+ "\n\nSi necesitas ayuda adicional, por favor envía un correo "
-				+ "especificando tu problema a alguno\nde los siguientes correos de"
-				+ " contacto:\n\nJeffry Steve Sahagún Beleño:"
-				+ " jefrysahagun.sb@academia.umb.edu.co\nMiguel Ángel Bejarano Muñoz:"
-				+ " miguelbejarano.am@academia.umb.edu.co";
+        private void btnErroresComunesActionPerformed(java.awt.event.ActionEvent evt) {
+                String texto = "¡Hola! Aquí te dejo un apartado de ayuda con algunos errores comunes y"
+                                + " sus\nposibles soluciones:\n\nNo puedes ingresar:\nVerifica tus "
+                                + "credenciales de inicio de sesión.\nRestablece tu contraseña si "
+                                + "la has olvidado.\nVerifica tu conexión a internet.\nSi el "
+                                + "problema persiste, contacta al soporte técnico de la plataforma."
+                                + "\n\nNo puedes registrarte:\nVerifica que completaste todos los "
+                                + "campos requeridos y que usaste una\ndirección de correo "
+                                + "institucional válida.\nSi el problema persiste, intenta utilizar"
+                                + " una dirección de correo electrónico\ndiferente o contacta al "
+                                + "soporte técnico de la plataforma.\n\nError al actualizar "
+                                + "biografía:\nAsegúrate de seguir los requisitos de longitud y "
+                                + "formato para la biografía.\nSi el problema persiste, intenta "
+                                + "actualizar tu biografía desde otro\ndispositivo o navegador o "
+                                + "contacta al soporte técnico de la plataforma.\n\nError al"
+                                + " agendar tutoría:\nVerifica que seleccionaste la fecha y hora "
+                                + "correctas.\nVerifica que tienes los permisos necesarios para"
+                                + " agendar una tutoría.\nSi el problema persiste, intenta utilizar"
+                                + " otro dispositivo o navegador o\ncontacta al soporte técnico de"
+                                + " la plataforma.\n\nError al actualizar lista de tareas:"
+                                + "\nAsegúrate de seguir los requisitos de longitud y formato para"
+                                + " cada tarea en\nla lista.\nVerifica que tienes los permisos "
+                                + "necesarios para actualizar la lista de\ntareas en la plataforma."
+                                + "\n\nSi necesitas ayuda adicional, por favor envía un correo "
+                                + "especificando tu problema a alguno\nde los siguientes correos de"
+                                + " contacto:\n\nAdrián Camilo Tuta Cortés:"
+                                + " tutaa460@gmail.com";
 
-		JOptionPane.showMessageDialog(null, texto, "AYUDA", JOptionPane.INFORMATION_MESSAGE);
-	}
+                JOptionPane.showMessageDialog(null, texto, "AYUDA", JOptionPane.INFORMATION_MESSAGE);
+        }
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[]) {
-		FlatMacDarkLaf.setup();
-		EventQueue.invokeLater(() -> new Login().setVisible(true));
-	}
+        /**
+         * @param args the command line arguments
+         */
+        public static void main(String args[]) {
+                FlatMacDarkLaf.setup();
+                EventQueue.invokeLater(() -> new Login().setVisible(true));
+        }
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btnErroresComunes;
